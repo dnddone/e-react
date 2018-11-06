@@ -7,12 +7,13 @@ const FilmDescription = (props) => {
 			for (let i = 0; i < genres.length; i++) {
 				const genreItem = genres[i];
 
-				let genreSearchResult = genreItem.find(obj => {
+
+				let genreSearchResult = genres.find(obj => {
 				  return genreItem.id === genre ? genreItem.name : undefined;
 				});
 
 				if (genreSearchResult) {
-					return genreSearchResult;
+					return genreSearchResult.name;
 				}
 			}
 		});

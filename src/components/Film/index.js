@@ -18,7 +18,7 @@ const Film = (props) => {
 			<a href={href} className="film__link">
 				<FilmImage poster={posterPath} />
 				<FilmTitle title={title} />
-				<FilmDescription genreIDs={genreIDs} genres={genres} />
+				<FilmDescription genreIDs={genreIDs} genres={genres.genres} />
 				<Bookmark className="bookmark" />
 			</a>
 		</li>

@@ -64,12 +64,11 @@ body {
   text-decoration: none;
   padding: 20px;
   color: #fff;
-  transition: all 0.2s linear;
+  transition: color 0.2s linear;
 }
 
-.nav__link::hover {
-  color: #000;
-  background-color: #fff;
+.nav__link:hover {
+  color: #1af;
 }
 
 .main-content .container {
@@ -136,7 +135,14 @@ body {
   width: 30%;
   padding: 10px;
   border: 1px solid #fff;
+  overflow: hidden;
   margin: 0px 16px 20px;
+  transition: all 0.2s linear;
+}
+
+.film__item:hover {
+  border-color: #1af;
+  box-shadow: 0px 0px 20px 5px rgba(255, 255, 255, 0.25);
 }
 
 .film__link {
@@ -145,6 +151,10 @@ body {
 }
 
 .film__title {
-  font-size: 20px;
+  font-size: 18px;
   margin: 10px 0;
+}
+
+.film__description {
+  font-size: 12px;
 }
