@@ -5,15 +5,22 @@ import FilmDescription from './FilmDescription';
 import Bookmark from '../Bookmark';
 
 const Film = (props) => {
-	const { title, poster_path, genres, movie } = props,
-		genreIDs = movie.genre_ids;
+	const { genres, movie } = props,
+		genreIDs = movie.genre_ids,
+		posterPath = props.movie.poster_path;
+
+	const { id, title } = movie;
+
+	const href = '/movie/' + id;
 
 	return (
 		<li className="film__item">
-			<FilmTitle title={title} />
-			<FilmImage poster={poster_path} />
-			<FilmDescription genreIDs={genreIDs} genres={genres} />
-			<Bookmark className="bookmark" />
+			<a href={href} className="film__link">
+				<FilmImage poster={posterPath} />
+				<FilmTitle title={title} />
+				<FilmDescription genreIDs={genreIDs} genres={genres} />
+				<Bookmark className="bookmark" />
+			</a>
 		</li>
 	);
 }

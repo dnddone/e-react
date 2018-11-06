@@ -4,10 +4,6 @@
   font-family: "Montserrat", sans-serif !important;
 }
 
-img {
-  max-width: 100%;
-}
-
 body {
   background-color: #000;
 }
@@ -129,11 +125,26 @@ body {
   font-size: 0;
 }
 
+.film__image {
+  height: 400px;
+  width: 100%;
+}
+
 .film__item {
   display: inline-block;
   vertical-align: top;
-  width: 33%;
-  padding: 15px;
-  margin: 0px 20px 20px;
+  width: 30%;
+  padding: 10px;
   border: 1px solid #fff;
+  margin: 0px 16px 20px;
+}
+
+.film__link {
+  display: block;
+  text-decoration: none;
+}
+
+.film__title {
+  font-size: 20px;
+  margin: 10px 0;
 }
