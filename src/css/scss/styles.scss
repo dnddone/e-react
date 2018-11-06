@@ -155,10 +155,31 @@ body {
     
     &__title {
         font-size: 18px;
-        margin: 10px 0;
+        margin: 0 0 10px;
+        height: 36px;
     }
     
     &__description {
         font-size: 12px;
+        margin-top: 15px;
+    }
+    
+    .bookmark {
+        float: right;
+        
+        svg {
+            font-size: 22px;
+            
+            path {
+                fill: #fff;
+                transition: all 0.2s linear;
+            }
+        }
+        
+        &:hover {
+            svg path {
+                fill: rgba(17, 170, 255, 0.75)
+            }
+        }
     }
 }

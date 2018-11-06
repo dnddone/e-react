@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Logo from "./Logo";
 import NavMenu from "./NavMenu";
 
-const navMenuList = ["Home", "About"];
+const navMenuList = ["Home", "About", "Bookmarks"];
 
 class Header extends Component {
   constructor(props) {
