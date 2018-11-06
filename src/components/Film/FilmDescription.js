@@ -9,8 +9,9 @@ const FilmDescription = (props) => {
 
 
 				let genreSearchResult = genres.find(obj => {
-				  return genreItem.id === genre ? genreItem.name : undefined;
+				  return obj.id === genre ? obj.name : undefined;
 				});
+
 
 				if (genreSearchResult) {
 					return genreSearchResult.name;

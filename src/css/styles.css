@@ -152,9 +152,28 @@ body {
 
 .film__title {
   font-size: 18px;
-  margin: 10px 0;
+  margin: 0 0 10px;
+  height: 36px;
 }
 
 .film__description {
   font-size: 12px;
+  margin-top: 15px;
+}
+
+.film .bookmark {
+  float: right;
+}
+
+.film .bookmark svg {
+  font-size: 22px;
+}
+
+.film .bookmark svg path {
+  fill: #fff;
+  transition: all 0.2s linear;
+}
+
+.film .bookmark:hover svg path {
+  fill: rgba(17, 170, 255, 0.75);
 }
