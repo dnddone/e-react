@@ -13,10 +13,12 @@ const Film = (props) => {
 
 	const href = '/movie/' + id;
 
+	const isBookmark = '';
+
 	return (
 		<li className="film__item film">
 			<a href={href} className="film__link">
-				<Bookmark />
+				<Bookmark isBookmark={isBookmark} />
 				<FilmTitle title={title} />
 				<FilmImage poster={posterPath} />
 				<FilmDescription genreIDs={genreIDs} genres={genres.genres} />

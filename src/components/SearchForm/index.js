@@ -1,31 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class SearchForm extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			searchValue: ''
-		}
-	}
+const SearchForm = (props) => (
+	<div className="search__container">
+		<input 
+			className="search__input"
+			type="text"
+			onChange={props.onChangeHandler}
+			placeholder="Try to search anything..."
+		/>
+	</div>
+);
 
-	onChangeInput = (event) => {
-		this.setState({
-			searchValue: event.target.value
-		});
-	}
-
-	render() {
-		return (
-			<div className="search__container">
-				<input 
-					className="search__input"
-					type="text"
-					onChange={this.onChangeInput.bind(this)}
-					placeholder="Try to search anything..."
-				/>
-			</div>
-		);
-	}
-}
 
 export default SearchForm;

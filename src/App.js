@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Header from "./components/header";
-import MainContent from "./components/mainContent";
+import Main from "./components/Main";
 
 import "./css/reset.css";
 import "./css/styles.css";
@@ -15,7 +15,7 @@ class App extends Component {
         <div>
 		  <Header />
           <Switch>
-            <Route path="/" component={MainContent} exact />
+            <Route path="/" component={Main} exact />
             {/* <Route path="/about" component={About} />*/}
             {/*<Route path="/contact" component={Contact} />*/}
             {/*<Route component={Error} />*/}
