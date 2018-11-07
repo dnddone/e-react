@@ -10,6 +10,12 @@ body {
     background-color: #000;
 }
 
+.color {
+    &-error {
+        color: #ff0000;
+    }
+}
+
 .App {
     font-family: sans-serif;
     text-align: center;
@@ -125,6 +131,13 @@ body {
 .film {
     &__list {
         font-size: 0;
+    }
+    
+    &__user {
+        color: #fff;
+        font-size: 18px;
+        text-align: center;
+        margin: 20px;
     }
     
     &__image {

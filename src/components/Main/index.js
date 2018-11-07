@@ -15,31 +15,55 @@ class Main extends Component {
         error: null,
         isLoaded: false,
         genres: []
-      },
-      searchValue: ''
+      }
     };
   }
 
-  onChangeHandler = (event) => {
-    this.setState({
-      searchValue: event.target.value
-    });
+  onChangeHandler = async (event) => {
 
-    const dndd = setTimeout(() => {console.log(`Timer with id ${dndd}`)}, 1000);
-    clearInterval(dndd);
-    console.log(`Timer ${dndd} stopped`);
+    const searchValue = event.target.value;
+
+    if (!searchValue) {
+      return;
+    }
+
+    this.setState({ isLoaded: false });
+
+    const searchURL = `https://api.themoviedb.org/3/search/movie?&api_key=677522a533aae20a5fa0d80d392c1496&query=${searchValue}`;
+
+    const getSearchMovies = await fetch(searchURL)
+        .then(response => response.json())
+        .then((response) => {
+          this.setState({
+            movie: {
+              ...this.state.movie, 
+              isLoaded: true,
+              movies: response.results
+            }
+          });
+        },
+        (error) => {
+          this.setState({
+            movie: {
+              ...this.state.movie, 
+              isLoaded: true,
+              error: error
+            }
+          });
+        }
+      );
   }
 
   async componentDidMount() {
     await fetch("https://api.themoviedb.org/3/movie/popular?api_key=677522a533aae20a5fa0d80d392c1496")
       .then(response => response.json())
       .then(
-        (result) => {
+        (response) => {
           this.setState({
             movie: {
               ...this.state.movie, 
               isLoaded: true,
-              movies: result.results
+              movies: response.results
             }
           });
         },
@@ -91,9 +115,9 @@ class Main extends Component {
         <div className="container">
           <SearchForm onChangeHandler={this.onChangeHandler} test={this.state.searchValue} />
           {(
-            (error && <div>Error: {error.message}</div>)
+            (error && <div className="film__user color-error">Error: {error.message}</div>)
             || 
-            (!isLoaded && <div>Loading...</div>)
+            (!isLoaded && <div className="film__user">Loading...</div>)
             ||
             (
               <ul className="film__list">

@@ -8,6 +8,10 @@ body {
   background-color: #000;
 }
 
+.color-error {
+  color: #ff0000;
+}
+
 .App {
   font-family: sans-serif;
   text-align: center;
@@ -122,6 +126,13 @@ body {
 
 .film__list {
   font-size: 0;
+}
+
+.film__user {
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  margin: 20px;
 }
 
 .film__image {
