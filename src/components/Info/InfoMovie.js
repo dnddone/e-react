@@ -16,27 +16,27 @@ export default (props) => {
 		} 
 	}
 
+	console.log(info);
+
 	return (
 		<div className="info">
 			<h1 className="info__title">{info.title}</h1>
 			<div>
+				<div className="info__image-container info__item">
+					<img src={`https://image.tmdb.org/t/p/w300${info.poster_path}`} alt={info.title}/>
+				</div>
 				<div className="info__container info__item">
 					<div className="info__description">{`Original title: ${info.original_title}`}</div>
 					<div className="info__description">{`Tagline: ${info.tagline}`}</div>
-					<div className="info__description">{`Budget: ${info.budget}`}</div>
+					<div className="info__description">{`Budget: $${info.budget.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')}`}</div>
 					<div className="info__description">{`Genres: ${genreDefiner(info.genres)}`}</div>
 					<div className="info__description">Homepage: <a href={info.homepage} className="info__link">{info.homepage}</a></div>
 					<div className="info__description">{`Runtime: ${info.runtime} minutes`}</div>
 					<div className="info__description">{`Release date: ${info.release_date}`}</div>
-					<div className="info__description color-yellow">{`Vote avarage: ${info.vote_avarage}`}</div>
-					<div className="info__description color-blue">{`Vote count ${info.vote_count}`}</div>
+					<div className="info__description">Vote avarage: <span className="color-yellow">{info.vote_average}</span></div>
+					<div className="info__description">Vote count: <span className="color-blue">{info.vote_count}</span></div>
 				</div>
-				<div className="info__image-container info__item">
-					<img src={`https://image.tmdb.org/t/p/w300${info.poster_path}`} alt={info.title}/>
-				</div>
-				<div className="info__container">
-					<p className="info__overview">{info.overview}</p>
-				</div>
+				<p className="info__overview">{info.overview}</p>
 			</div>
 		</div>
 	);
