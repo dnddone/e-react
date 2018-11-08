@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Header from "./components/Header";
 import Main from "./components/Main";
+import Bookmarks from "./components/Bookmarks";
 import Error from "./components/Error";
 
 import "./css/reset.css";
@@ -20,6 +20,7 @@ class App extends Component {
             {/* <Route path="/about" component={About} />*/}
             {/*<Route path="/contact" component={Contact} />*/}
             {/* <Route path="/movie" component={Info} /> */}
+            <Route path="/bookmarks" component={Bookmarks} />
             <Route component={Error} />
           </Switch>
         </div>

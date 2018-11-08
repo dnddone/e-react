@@ -3,7 +3,7 @@ import React from "react";
 const NavMenu = props => {
   const { navMenuList } = props;
   const menuList = navMenuList.map((item, index) => {
-    const href = item === 'Home' ? "/" : "/" + item; 
+    const href = item === 'Home' ? "/" : "/" + item.toLowerCase(); 
     return (
       <li className="nav__item" key={index}>
         <a href={href} className="nav__link">

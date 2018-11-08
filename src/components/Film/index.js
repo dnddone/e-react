@@ -67,26 +67,18 @@ class Film extends Component {
 		const shouldIAdd = prevResultAddingRemoving;
 		let arrayIDs = this.getLocalStorageArray(),
 				stringIDs;
-		
-				console.log(' ');
 
 		if (shouldIAdd) {
 			arrayIDs.push(id);
 			stringIDs = arrayIDs.join('/');
-			console.log(`${id} is added`);
 		} else if (arrayIDs.length > 0) {
 			const index = arrayIDs.indexOf(id.toString());
 
 			if (index > -1) { arrayIDs.splice(index, 1); }
 
 			stringIDs = arrayIDs.join('/');
-			console.log(`${id} is removed`);
 		}
-
-		console.log(`New array is`);
-		console.log(arrayIDs);
-	
-		// console.log(`stringIDs is [${stringIDs}]`);
+		
 		localStorage.setItem('ids', stringIDs);
 	}
 
@@ -108,7 +100,7 @@ class Film extends Component {
 
 	render() {
 		const { genres, movie, id, onClickBookmarkHandler } = this.props,
-			genreIDs = movie.genre_ids,
+			genreIDs = movie.genre_ids || movie.genres,
 			posterPath = this.props.movie.poster_path;
 
 		const { title } = movie;
