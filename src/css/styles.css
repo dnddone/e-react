@@ -41,6 +41,20 @@ body {
   line-height: 0.85;
   display: block;
   color: #fff;
+  transition: color 0.2s linear;
+}
+
+.header__logo-link {
+  display: block;
+  text-decoration: none;
+}
+
+.header__logo-link:hover .header__logo-white {
+  color: #1af;
+}
+
+.header__logo-link:hover .header__logo-onblack {
+  color: #ffff00;
 }
 
 .header__logo-white {
@@ -50,7 +64,7 @@ body {
 }
 
 .header__logo-onblack {
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .nav__list {
