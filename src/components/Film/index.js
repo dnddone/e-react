@@ -47,28 +47,70 @@ class Film extends Component {
 	}
 
 	toggleLocalStorageBookmark = (id) => {
-		id = id.toString();
-		const localStorageExist = localStorage.getItem(id);
+		const idString = id.toString();
+		const localStorageExist = localStorage.getItem(idString);
 
+		let shouldAddIDtoLocalStorageArray = true;
 		let result;
 
 		if (localStorageExist) {
-			localStorage.removeItem(id);
+			localStorage.removeItem(idString);
 			result = false;
 		} else {
-			localStorage.setItem(id, 'true');
+			localStorage.setItem(idString, 'true');
 			result = true;
 		}
+
+		// if result is `true`, add ID then, if `false` remove that ID from localStorage.
+		this.updateLocalStorageBookmarkMovies(id, result);
+
 		return result;
+	}
+
+	updateLocalStorageBookmarkMovies = (id, prevResultAddingRemoving) => {
+		const shouldIAdd = prevResultAddingRemoving;
+		let arrayIDs = this.getLocalStorageArray(),
+				stringIDs;
+
+		// if (localStorageExist) {
+		// 	console.log(localStorageExist.split('/'));
+		// } else if (shouldIAdd) {
+		// 	const localStorageAddArray = arrayIDs.push(id).join('/');
+		// 	localStorage.setItem('ids', localStorageAddArray)
+		// }
+		
+		// console.log(`id is [${id}]`);
+		console.log(arrayIDs.length);
+
+		if (shouldIAdd) {
+			stringIDs = arrayIDs.push(id).join('/');
+			// console.log(`${id} is added`);
+		} else if (arrayIDs.length > 0) {
+			const index = arrayIDs.indexOf(id);
+
+			if (index > -1) { arrayIDs.splice(index, 1); }
+
+			stringIDs = arrayIDs.join('/');
+			// console.log(`${id} is removed`);
+		}
+	
+		// console.log(`stringIDs is [${stringIDs}]`);
+		localStorage.setItem('ids', stringIDs);
+	}
+
+	getLocalStorageArray = () => {
+		const localStorageIDsArray = localStorage.getItem('ids');
+
+		return localStorageIDsArray ? localStorageIDsArray.split('/') : new Array();
 	}
 
 	onBookmarkClickHandler = (event) => {
 	    if (this.closestByClass(event.target, 'bookmark')) {
-			event.preventDefault();
+				event.preventDefault();
+				const { id } = this.state;
+				const isBookmark = this.toggleLocalStorageBookmark(id) ? 'added' : '';
 
-			const isBookmark = this.toggleLocalStorageBookmark(this.state.id) ? 'added' : '';
-
-			this.setState({ isBookmark: isBookmark });
+				this.setState({ isBookmark: isBookmark });
 	    } 
 	}
 
