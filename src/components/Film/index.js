@@ -20,10 +20,6 @@ class Film extends Component {
 		this.setState({ isBookmark: isAlreadyBookmarked });
 	}
 
-	isAlreadyBookmarkedFunction = () => {
-
-	}
-
 	closestByClass = (element, clazz) => {
 	    // Traverse the DOM up with a while loop
 	    const regexClazz = new RegExp(clazz);
@@ -71,28 +67,24 @@ class Film extends Component {
 		const shouldIAdd = prevResultAddingRemoving;
 		let arrayIDs = this.getLocalStorageArray(),
 				stringIDs;
-
-		// if (localStorageExist) {
-		// 	console.log(localStorageExist.split('/'));
-		// } else if (shouldIAdd) {
-		// 	const localStorageAddArray = arrayIDs.push(id).join('/');
-		// 	localStorage.setItem('ids', localStorageAddArray)
-		// }
 		
-		// console.log(`id is [${id}]`);
-		console.log(arrayIDs.length);
+				console.log(' ');
 
 		if (shouldIAdd) {
-			stringIDs = arrayIDs.push(id).join('/');
-			// console.log(`${id} is added`);
+			arrayIDs.push(id);
+			stringIDs = arrayIDs.join('/');
+			console.log(`${id} is added`);
 		} else if (arrayIDs.length > 0) {
-			const index = arrayIDs.indexOf(id);
+			const index = arrayIDs.indexOf(id.toString());
 
 			if (index > -1) { arrayIDs.splice(index, 1); }
 
 			stringIDs = arrayIDs.join('/');
-			// console.log(`${id} is removed`);
+			console.log(`${id} is removed`);
 		}
+
+		console.log(`New array is`);
+		console.log(arrayIDs);
 	
 		// console.log(`stringIDs is [${stringIDs}]`);
 		localStorage.setItem('ids', stringIDs);
@@ -101,7 +93,7 @@ class Film extends Component {
 	getLocalStorageArray = () => {
 		const localStorageIDsArray = localStorage.getItem('ids');
 
-		return localStorageIDsArray ? localStorageIDsArray.split('/') : new Array();
+		return localStorageIDsArray ? localStorageIDsArray.split('/') : [];
 	}
 
 	onBookmarkClickHandler = (event) => {
