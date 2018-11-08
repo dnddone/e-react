@@ -113,7 +113,7 @@ class Main extends Component {
     return (
       <section className="main-content">
         <div className="container">
-          <SearchForm onChangeHandler={this.onChangeHandler} test={this.state.searchValue} />
+          <SearchForm onChangeHandler={this.onChangeHandler} />
           {(
             (error && <div className="film__user color-error">Error: {error.message}</div>)
             || 
@@ -123,7 +123,7 @@ class Main extends Component {
               <ul className="film__list">
                 {
                   movies.map((movie, index) => {
-                    return (index < 18) ? <Film movie={movie} genres={genre} key={movie.id} /> : '';
+                    return (index < 18) ? <Film movie={movie} genres={genre} key={movie.id} id={movie.id} /> : '';
                   })
                 }
               </ul>

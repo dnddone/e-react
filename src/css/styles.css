@@ -103,7 +103,7 @@ body {
 
 .search__container {
   text-align: center;
-  margin: 0px auto 20px;
+  margin: 0px auto 40px;
 }
 
 .search__input {
@@ -186,5 +186,9 @@ body {
 }
 
 .film .bookmark:hover svg path {
-  fill: rgba(17, 170, 255, 0.75);
+  fill: #11aaff !important;
+}
+
+.film .bookmark.added svg path {
+  fill: #ffff00;
 }
