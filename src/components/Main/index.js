@@ -24,6 +24,7 @@ class Main extends Component {
     const searchValue = event.target.value;
 
     if (!searchValue) {
+      this.getMovieAsync();
       return;
     }
 
@@ -54,7 +55,7 @@ class Main extends Component {
       );
   }
 
-  async componentDidMount() {
+  getMovieAsync = async () => {
     await fetch("https://api.themoviedb.org/3/movie/popular?api_key=677522a533aae20a5fa0d80d392c1496")
       .then(response => response.json())
       .then(
@@ -77,6 +78,10 @@ class Main extends Component {
           });
         }
       );
+  }
+
+  async componentDidMount() {
+    this.getMovieAsync();
 
     await fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=677522a533aae20a5fa0d80d392c1496")
       .then(response => response.json())
@@ -108,7 +113,8 @@ class Main extends Component {
     const error = movie.error || genre.error,
       isLoaded = movie.isLoaded && genre.isLoaded;
 
-    const { movies } = movie, { genres } = genre;
+    const { movies } = movie, { genres } = genre,
+        moviesIsNotEmpty = movies.length > 0;
 
     return (
       <section className="main-content">
@@ -122,9 +128,15 @@ class Main extends Component {
             (
               <ul className="film__list">
                 {
-                  movies.map((movie, index) => {
-                    return (index < 18) ? <Film movie={movie} genres={genre} key={movie.id} id={movie.id} /> : '';
-                  })
+                  (
+                    moviesIsNotEmpty && movies.map((movie, index) => {
+                      return (index < 18) ? <Film movie={movie} genres={genre} key={movie.id} id={movie.id} /> : '';
+                    })
+                  ) 
+
+                  || 
+
+                  (<div className="film__user">The movie list is empty!</div>)
                 }
               </ul>
             )

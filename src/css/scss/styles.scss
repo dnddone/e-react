@@ -84,8 +84,8 @@ body {
 
 .main-content {
     .container {
-        border-left: 1px solid #fff;
-        border-right: 1px solid #fff;
+        border: 1px solid #fff;
+        border-top: none;
         padding: 40px 0;
     }
 }
@@ -106,7 +106,7 @@ body {
 .search {
     &__container {
         text-align: center;
-        margin: 0px auto 20px;
+        margin: 0px auto 40px;
     }
     
     &__input {
@@ -191,7 +191,13 @@ body {
         
         &:hover {
             svg path {
-                fill: rgba(17, 170, 255, 0.75)
+                fill: rgb(17, 170, 255) !important;
+            }
+        }
+        
+        &.added {
+            svg path {
+                fill: #ffff00;
             }
         }
     }
