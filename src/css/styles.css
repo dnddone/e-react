@@ -206,3 +206,31 @@ body {
 .film .bookmark.added svg path {
   fill: #ffff00;
 }
+
+.pagination__container {
+  margin-top: 40px;
+}
+
+.pagination__list {
+  text-align: center;
+}
+
+.pagination__item {
+  font-size: 18px;
+  padding: 0 5px;
+  margin: 0 5px 10px;
+  display: inline-block;
+  vertical-align: top;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.2s linear;
+}
+
+.pagination__item:hover {
+  color: #1af;
+}
+
+.pagination__item.current {
+  color: #ffff00 !important;
+  cursor: default;
+}

@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import SearchForm from "../SearchForm";
 import Film from "../Film";
+import Pagination from "../Pagination";
 
 class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
+			page: 1,
+			totalPages: 1,
+			searchValue: '',
       movie: {
         error: null,
         isLoaded: false,
@@ -24,11 +28,12 @@ class Main extends Component {
     const searchValue = event.target.value;
 
     if (!searchValue) {
+			this.setState({ page: 1, searchValue: '' });
       this.getMovieAsync();
       return;
     }
 
-    this.setState({ isLoaded: false });
+    this.setState({ isLoaded: false, searchValue: searchValue });
 
     const searchURL = `https://api.themoviedb.org/3/search/movie?&api_key=677522a533aae20a5fa0d80d392c1496&query=${searchValue}`;
 
@@ -40,7 +45,7 @@ class Main extends Component {
               ...this.state.movie, 
               isLoaded: true,
               movies: response.results
-            }
+						}
           });
         },
         (error) => {
@@ -53,10 +58,17 @@ class Main extends Component {
           });
         }
       );
-  }
+	}
+	
+	updatePage = (page) => {
+		this.setState({ page: page });
+		this.getMovieAsync();
+	}
 
   getMovieAsync = async () => {
-    await fetch("https://api.themoviedb.org/3/movie/popular?api_key=677522a533aae20a5fa0d80d392c1496")
+		const { page } = this.state
+		console.log(page);
+    await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=677522a533aae20a5fa0d80d392c1496&page=${page}`)
       .then(response => response.json())
       .then(
         (response) => {
@@ -65,7 +77,8 @@ class Main extends Component {
               ...this.state.movie, 
               isLoaded: true,
               movies: response.results
-            }
+						},
+						totalPages: response.total_pages
           });
         },
         (error) => {
@@ -80,8 +93,8 @@ class Main extends Component {
       );
   }
 
-  async componentDidMount() {
-    this.getMovieAsync();
+  async componentWillMount() {
+		this.getMovieAsync();
 
     await fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=677522a533aae20a5fa0d80d392c1496")
       .then(response => response.json())
@@ -108,7 +121,7 @@ class Main extends Component {
   }
 
   render() {
-    const { movie, genre } = this.state;
+    const { movie, genre, page, totalPages, searchValue } = this.state;
 
     const error = movie.error || genre.error,
       isLoaded = movie.isLoaded && genre.isLoaded;
@@ -126,21 +139,27 @@ class Main extends Component {
             (!isLoaded && <div className="film__user">Loading...</div>)
             ||
             (
-              <ul className="film__list">
-                {
-                  (
-                    moviesIsNotEmpty && movies.map((movie, index) => {
-                      return (index < 18) ? <Film movie={movie} genres={genre} key={movie.id} id={movie.id} /> : '';
-                    })
-                  ) 
+              <div>
+								<ul className="film__list">
+									{
+										(
+											moviesIsNotEmpty && movies.map((movie, index) => {
+												return (index < 18) ? <Film movie={movie} genres={genre} key={movie.id} id={movie.id} /> : '';
+											})
+										) 
 
-                  || 
+										|| 
 
-                  (<div className="film__user">The movie list is empty!</div>)
-                }
-              </ul>
+										(<div className="film__user">The movie list is empty!</div>)
+									}
+								</ul>
+								
+							</div>
             )
-          )}
+					)}
+					{
+						(!searchValue && <Pagination handlePage={this.updatePage} currentPage={page} totalPages={totalPages}	/>)
+					}
         </div>
       </section>
     );
