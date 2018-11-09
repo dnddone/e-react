@@ -291,6 +291,7 @@ body {
 }
 
 .info__button {
+  outline: none;
   background-color: transparent;
   padding: 10px 20px;
   cursor: pointer;
@@ -299,8 +300,19 @@ body {
   transition: all 0.2s linear;
 }
 
+.info__button .bookmark {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .info__button-container {
   margin-top: 40px;
+}
+
+.info__button-text {
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: bottom;
 }
 
 .info__button svg {

@@ -310,8 +310,21 @@ body {
     }
     
     &__button {
+        outline: none;
+        
+        .bookmark {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
         &-container {
             margin-top: 40px;
+        }
+        
+        &-text {
+            font-size: 16px;
+            display: inline-block;
+            vertical-align: bottom;
         }
         
         background-color: transparent;

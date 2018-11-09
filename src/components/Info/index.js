@@ -6,6 +6,7 @@ export default class Info extends Component {
 		super(props);
 		this.state = {
 			id: '',
+			isBookmark: '',
 			movie: {
 				isLoaded: false,
 				movie: ''
@@ -19,8 +20,64 @@ export default class Info extends Component {
 	}
 
 	componentWillMount() {
-		const id = window.location.pathname.replace('/movie/', '');
+		const id = window.location.pathname.replace('/movie/', '');	
+		const isAlreadyBookmarked = localStorage.getItem(this.state.id.toString()) ? 'added' : '';
+
+		this.setState({ isBookmark: isAlreadyBookmarked });
 		this.setState({ id: id });
+	}
+
+	getLocalStorageArray = () => {
+		const localStorageIDsArray = localStorage.getItem('ids');
+
+		return localStorageIDsArray ? localStorageIDsArray.split('/') : [];
+	}
+
+	onBookmarkClickHandler = () => {
+		const { id } = this.state;
+		const isBookmark = this.toggleLocalStorageBookmark(id) ? 'added' : '';
+
+		this.setState({ isBookmark: isBookmark });
+	}
+
+	toggleLocalStorageBookmark = (id) => {
+		const idString = id.toString();
+		const localStorageExist = localStorage.getItem(idString);
+
+		let shouldAddIDtoLocalStorageArray = true;
+		let result;
+
+		if (localStorageExist) {
+			localStorage.removeItem(idString);
+			result = false;
+		} else {
+			localStorage.setItem(idString, 'true');
+			result = true;
+		}
+
+		// if result is `true`, add ID then, if `false` remove that ID from localStorage.
+		this.updateLocalStorageBookmarkMovies(id, result);
+
+		return result;
+	}
+
+	updateLocalStorageBookmarkMovies = (id, prevResultAddingRemoving) => {
+		const shouldIAdd = prevResultAddingRemoving;
+		let arrayIDs = this.getLocalStorageArray(),
+				stringIDs;
+
+		if (shouldIAdd) {
+			arrayIDs.push(id);
+			stringIDs = arrayIDs.join('/');
+		} else if (arrayIDs.length > 0) {
+			const index = arrayIDs.indexOf(id.toString());
+
+			if (index > -1) { arrayIDs.splice(index, 1); }
+
+			stringIDs = arrayIDs.join('/');
+		}
+		
+		localStorage.setItem('ids', stringIDs);
 	}
 
 	async componentDidMount() {
@@ -74,7 +131,7 @@ export default class Info extends Component {
 	}
 
 	render() {
-		const { movie } = this.state,
+		const { movie, isBookmark } = this.state,
 				info = movie.movie;
 
 		const error = movie.error,
@@ -88,7 +145,11 @@ export default class Info extends Component {
             || 
             (!isLoaded && <div className="film__user">Loading...</div>)
             ||
-            <InfoMovie info={info} />
+						<InfoMovie 
+							info={info} 
+							isBookmark={isBookmark} 
+							onBookmarkHandler={this.onBookmarkClickHandler} 
+						/>
 					)}
 				</div>
 			</div>

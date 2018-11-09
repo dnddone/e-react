@@ -2,7 +2,8 @@ import React from 'react';
 import Bookmark from '../Bookmark';
 
 export default (props) => {
-	const { info } = props;
+	const { info, onBookmarkHandler, isBookmark } = props;
+	const bookmarkClass = isBookmark ? 'added' : '';
 
 	const isProprtyOk = (prop) => {
 		return prop ? prop : 'Property does not exist';
@@ -16,8 +17,6 @@ export default (props) => {
 			return genreArray.join(', ');
 		} 
 	}
-
-	console.log(info);
 
 	return (
 		<div className="info">
@@ -37,8 +36,8 @@ export default (props) => {
 					<div className="info__description">Vote avarage: <span className="color-yellow">{info.vote_average}</span></div>
 					<div className="info__description">Vote count: <span className="color-blue">{info.vote_count}</span></div>
 					<div className="info__button-container">
-						<button className="info__button">
-							<Bookmark />
+						<button className={`info__button ${bookmarkClass}`} onClick={onBookmarkHandler}>
+							<Bookmark /> <span className="info__button-text">{`${isBookmark ? 'Remove from' : 'Add to'}`} favorite </span>
 						</button>
 					</div>
 				</div>
