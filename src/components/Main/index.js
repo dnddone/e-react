@@ -67,7 +67,7 @@ class Main extends Component {
 
   getMovieAsync = async () => {
 		const { page } = this.state
-		console.log(page);
+		
     await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=677522a533aae20a5fa0d80d392c1496&page=${page}`)
       .then(response => response.json())
       .then(

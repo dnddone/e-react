@@ -112,6 +112,7 @@ export default class Bookmarks extends Component {
                 {
                   (
                     moviesIsNotEmpty && movies.map((movie, index) => {
+											console.log(movie);
                       return (index < 18) ? <Film movie={movie} genres={genre} key={movie.id} id={movie.id} /> : '';
                     })
                   ) 
