@@ -33,6 +33,8 @@ class Main extends Component {
       return;
     }
 
+		// TODO: Pagination for search query
+
     this.setState({ isLoaded: false, searchValue: searchValue });
 
     const searchURL = `https://api.themoviedb.org/3/search/movie?&api_key=677522a533aae20a5fa0d80d392c1496&query=${searchValue}`;
