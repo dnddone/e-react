@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Info from "./components/Info";
 import Bookmarks from "./components/Bookmarks";
+import Notification from "./components/Notification";
 import Error from "./components/Error";
 
 import "./css/reset.css";
@@ -14,7 +15,8 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <div className="rsa">
+					<Notification />
 		  		<Header />
           <Switch>
             <Route path="/" component={Main} exact />

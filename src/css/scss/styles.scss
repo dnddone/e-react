@@ -14,6 +14,18 @@ body {
     &-error {
         color: #ff0000;
     }
+    
+    &-yellow {
+        color: $yellow;
+    }
+    
+    &-blue {
+        color: $blue;
+    }
+}
+
+.rsa {
+    position: relative;
 }
 
 .App {
@@ -358,5 +370,34 @@ body {
                 fill: $yellow;
             }
         }
+    }
+}
+
+.notification {
+    max-width: 320px;
+    width: 100%;
+    position: absolute;
+    top: 57px;
+    right: 25px;
+    
+    &__container {
+        border: 1px solid #fff;
+        padding: 15px 20px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        background-color: #000;
+    }
+    
+    &__id {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
+        font-size: 16px;
+    }
+    
+    &__message {
+        font-size: 14px;
+        line-height: 1.3;
     }
 }

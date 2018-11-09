@@ -12,6 +12,18 @@ body {
   color: #ff0000;
 }
 
+.color-yellow {
+  color: #ffff00;
+}
+
+.color-blue {
+  color: #1af;
+}
+
+.rsa {
+  position: relative;
+}
+
 .App {
   font-family: sans-serif;
   text-align: center;
@@ -338,4 +350,33 @@ body {
 
 .info__button.added svg path {
   fill: #ffff00;
+}
+
+.notification {
+  max-width: 320px;
+  width: 100%;
+  position: absolute;
+  top: 57px;
+  right: 15px;
+}
+
+.notification__container {
+  border: 1px solid #fff;
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: #000;
+}
+
+.notification__id {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+  font-size: 16px;
+}
+
+.notification__message {
+  font-size: 14px;
+  line-height: 1.3;
 }
