@@ -1,4 +1,5 @@
 import React from 'react';
+import Bookmark from '../Bookmark';
 
 export default (props) => {
 	const { info } = props;
@@ -35,6 +36,11 @@ export default (props) => {
 					<div className="info__description">{`Release date: ${info.release_date}`}</div>
 					<div className="info__description">Vote avarage: <span className="color-yellow">{info.vote_average}</span></div>
 					<div className="info__description">Vote count: <span className="color-blue">{info.vote_count}</span></div>
+					<div className="info__button-container">
+						<button className="info__button">
+							<Bookmark />
+						</button>
+					</div>
 				</div>
 				<p className="info__overview">{info.overview}</p>
 			</div>

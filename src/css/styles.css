@@ -289,3 +289,41 @@ body {
   font-size: 16px;
   margin: 25px 0 0;
 }
+
+.info__button {
+  background-color: transparent;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 1px solid #fff;
+  box-shadow: 0px 0px 20px 5px rgba(255, 255, 255, 0.5);
+  transition: all 0.2s linear;
+}
+
+.info__button-container {
+  margin-top: 40px;
+}
+
+.info__button svg {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.info__button svg path {
+  transition: all 0.2s linear;
+}
+
+.info__button:hover {
+  box-shadow: 0px 0px 20px 5px rgba(17, 170, 255, 0.5) !important;
+}
+
+.info__button:hover svg path {
+  fill: #1af !important;
+}
+
+.info__button.added {
+  box-shadow: 0px 0px 20px 5px rgba(255, 255, 0, 0.5);
+}
+
+.info__button.added svg path {
+  fill: #ffff00;
+}

@@ -35,7 +35,7 @@ class Film extends Component {
 
 	        className = (typeof element.className) === 'string' ? element.className : '';
 	    }
-	    // At this point, the while loop has stopped and `el` represents the element that has
+	    // At this point, the while loop has stopped and `element` represents the element that has
 	    // the class you specified in the second parameter of the function `clazz`
 
 	    // Then return the matched element

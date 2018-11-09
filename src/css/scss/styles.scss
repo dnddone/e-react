@@ -308,4 +308,42 @@ body {
         font-size: 16px;
         margin: 25px 0 0;
     }
+    
+    &__button {
+        &-container {
+            margin-top: 40px;
+        }
+        
+        background-color: transparent;
+        padding: 10px 20px;
+        cursor: pointer;
+        border: 1px solid #fff;
+        box-shadow: 0px 0px 20px 5px rgba(255, 255, 255, 0.5);
+        transition: all 0.2s linear;
+        
+        svg {
+            font-size: 18px;
+            margin-right: 10px;
+            
+            path {
+                transition: all 0.2s linear;
+            }
+        }
+        
+        &:hover {
+            box-shadow: 0px 0px 20px 5px rgba(17, 170, 255, 0.5) !important;
+            
+            svg path {
+                fill: $blue !important;
+            }
+        }
+        
+        &.added {
+            box-shadow: 0px 0px 20px 5px rgba(255, 255, 0, 0.5);
+            
+            svg path {
+                fill: $yellow;
+            }
+        }
+    }
 }
