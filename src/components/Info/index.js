@@ -9,18 +9,17 @@ export default class Info extends Component {
 			movie: {
 				isLoaded: false,
 				movie: ''
-			},
-			genre: {
-        error: null,
-        isLoaded: false,
-        genres: []
-      }
+			}
+			// genre: {
+      //   error: null,
+      //   isLoaded: false,
+      //   genres: []
+      // }
 		};
 	}
 
 	componentWillMount() {
 		const id = window.location.pathname.replace('/movie/', '');
-		console.log(id);
 		this.setState({ id: id });
 	}
 
@@ -50,41 +49,36 @@ export default class Info extends Component {
         }
 			);
 			
-		await fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=677522a533aae20a5fa0d80d392c1496")
-      .then(response => response.json())
-      .then(
-        (genre) => {
-          this.setState({
-            genre: {
-              ...this.state.genre, 
-              isLoaded: true,
-              genres: genre.genres
-            }
-          });
-        },
-        (error) => {
-          this.setState({
-            genre: {
-              ...this.state.genre, 
-              isLoaded: true,
-              error: error
-            }
-          });
-        }
-      );
+		// await fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=677522a533aae20a5fa0d80d392c1496")
+    //   .then(response => response.json())
+    //   .then(
+    //     (genre) => {
+    //       this.setState({
+    //         genre: {
+    //           ...this.state.genre, 
+    //           isLoaded: true,
+    //           genres: genre.genres
+    //         }
+    //       });
+    //     },
+    //     (error) => {
+    //       this.setState({
+    //         genre: {
+    //           ...this.state.genre, 
+    //           isLoaded: true,
+    //           error: error
+    //         }
+    //       });
+    //     }
+    //   );
 	}
 
 	render() {
-		const { movie, genre } = this.state;
-		const { genres } = genre;
+		const { movie } = this.state,
+				info = movie.movie;
 
-		const info = movie.movie;
-		
-		console.log(info);
-
-		const error = movie.error || genre.error,
-      isLoaded = movie.isLoaded && genre.isLoaded;
-
+		const error = movie.error,
+      isLoaded = movie.isLoaded;
 
 		return (
 			<div className="main-content">
@@ -94,7 +88,7 @@ export default class Info extends Component {
             || 
             (!isLoaded && <div className="film__user">Loading...</div>)
             ||
-            <InfoMovie genres={genres} info={info} />
+            <InfoMovie info={info} />
 					)}
 				</div>
 			</div>
