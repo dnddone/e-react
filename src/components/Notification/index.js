@@ -6,19 +6,17 @@ class Notification extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
-	}
+	} 
 
 	render() {
+		const { id, title } = this.props;
+
 		return (
 			<div className="notification">
-				<NotificationMessage id={this.props.id} />
+				<NotificationMessage id={id} title={title} />
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = (state) => ({
-	id: state.id
-});
-
-export default connect(mapStateToProps)(Notification);
+export default Notification;

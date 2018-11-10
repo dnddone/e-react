@@ -355,7 +355,7 @@ body {
 .notification {
   max-width: 320px;
   width: 100%;
-  position: absolute;
+  position: fixed;
   top: 57px;
   right: 25px;
 }
@@ -373,7 +373,7 @@ body {
   font-weight: bold;
   margin-bottom: 10px;
   display: block;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .notification__message {

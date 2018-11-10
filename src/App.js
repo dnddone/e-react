@@ -10,37 +10,12 @@ import Bookmarks from "./components/Bookmarks";
 import Notification from "./components/Notification";
 import Error from "./components/Error";
 
+import configureStore from './redux/store/configureStore';
+
 import "./css/reset.css";
 import "./css/styles.css";
 
-const initialState = {
-	ids: []
-}
-
-// TODO: redux notification
-function reducer(state = initialState, action) {
-	switch(action.type) {
-		case "REMOVE_ID": 
-			console.log('Action is REMOVE');
-			console.log(state.ids);
-			return {
-
-			}
-		
-		case "ADD_ID": 
-			console.log('Action is REMOVE');
-			console.log(state.ids);
-			return {
-
-			}
-	}
-	return state;
-}
-
-const store = createStore(reducer);
-
-store.dispatch({ type: "REMOVE_ID" });
-store.dispatch({ type: "ADD_ID" });
+const store = configureStore();
 
 class App extends Component {
   render() {
