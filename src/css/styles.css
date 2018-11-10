@@ -357,7 +357,7 @@ body {
   width: 100%;
   position: absolute;
   top: 57px;
-  right: 15px;
+  right: 25px;
 }
 
 .notification__container {
@@ -368,7 +368,7 @@ body {
   background-color: #000;
 }
 
-.notification__id {
+.notification__title {
   text-align: center;
   font-weight: bold;
   margin-bottom: 10px;

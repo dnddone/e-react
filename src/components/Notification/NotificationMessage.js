@@ -1,11 +1,13 @@
 import React from 'react';
 
 const NotificationMessage = (props) => {
+	const { id } = props;
+
 	return (
 		<div className="notification__container">
-			<h3 className="notification__id">(id: <span className="color-blue">this.id</span>)</h3>
+			<h3 className="notification__title">id: <span className="color-blue">this.title</span></h3>
 			<p className="notification__message">
-				The movie "<span className="color-yellow">this.title</span>" was (deleted from) your favorite list
+				<span className="color-yellow">{id}</span>: the movie was (deleted from) your favorite list
 			</p>
 		</div>
 	);
