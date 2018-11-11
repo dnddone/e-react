@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'; 
+
 import FilmTitle from './FilmTitle';
 import FilmImage from './FilmImage';
 import FilmDescription from './FilmDescription';
 import Bookmark from '../Bookmark';
 
+import { addID, removeID } from '../../actions';
+
+// import  from '../'
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addID: (id, title) => dispatch(addID(id, title)),
+		removeID: (id, title) => dispatch(removeID(id, title)),
+	}
+};
 
 class Film extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			id: props.id,
+			id: '',
 			isBookmark: ''
 		}
 	}
@@ -58,6 +70,12 @@ class Film extends Component {
 		}
 
 		// if result is `true`, add ID then, if `false` remove that ID from localStorage.
+		if (result) {
+			this.props.addID(id, this.props.movie.title);
+		} else {
+			this.props.removeID(id, this.props.movie.title);
+		}
+
 		this.updateLocalStorageBookmarkMovies(id, result);
 
 		return result;
@@ -118,8 +136,7 @@ class Film extends Component {
 			</li>
 		);
 	}
-
-	
 }
 
-export default Film;
+export default connect(null, mapDispatchToProps)(Film);
+// export default Film;

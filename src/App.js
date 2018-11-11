@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import reducer from './reducers';
 
 import Header from "./components/Header";
 import Main from "./components/Main";
@@ -10,14 +11,19 @@ import Bookmarks from "./components/Bookmarks";
 import Notification from "./components/Notification";
 import Error from "./components/Error";
 
-import configureStore from './redux/store/configureStore';
-
 import "./css/reset.css";
 import "./css/styles.css";
 
-const store = configureStore();
+const store = createStore(reducer);
 
 class App extends Component {
+	constructor() {
+		super();
+
+		store.subscribe(() => {
+			console.log(store.getState());
+		})
+	}
   render() {
     return (
       <BrowserRouter>

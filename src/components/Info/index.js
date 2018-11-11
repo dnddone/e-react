@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { addID, removeID } from '../../actions';
 import InfoMovie from './InfoMovie';
 
-export default class Info extends Component {
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addID: (id, title) => dispatch(addID(id, title)),
+		removeID: (id, title) => dispatch(removeID(id, title)),
+	}
+};
+
+class ConnectedInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -11,19 +21,12 @@ export default class Info extends Component {
 				isLoaded: false,
 				movie: ''
 			}
-			// genre: {
-      //   error: null,
-      //   isLoaded: false,
-      //   genres: []
-      // }
 		};
 	}
 
 	componentWillMount() {
 		const id = window.location.pathname.replace('/movie/', '');	
-		const isAlreadyBookmarked = localStorage.getItem(this.state.id.toString()) ? 'added' : '';
-
-		this.setState({ isBookmark: isAlreadyBookmarked });
+		
 		this.setState({ id: id });
 	}
 
@@ -36,6 +39,12 @@ export default class Info extends Component {
 	onBookmarkClickHandler = () => {
 		const { id } = this.state;
 		const isBookmark = this.toggleLocalStorageBookmark(id) ? 'added' : '';
+
+		if (isBookmark) {
+			this.props.addID(id, this.state.movie.movie.title);
+		} else {
+			this.props.removeID(id, this.state.movie.movie.title);
+		}
 
 		this.setState({ isBookmark: isBookmark });
 	}
@@ -82,6 +91,9 @@ export default class Info extends Component {
 
 	async componentDidMount() {
 		const { id } = this.state;
+		const isAlreadyBookmarked = localStorage.getItem(this.state.id.toString()) ? 'added' : '';
+
+		this.setState({ isBookmark: isAlreadyBookmarked });
 
 		await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=677522a533aae20a5fa0d80d392c1496`)
       .then(response => response.json())
@@ -105,29 +117,6 @@ export default class Info extends Component {
           });
         }
 			);
-			
-		// await fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=677522a533aae20a5fa0d80d392c1496")
-    //   .then(response => response.json())
-    //   .then(
-    //     (genre) => {
-    //       this.setState({
-    //         genre: {
-    //           ...this.state.genre, 
-    //           isLoaded: true,
-    //           genres: genre.genres
-    //         }
-    //       });
-    //     },
-    //     (error) => {
-    //       this.setState({
-    //         genre: {
-    //           ...this.state.genre, 
-    //           isLoaded: true,
-    //           error: error
-    //         }
-    //       });
-    //     }
-    //   );
 	}
 
 	render() {
@@ -135,7 +124,7 @@ export default class Info extends Component {
 				info = movie.movie;
 
 		const error = movie.error,
-      isLoaded = movie.isLoaded;
+			isLoaded = movie.isLoaded;
 
 		return (
 			<div className="main-content">
@@ -156,3 +145,7 @@ export default class Info extends Component {
 		);
 	}
 }
+
+const Info = connect(null, mapDispatchToProps)(ConnectedInfo);
+
+export default Info;

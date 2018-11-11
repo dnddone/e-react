@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
+
 import NotificationMessage from './NotificationMessage';
 
 class Notification extends Component {
@@ -19,4 +20,12 @@ class Notification extends Component {
 	}
 }
 
-export default Notification;
+function mapStateToProps(state) {
+	return {
+		id: state.id,
+		title: state.title,
+		status: state.status
+	}
+}
+
+export default connect(mapStateToProps)(Notification);
