@@ -29,7 +29,8 @@ class ConnectedInfo extends Component {
 	}
 
 	componentWillMount() {
-		const id = window.location.pathname.replace('/e-react/movie/', '');	
+		// const id = window.location.pathname.replace('/e-react/movie/', '');	
+		const id = window.location.pathname.replace('/movie/', '');	
 		
 		this.setState({ id: id });
 	}

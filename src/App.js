@@ -16,7 +16,8 @@ import "./css/styles.css";
 
 const store = createStore(reducer);
 
-const url = '/e-react';
+// const url = '/e-react';
+const url = '';
 
 class App extends Component {
 	constructor() {
@@ -35,7 +36,6 @@ class App extends Component {
 						<Header />
 						<Switch>
 							<Route path={`${url}/`} component={Main} exact />
-							{/* <Route path="/about" component={About} />*/}
 							<Route path={`${url}/movie`} component={Info} />
 							<Route path={`${url}/bookmarks`} component={Bookmarks} />
 							<Route component={Error} />

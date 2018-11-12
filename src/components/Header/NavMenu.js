@@ -2,7 +2,10 @@ import React from "react";
 
 const NavMenu = props => {
 	const { navMenuList } = props;
-	const url = '/e-react';
+
+	// const url = '/e-react';
+	const url = '';
+
   const menuList = navMenuList.map((item, index) => {
     const href = item === 'Home' ? `${url}/` : `${url}/${item.toLowerCase()}`; 
     return (
