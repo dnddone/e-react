@@ -1,9 +1,10 @@
 import React from "react";
 
 const NavMenu = props => {
-  const { navMenuList } = props;
+	const { navMenuList } = props;
+	const url = '/e-react';
   const menuList = navMenuList.map((item, index) => {
-    const href = item === 'Home' ? "/" : "/" + item.toLowerCase(); 
+    const href = item === 'Home' ? `${url}/` : `${url}/${item.toLowerCase()}`; 
     return (
       <li className="nav__item" key={index}>
         <a href={href} className="nav__link">

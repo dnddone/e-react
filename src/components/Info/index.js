@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { addID, removeID } from '../../actions';
 import InfoMovie from './InfoMovie';
+import Main from '../Main';
 
 const mapDispatchToProps = (dispatch) => {
 	return {
@@ -25,7 +26,7 @@ class ConnectedInfo extends Component {
 	}
 
 	componentWillMount() {
-		const id = window.location.pathname.replace('/movie/', '');	
+		const id = window.location.pathname.replace('/e-react/movie/', '');	
 		
 		this.setState({ id: id });
 	}
@@ -127,19 +128,24 @@ class ConnectedInfo extends Component {
 			isLoaded = movie.isLoaded;
 
 		return (
-			<div className="main-content">
-				<div className="container">
-					{(
-            (error && <div className="film__user color-error">Error: {error.message}</div>)
-            || 
-            (!isLoaded && <div className="film__user">Loading...</div>)
-            ||
-						<InfoMovie 
-							info={info} 
-							isBookmark={isBookmark} 
-							onBookmarkHandler={this.onBookmarkClickHandler} 
-						/>
-					)}
+			<div>
+				<div className="main-content">
+					<div className="container">
+						{(
+							(error && <div className="film__user color-error">Error: {error.message}</div>)
+							|| 
+							(!isLoaded && <div className="film__user">Loading...</div>)
+							||
+							<InfoMovie 
+								info={info} 
+								isBookmark={isBookmark} 
+								onBookmarkHandler={this.onBookmarkClickHandler} 
+							/>
+						)}
+					</div>
+				</div>
+				<div className="recommendations">
+					<Main isRecommendations={true} specialID={this.state.id} />
 				</div>
 			</div>
 		);

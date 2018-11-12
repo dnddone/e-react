@@ -123,7 +123,7 @@ class Film extends Component {
 
 		const { title } = movie;
 
-		const href = '/movie/' + id;
+		const href = '/e-react/movie/' + id;
 
 		return (
 			<li className="film__item film">

@@ -69,8 +69,12 @@ class Main extends Component {
 
   getMovieAsync = async () => {
 		const { page } = this.state
+		const  defineURL = this.props.isRecommendations 
+				? `https://api.themoviedb.org/3/movie/${this.props.specialID}/recommendations?api_key=677522a533aae20a5fa0d80d392c1496`
+				: `https://api.themoviedb.org/3/movie/popular?api_key=677522a533aae20a5fa0d80d392c1496&page=${page}`;
 		
-    await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=677522a533aae20a5fa0d80d392c1496&page=${page}`)
+		
+    await fetch(defineURL)
       .then(response => response.json())
       .then(
         (response) => {
@@ -129,12 +133,17 @@ class Main extends Component {
       isLoaded = movie.isLoaded && genre.isLoaded;
 
     const { movies } = movie, { genres } = genre,
-        moviesIsNotEmpty = movies.length > 0;
+				moviesIsNotEmpty = movies.length > 0;
+				
+		const isInfoPage = this.props.isRecommendations;
+
+		console.log(`IsInfo page is [${isInfoPage}]`);
 
     return (
       <section className="main-content">
         <div className="container">
-          <SearchForm onChangeHandler={this.onChangeHandler} />
+					{(isInfoPage && <h1 className="recommendations__title">Movie recommendations</h1>)}
+          {(!isInfoPage && <SearchForm onChangeHandler={this.onChangeHandler} />)}
           {(
             (error && <div className="film__user color-error">Error: {error.message}</div>)
             || 
@@ -146,7 +155,12 @@ class Main extends Component {
 									{
 										(
 											moviesIsNotEmpty && movies.map((movie, index) => {
-												return (index < 18) ? <Film movie={movie} genres={genre} key={movie.id} id={movie.id} /> : '';
+												if (isInfoPage && index < 3) {
+													return <Film movie={movie} genres={genre} key={movie.id} id={movie.id} />;
+												} else if (!isInfoPage && index < 18) {
+													return  <Film movie={movie} genres={genre} key={movie.id} id={movie.id} />;
+												}
+											
 											})
 										) 
 
@@ -160,7 +174,7 @@ class Main extends Component {
             )
 					)}
 					{
-						(!searchValue && <Pagination handlePage={this.updatePage} currentPage={page} totalPages={totalPages}	/>)
+						(!searchValue && !isInfoPage && <Pagination handlePage={this.updatePage} currentPage={page} totalPages={totalPages}	/>)
 					}
         </div>
       </section>

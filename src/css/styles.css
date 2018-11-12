@@ -355,7 +355,7 @@ body {
 .notification {
   max-width: 320px;
   width: 100%;
-  position: fixed;
+  position: absolute;
   top: 57px;
   right: 25px;
 }
@@ -373,10 +373,16 @@ body {
   font-weight: bold;
   margin-bottom: 10px;
   display: block;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .notification__message {
   font-size: 14px;
   line-height: 1.3;
+}
+
+.recommendations__title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
 }
