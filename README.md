@@ -1,4 +1,4 @@
-# E-react
+# E-React
 E-React Movies API
 
 ## Get started
