@@ -137,8 +137,6 @@ class Main extends Component {
 				
 		const isInfoPage = this.props.isRecommendations;
 
-		console.log(`IsInfo page is [${isInfoPage}]`);
-
     return (
       <section className="main-content">
         <div className="container">

@@ -355,7 +355,7 @@ body {
 .notification {
   max-width: 320px;
   width: 100%;
-  position: absolute;
+  position: fixed;
   top: 57px;
   right: 25px;
 }

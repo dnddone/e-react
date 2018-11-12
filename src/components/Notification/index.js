@@ -10,11 +10,11 @@ class Notification extends Component {
 	} 
 
 	render() {
-		const { id, title } = this.props;
+		const { id, title, status } = this.props;
 
 		return (
 			<div className="notification">
-				<NotificationMessage id={id} title={title} />
+				<NotificationMessage id={id} title={title} status={status} />
 			</div>
 		);
 	}
