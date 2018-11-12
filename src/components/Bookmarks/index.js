@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Film from "../Film";
 
+// It shows the moevies from bookmark list at hostname/bookmarks
 export default class Bookmarks extends Component {
 	constructor(props) {
     super(props);
@@ -20,6 +21,7 @@ export default class Bookmarks extends Component {
   }
 
   getAllMovieSAsync = async () => {
+		// It gets all movies of bookmark list from localStorage
 		let fetchArrayMovies = [], fetchMovie;
 		const localStorageIDs = localStorage.getItem('ids');
 
@@ -64,6 +66,7 @@ export default class Bookmarks extends Component {
   async componentDidMount() {
     this.getAllMovieSAsync();
 
+		// It gets the genres to define genre_ids
     await fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=677522a533aae20a5fa0d80d392c1496")
       .then(response => response.json())
       .then(
@@ -97,6 +100,7 @@ export default class Bookmarks extends Component {
     const { movies } = movie, { genres } = genre,
         moviesIsNotEmpty = movies.length > 0;
 
+		// TODO: Bookmarks pagination
     return (
       <section className="main-content">
         <div className="container">
@@ -112,7 +116,7 @@ export default class Bookmarks extends Component {
                 {
                   (
                     moviesIsNotEmpty && movies.map((movie, index) => {
-                      return (index < 18) ? <Film movie={movie} genres={genre} key={movie.id} id={movie.id} /> : '';
+                      return <Film movie={movie} genres={genre} key={movie.id} id={movie.id} />;
                     })
                   ) 
 

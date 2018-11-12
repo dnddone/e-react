@@ -5,6 +5,7 @@ import { addID, removeID } from '../../actions';
 import InfoMovie from './InfoMovie';
 import Main from '../Main';
 
+// dispatch for displaying notification, when bookmark is added/removed
 const mapDispatchToProps = (dispatch) => {
 	return {
 		addID: (id, title) => dispatch(addID(id, title)),
@@ -12,6 +13,8 @@ const mapDispatchToProps = (dispatch) => {
 	}
 };
 
+
+// It shows movie details with three more recommendations
 class ConnectedInfo extends Component {
 	constructor(props) {
 		super(props);
@@ -38,6 +41,7 @@ class ConnectedInfo extends Component {
 	}
 
 	onBookmarkClickHandler = () => {
+		// To display notification message
 		const { id } = this.state;
 		const isBookmark = this.toggleLocalStorageBookmark(id) ? 'added' : '';
 
@@ -51,6 +55,7 @@ class ConnectedInfo extends Component {
 	}
 
 	toggleLocalStorageBookmark = (id) => {
+		// localStorage handler
 		const idString = id.toString();
 		const localStorageExist = localStorage.getItem(idString);
 
@@ -96,6 +101,7 @@ class ConnectedInfo extends Component {
 
 		this.setState({ isBookmark: isAlreadyBookmarked });
 
+		// It gets movie info
 		await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=677522a533aae20a5fa0d80d392c1496`)
       .then(response => response.json())
       .then(

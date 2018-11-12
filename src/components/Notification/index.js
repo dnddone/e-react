@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import NotificationMessage from './NotificationMessage';
 
+// Notification messages. I have no idea how to animate it
 class Notification extends Component {
 	constructor(props) {
 		super(props);

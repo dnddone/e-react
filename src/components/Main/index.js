@@ -3,6 +3,7 @@ import SearchForm from "../SearchForm";
 import Film from "../Film";
 import Pagination from "../Pagination";
 
+// It show movie's preview at home page
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +25,6 @@ class Main extends Component {
   }
 
   onChangeHandler = async (event) => {
-
     const searchValue = event.target.value;
 
     if (!searchValue) {
@@ -33,7 +33,7 @@ class Main extends Component {
       return;
     }
 
-		// TODO: Pagination for search query
+		// TODO: Pagination for search queries
 
     this.setState({ isLoaded: false, searchValue: searchValue });
 

@@ -8,8 +8,7 @@ import Bookmark from '../Bookmark';
 
 import { addID, removeID } from '../../actions';
 
-// import  from '../'
-
+// dispatch for displaying notification, when bookmark is added/removed
 const mapDispatchToProps = (dispatch) => {
 	return {
 		addID: (id, title) => dispatch(addID(id, title)),
@@ -17,6 +16,7 @@ const mapDispatchToProps = (dispatch) => {
 	}
 };
 
+// It is the movie's container at /home or /bookmarks pages.
 class Film extends Component {
 	constructor(props) {
 		super(props);
@@ -55,6 +55,7 @@ class Film extends Component {
 	}
 
 	toggleLocalStorageBookmark = (id) => {
+		// Single toogle bookmark for fast getting from localStorage by id;
 		const idString = id.toString();
 		const localStorageExist = localStorage.getItem(idString);
 
@@ -82,6 +83,7 @@ class Film extends Component {
 	}
 
 	updateLocalStorageBookmarkMovies = (id, prevResultAddingRemoving) => {
+		// Full list of movies' bookmark list from localStorage
 		const shouldIAdd = prevResultAddingRemoving;
 		let arrayIDs = this.getLocalStorageArray(),
 				stringIDs;
@@ -107,6 +109,7 @@ class Film extends Component {
 	}
 
 	onBookmarkClickHandler = (event) => {
+		// When bookmark star button is clicked
 	    if (this.closestByClass(event.target, 'bookmark')) {
 				event.preventDefault();
 				const { id } = this.state;
@@ -139,4 +142,3 @@ class Film extends Component {
 }
 
 export default connect(null, mapDispatchToProps)(Film);
-// export default Film;

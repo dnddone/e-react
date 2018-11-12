@@ -4,6 +4,7 @@ const FilmDescription = (props) => {
 	const { genreIDs, genres } = props;
 	let genreArray;
 
+	// Not pure, because of "genres" array and "genres" object
 	if (genreIDs.length == 0) {
 		genreArray = [];
 	} else if (genreIDs[0] instanceof Object) {
