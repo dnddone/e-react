@@ -21,7 +21,7 @@ class Film extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			id: '',
+			id: props.id,
 			isBookmark: ''
 		}
 	}
