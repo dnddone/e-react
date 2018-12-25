@@ -29,8 +29,8 @@ class App extends Component {
 	}
   render() {
     return (
-      <BrowserRouter>
-        <Provider store={store}>
+			<Provider store={store}>
+				<BrowserRouter>
 					<div className="rsa">
 						<Notification />
 						<Header />
@@ -41,8 +41,8 @@ class App extends Component {
 							<Route component={Error} />
 						</Switch>
 					</div>
-				</Provider>
-      </BrowserRouter>
+				</BrowserRouter>
+			</Provider>
     );
   }
 }

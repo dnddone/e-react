@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from 'react-router-dom'; 
 
 const NavMenu = props => {
 	const { navMenuList } = props;
@@ -10,9 +11,7 @@ const NavMenu = props => {
     const href = item === 'Home' ? `${url}/` : `${url}/${item.toLowerCase()}`; 
     return (
       <li className="nav__item" key={index}>
-        <a href={href} className="nav__link">
-          {item}
-        </a>
+        <NavLink to={href} className="nav__link">{item}</NavLink>
       </li>
     );
   });
