@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const Logo = () => {
   return (
     <div className="header__logo-container header__logo">
-      <a href="/" className="header__logo-link">
+      <Link to="/" className="header__logo-link">
 				<span className="header__logo-white">white</span>
       	<span className="header__logo-onblack">on black</span>
-      </a>
+      </Link>
     </div>
   );
 };

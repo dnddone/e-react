@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import reducer from './reducers';
+import reducer from './redux/reducers';
 
 import Header from "./components/Header";
 import Main from "./components/Main";
@@ -32,7 +32,7 @@ class App extends Component {
 			<Provider store={store}>
 				<BrowserRouter>
 					<div className="rsa">
-						<Notification />
+						{/* <Notification /> */}
 						<Header />
 						<Switch>
 							<Route path={`${url}/`} component={Main} exact />

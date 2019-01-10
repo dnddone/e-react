@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'; 
+import { Link } from 'react-router-dom';
 
 import FilmTitle from './FilmTitle';
 import FilmImage from './FilmImage';
 import FilmDescription from './FilmDescription';
 import Bookmark from '../Bookmark';
 
-import { addID, removeID } from '../../actions';
+import { addID, removeID } from '../../redux/actions';
 
 // dispatch for displaying notification, when bookmark is added/removed
 const mapDispatchToProps = (dispatch) => {
@@ -131,12 +132,12 @@ class Film extends Component {
 
 		return (
 			<li className="film__item film">
-				<a href={href} className="film__link" onClick={this.onBookmarkClickHandler}>
+				<Link to={href} className="film__link" onClick={this.onBookmarkClickHandler}>
 					<Bookmark isBookmark={this.state.isBookmark} />
 					<FilmTitle title={title} />
 					<FilmImage poster={posterPath} />
 					<FilmDescription genreIDs={genreIDs} genres={genres.genres} />
-				</a>
+				</Link>
 			</li>
 		);
 	}
