@@ -13,3 +13,7 @@ E-React Movies API
 	npm install
 	npm start
 ```
+
+## Published
+
+http://e-react.herokuapp.com/
