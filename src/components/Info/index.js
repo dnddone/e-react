@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { addID, removeID } from '../../actions';
+import { addID, removeID } from '../../redux/actions';
 import InfoMovie from './InfoMovie';
 import Main from '../Main';
 
