@@ -15,7 +15,7 @@ const Pagination = (props) => {
 		<div className="pagination pagination__container">
 			<ul className="pagination__list">
 				{arrayPage.map((value, index) => {
-					const isCurrent = currentPage == value;
+					const isCurrent = currentPage === value;
 					return <PaginationItem key={index} handlePage={!isCurrent ? handlePage : ()=>{}} page={value} current={isCurrent ? 'current' : ''} />
 				})}
 			</ul>

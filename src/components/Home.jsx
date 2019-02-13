@@ -1,66 +1,70 @@
-import React, { Component } from "react";
-import SearchForm from "../SearchForm";
-import Film from "../Film";
-import Pagination from "../Pagination";
+import React, { Component } from 'react';
+import { string, number } from 'prop-types';
+import { movieConstants } from '../constants';
+import SearchForm from './SearchForm';
+import Film from './Film';
+import Pagination from './Pagination';
+
+const propTypes = {
+  page: number,
+  totalPages: number,
+  searchValue: string,
+};
+
+const defaultProps = {
+  page: 1,
+  totalPage: 1,
+  searchValues: '',
+  errors: {},
+  loading: {},
+  data: {},
+};
 
 // It show movie's preview at home page
-class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-			page: 1,
-			totalPages: 1,
-			searchValue: '',
-      movie: {
-        error: null,
-        isLoaded: false,
-        movies: []
-      },
-      genre: {
-        error: null,
-        isLoaded: false,
-        genres: []
-      }
-    };
+class Home extends Component {
+  state = {};
+
+  componentDidMount() {
+    this.getMovieAsync();
+    // TODO: Genre request is required here;
   }
 
-  onChangeHandler = async (event) => {
+  onChangeHandler = (event) => {
     const searchValue = event.target.value;
 
     if (!searchValue) {
-			this.setState({ page: 1, searchValue: '' });
-      this.getMovieAsync();
+      this.setState({ page: 1, searchValue: '' }, () => this.getMovieAsync());
       return;
     }
 
-		// TODO: Pagination for search queries
+    // TODO: Pagination for search queries
 
-    this.setState({ isLoaded: false, searchValue: searchValue });
+    this.setState({
+      searchValue,
+    });
 
-    const searchURL = `https://api.themoviedb.org/3/search/movie?&api_key=677522a533aae20a5fa0d80d392c1496&query=${searchValue}`;
-
-    const getSearchMovies = await fetch(searchURL)
-        .then(response => response.json())
-        .then((response) => {
-          this.setState({
-            movie: {
-              ...this.state.movie, 
-              isLoaded: true,
-              movies: response.results
-						}
-          });
-        },
-        (error) => {
-          this.setState({
-            movie: {
-              ...this.state.movie, 
-              isLoaded: true,
-              error: error
-            }
-          });
-        }
+    fetch(`${movieConstants.SEARCH_URL}&query=${searchValue}`)
+      .then(response => response.json())
+      .then((response) => {
+        this.setState((state) => {
+          movie: {
+            ...state.movie, 
+            isLoaded: true,
+            movies: response.results,
+          }
+        });
+      },
+      (error) => {
+        this.setState({
+          movie: {
+            ...this.state.movie, 
+            isLoaded: true,
+            error: error
+          }
+        });
+      }
       );
-	}
+    }
 	
 	updatePage = (page) => {
 		this.setState({ page: page });
@@ -91,33 +95,6 @@ class Main extends Component {
           this.setState({
             movie: {
               ...this.state.movie, 
-              isLoaded: true,
-              error: error
-            }
-          });
-        }
-      );
-  }
-
-  async componentWillMount() {
-		this.getMovieAsync();
-
-    await fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=677522a533aae20a5fa0d80d392c1496")
-      .then(response => response.json())
-      .then(
-        (genre) => {
-          this.setState({
-            genre: {
-              ...this.state.genre, 
-              isLoaded: true,
-              genres: genre.genres
-            }
-          });
-        },
-        (error) => {
-          this.setState({
-            genre: {
-              ...this.state.genre, 
               isLoaded: true,
               error: error
             }
@@ -180,4 +157,7 @@ class Main extends Component {
   }
 }
 
-export default Main;
+Home.propTypes = propTypes;
+Home.defaultProps = defaultProps;
+
+export default Home;

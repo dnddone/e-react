@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { addID, removeID } from '../../redux/actions';
 import InfoMovie from './InfoMovie';
-import Main from '../Main';
+import Main from '../Main/Main';
 
 // dispatch for displaying notification, when bookmark is added/removed
 const mapDispatchToProps = (dispatch) => {
