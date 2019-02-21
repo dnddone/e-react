@@ -1,0 +1,46 @@
+.header {
+  background-color: #000;
+  border-bottom: 1px solid #fff;
+
+  &__logo {
+    &-container {
+      float: left;
+      width: 120px;
+      text-align: center;
+      padding: 10px 0;
+    
+      span {
+        text-transform: uppercase;
+        line-height: 0.85;
+        display: block;
+        color: #fff;
+        transition: color 0.2s linear;
+      }
+    }
+    
+    &-link {
+      display: block;
+      text-decoration: none;
+      
+      &:hover {
+        .header__logo-white {
+          color: $blue;
+        }
+        
+        .header__logo-onblack {
+          color: $yellow;
+        }
+      }
+    }
+    
+    &-white {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+      
+    &-onblack {
+      font-size: 15px;
+    }
+  }
+}

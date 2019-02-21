@@ -1,0 +1,74 @@
+.film {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+
+  }
+    
+  &__user {
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    margin: 20px;
+  }
+  
+  &__image {
+    height: 400px;
+    width: 100%;
+  }
+    
+  &__item {
+    width: 298px;
+    padding: 10px;
+    border: 1px solid #fff;
+    overflow: hidden;
+    margin: 0px 14px 20px;
+    transition: all 0.2s linear;
+    
+    &:hover {
+      border-color: $blue;
+      box-shadow: 0px 0px 20px 5px rgba(255, 255, 255, 0.25);
+    }
+  }
+    
+  &__link {
+    display: block;
+    text-decoration: none;
+  }
+  
+  &__title {
+    font-size: 18px;
+    margin: 0 0 10px;
+    height: 36px;
+  }
+  
+  &__description {
+    font-size: 12px;
+    margin-top: 15px;
+  }
+    
+  .bookmark {
+    float: right;
+    
+    svg {
+      font-size: 22px;
+      
+      path {
+        fill: #fff;
+        transition: all 0.2s linear;
+      }
+    }
+    
+    &:hover {
+      svg path {
+        fill: rgb(17, 170, 255) !important;
+      }
+    }
+    
+    &.added {
+      svg path {
+        fill: #ffff00;
+      }
+    }
+  }
+}

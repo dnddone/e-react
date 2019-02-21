@@ -8,7 +8,7 @@ const instance = axios.create({
 });
 
 instance.interceptors.response.use(
-  response => response,
+  response => response.data,
   (error) => {
     if (error.response) {
       throw new axios.Cancel('444');

@@ -1,0 +1,28 @@
+.notification {
+  max-width: 320px;
+  width: 100%;
+  position: fixed;
+  top: 57px;
+  right: 25px;
+  
+  &__container {
+    border: 1px solid #fff;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background-color: #000;
+  }
+    
+  &__title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    font-size: 16px;
+  }
+  
+  &__message {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+}

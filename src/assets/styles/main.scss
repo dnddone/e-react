@@ -1,4 +1,12 @@
 @import 'variables';
 @import 'reset';
-
 @import 'general';
+
+@import 'partial/header';
+@import 'partial/film';
+@import 'partial/info';
+@import 'partial/nav';
+@import 'partial/notification';
+@import 'partial/pagination';
+@import 'partial/recommendations';
+@import 'partial/search';

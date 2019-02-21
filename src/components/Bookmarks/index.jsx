@@ -82,8 +82,6 @@ export default class Bookmarks extends Component {
 
         // fetchArrayMovies.push(fetchMovie);
       }
-
-      // console.log(`fetchArrayMovies = {${fetchArrayMovies}}`);
     }
   };
 

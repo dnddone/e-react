@@ -1,0 +1,23 @@
+.nav {
+  &__list {
+    font-style: 0;
+    text-align: right;
+  }
+  
+  &__item {
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  &__link {
+    display: block;
+    text-decoration: none;
+    padding: 20px;
+    color: #fff;
+    transition: color 0.2s linear;
+      
+    &:hover {
+      color: $blue;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.pagination {
+  &__container {
+    margin-top: 40px;
+  }
+  
+  &__list {
+    text-align: center;
+  }
+  
+  &__item {
+    font-size: 18px;
+    padding: 0 5px;
+    margin: 0 5px 10px;
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+    color: #fff;
+    transition: all 0.2s linear;
+    
+    &:hover {
+        color: $blue;
+    }
+    
+    &.current {
+        color: $yellow !important;
+        cursor: default;
+    }
+  }
+}

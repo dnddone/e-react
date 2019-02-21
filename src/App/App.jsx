@@ -1,33 +1,51 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { func } from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import reducer from '../redux/reducers';
-
 import { pathsConstants } from '../constants';
+import { genreActions } from '../actions';
 
 import Header from '../components/Header/Header';
 import Home from '../components/Home';
 // import Info from '../components/Info';
 // import Bookmarks from '../components/Bookmarks';
-// import Error from '../components/Error';
+// import NotFound from '../components/NotFound';
 
-const store = createStore(reducer);
+const propTypes = {
+  getGenres: func,
+};
 
-const App = () => (
-  <Provider store={store}>
-    <BrowserRouter>
-      <div className="rsa">
-        <Header navigationList={pathsConstants.NAVIGATION_LIST} />
-        <Switch>
-          <Route exact path={pathsConstants.HOME_PAGE} component={Home} />
-          {/* <Route path={pathsConstants.MOVIE_PAGE} component={Info} />
-          <Route path={pathsConstants.BOOKMARKS_PAGE} component={Bookmarks} />
-          <Route component={Error} /> */}
-        </Switch>
-      </div>
-    </BrowserRouter>
-  </Provider>
-);
+const defaultProps = {
+  getGenres: () => {},
+};
 
-export default App;
+class App extends Component {
+  componentDidMount() {
+    this.props.getGenres();
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <div className="rsa">
+          <Header navigationList={pathsConstants.NAVIGATION_LIST} />
+          <Switch>
+            <Route exact path={pathsConstants.HOME_PAGE} component={Home} />
+            {/* <Route path={pathsConstants.MOVIE_PAGE} component={Info} />
+            <Route path={pathsConstants.BOOKMARKS_PAGE} component={Bookmarks} />
+            <Route component={Error} /> */}
+          </Switch>
+        </div>
+      </BrowserRouter>
+    );
+  }
+}
+
+App.propTypes = propTypes;
+App.defaultProps = defaultProps;
+
+const mapDispatchToProps = dispatch => ({
+  getGenres: () => dispatch(genreActions.getGenres()),
+});
+
+export default connect(null, mapDispatchToProps)(App);

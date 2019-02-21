@@ -1,0 +1,109 @@
+.info {
+  padding: 0 20px;
+  
+  .color {
+    &-yellow {
+      color: $yellow;
+    }
+    
+    &-blue {
+      color: $blue;
+    }
+  }
+  
+  &__container {
+    padding-left: 60px;
+  }
+  
+  &__title {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 0 40px;
+  }
+  
+  &__item {
+    display: inline-block;
+    vertical-align: top;
+    width: 60%;
+  }
+  
+  &__image {
+    &-container {
+      text-align: center;
+      width: 35%;
+    }
+  }
+  
+  &__link {
+    color: $yellow;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: $blue;
+    }
+  }
+  
+  &__description {
+    margin-bottom: 15px;
+  }
+  
+  &__overview {
+    line-height: 1.5;
+    font-size: 16px;
+    margin: 25px 0 0;
+  }
+  
+  &__button {
+    outline: none;
+      
+    .bookmark {
+        display: inline-block;
+        vertical-align: middle;
+    }
+      
+    &-container {
+      margin-top: 40px;
+    }
+    
+    &-text {
+      font-size: 16px;
+      display: inline-block;
+      vertical-align: bottom;
+    }
+    
+    background-color: transparent;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #fff;
+    box-shadow: 0px 0px 20px 5px rgba(255, 255, 255, 0.5);
+    transition: all 0.2s linear;
+      
+    svg {
+      font-size: 18px;
+      margin-right: 10px;
+      
+      path {
+        transition: all 0.2s linear;
+      }
+    }
+      
+    &:hover {
+      box-shadow: 0px 0px 20px 5px rgba(17, 170, 255, 0.5) !important;
+
+      svg path {
+        fill: $blue !important;
+      }
+    }
+      
+    &.added {
+      box-shadow: 0px 0px 20px 5px rgba(255, 255, 0, 0.5);
+      
+      svg path {
+        fill: $yellow;
+      }
+    }
+  }
+}

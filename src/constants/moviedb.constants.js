@@ -1,15 +1,29 @@
-export const API_TOKEN = '677522a533aae20a5fa0d80d392c1496';
-export const API_KEY = `api_key=${API_TOKEN}`;
-export const API_URL = 'https://api.themoviedb.org/3';
+import { API_KEY } from './app.constants';
 
-export const MOVIE_URL = `${API_URL}/movie`;
-export const GENRE_URL = `${API_URL}/genre`;
-export const SEARCH_URL = `${API_URL}/search/movie?${API_KEY}`;
+export const MOVIE_URL = '/movie';
+
+export const POPULAR_URL = `${MOVIE_URL}/popular?${API_KEY}`;
+export const SEARCH_URL = `/search/movie?${API_KEY}`;
+
+export const ADD_ID = 'ADD_ID';
+export const REMOVE_ID = 'REMOVE_ID';
+export const TOGGLE_ID = 'TOGGLE_ID';
+export const UPDATE_ID = 'UPDATE_ID';
+
+export const PAGINATION_UPDATE = 'PAGINATION_UPDATE';
+export const PAGINATION_RESET = 'PAGINATION_RESET';
+
+export const ADD_MOVIE_POPULAR = 'ADD_MOVIE_POPULAR';
 
 export default {
-  API_TOKEN,
   API_KEY,
-  API_URL,
   MOVIE_URL,
-  GENRE_URL,
+  POPULAR_URL,
+  ADD_ID,
+  REMOVE_ID,
+  TOGGLE_ID,
+  UPDATE_ID,
+  ADD_MOVIE_POPULAR,
+  PAGINATION_UPDATE,
+  PAGINATION_RESET,
 };
