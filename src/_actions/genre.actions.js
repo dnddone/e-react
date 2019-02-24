@@ -1,5 +1,6 @@
-import { genreService } from '../services';
-import { genreConstants } from '../constants';
+import { reduce } from '../_helpers/utils';
+import { genreService } from '../_services';
+import { genreConstants } from '../_constants';
 
 const makeGenresUsable = ({ genres }) => {
   const genreUsableObject = {};
@@ -17,10 +18,7 @@ const getGenres = () => dispatch => (
       (response) => {
         const genres = makeGenresUsable(response);
 
-        dispatch({
-          type: genreConstants.ADD_GENRES,
-          payload: { genres },
-        });
+        dispatch(reduce(genreConstants.ADD_GENRES, { genres }));
 
         return Promise.resolve(genres);
       },

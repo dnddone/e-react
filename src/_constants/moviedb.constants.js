@@ -13,6 +13,9 @@ export const UPDATE_ID = 'UPDATE_ID';
 export const PAGINATION_UPDATE = 'PAGINATION_UPDATE';
 export const PAGINATION_RESET = 'PAGINATION_RESET';
 
+export const MOVIE_LOADING = 'MOVIE_LOADING';
+export const MOVIE_LOADED = 'MOVIE_LOADED';
+
 export const ADD_MOVIE_POPULAR = 'ADD_MOVIE_POPULAR';
 
 export default {
@@ -26,4 +29,6 @@ export default {
   ADD_MOVIE_POPULAR,
   PAGINATION_UPDATE,
   PAGINATION_RESET,
+  MOVIE_LOADING,
+  MOVIE_LOADED,
 };

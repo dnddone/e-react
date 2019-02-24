@@ -8,9 +8,9 @@ import {
   objectOf,
   string,
 } from 'prop-types';
-import { movieActions } from '../actions';
+import { movieActions } from '../_actions';
 // import SearchForm from './SearchForm';
-import Film from './Film';
+import MovieBlock from './MovieBlock';
 // import Pagination from './Pagination';
 
 const propTypes = {
@@ -94,14 +94,16 @@ class Home extends Component {
   render() {
     const { movies, genres } = this.props;
 
+    const isMoviesNotEmpty = movies.length;
+
     return (
       <section className="main-content">
         <div className="container">
           <div>
             <ul className="film__list">
-              {
-                movies.map(movie => (
-                  <Film
+              {isMoviesNotEmpty
+                && movies.map(movie => (
+                  <MovieBlock
                     movie={movie}
                     genreIDs={movie.genre_ids}
                     genres={genres}
@@ -109,8 +111,9 @@ class Home extends Component {
                     id={movie.id}
                   />
                 ))
-
-                // (<div className="film__user">The movie list is empty!</div>)
+              }
+              {!isMoviesNotEmpty
+                && <div className="film__user">The movie list is empty!</div>
               }
             </ul>
           </div>

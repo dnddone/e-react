@@ -1,4 +1,4 @@
-import { genreConstants } from '../constants';
+import { genreConstants } from '../_constants';
 
 export default (state = {}, action) => {
   const { type } = action;

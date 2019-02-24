@@ -8,7 +8,7 @@ import {
   string,
 } from 'prop-types';
 import Bookmark from './Bookmark';
-import NoImagePNG from '../images/no-image.png';
+import NoImagePNG from '../assets/images/no-image.png';
 
 const propTypes = {
   id: number.isRequired,
@@ -27,7 +27,7 @@ const defaultProps = {
 };
 
 // It is the movie's container at /home or /bookmarks pages.
-class Film extends Component {
+class MovieBlock extends Component {
   // componentWillMount() {
   //  const isAlreadyBookmarked = localStorage.getItem(this.state.id.toString()) ? 'added' : '';
 
@@ -152,7 +152,7 @@ class Film extends Component {
   }
 }
 
-Film.propTypes = propTypes;
-Film.defaultProps = defaultProps;
+MovieBlock.propTypes = propTypes;
+MovieBlock.defaultProps = defaultProps;
 
-export default Film;
+export default MovieBlock;

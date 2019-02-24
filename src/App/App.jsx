@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { func } from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { pathsConstants } from '../constants';
-import { genreActions } from '../actions';
+import { pathsConstants } from '../_constants';
+import { genreActions } from '../_actions';
 
-import Header from '../components/Header/Header';
-import Home from '../components/Home';
-// import Info from '../components/Info';
-// import Bookmarks from '../components/Bookmarks';
-// import NotFound from '../components/NotFound';
+import Header from '../_components/Header/Header';
+import Home from '../_components/Home';
+// import Info from '../_components/Info';
+// import Bookmarks from '../_components/Bookmarks';
+import NotFound from '../_components/NotFound';
 
 const propTypes = {
   getGenres: func,
@@ -32,8 +32,8 @@ class App extends Component {
           <Switch>
             <Route exact path={pathsConstants.HOME_PAGE} component={Home} />
             {/* <Route path={pathsConstants.MOVIE_PAGE} component={Info} />
-            <Route path={pathsConstants.BOOKMARKS_PAGE} component={Bookmarks} />
-            <Route component={Error} /> */}
+            <Route path={pathsConstants.BOOKMARKS_PAGE} component={Bookmarks} /> */}
+            <Route component={NotFound} />
           </Switch>
         </div>
       </BrowserRouter>

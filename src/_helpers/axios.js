@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SERVER_URL, FETCH_TIMEOUT } from '../constants/app.constants';
+import { SERVER_URL, FETCH_TIMEOUT } from '../_constants/app.constants';
 
 const instance = axios.create({
   baseURL: SERVER_URL,

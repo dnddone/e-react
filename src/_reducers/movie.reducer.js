@@ -1,4 +1,4 @@
-import { movieConstants } from '../constants';
+import { movieConstants } from '../_constants';
 
 export default (state = [], action) => {
   const { type, payload: movies } = action;
