@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { func } from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { pathsConstants } from '../_constants';
-import { genreActions } from '../_actions';
+import { genreActions, bookmarkActions } from '../_actions';
 
 import Header from '../_components/Header/Header';
 import Home from '../_components/Home';
@@ -13,15 +13,18 @@ import NotFound from '../_components/NotFound';
 
 const propTypes = {
   getGenres: func,
+  getBookmarks: func,
 };
 
 const defaultProps = {
   getGenres: () => {},
+  getBookmarks: () => {},
 };
 
 class App extends Component {
   componentDidMount() {
     this.props.getGenres();
+    this.props.getBookmarks();
   }
 
   render() {
@@ -46,6 +49,7 @@ App.defaultProps = defaultProps;
 
 const mapDispatchToProps = dispatch => ({
   getGenres: () => dispatch(genreActions.getGenres()),
+  getBookmarks: () => dispatch(bookmarkActions.getBookmarks()),
 });
 
 export default connect(null, mapDispatchToProps)(App);

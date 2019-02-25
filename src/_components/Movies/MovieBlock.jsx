@@ -4,15 +4,17 @@ import {
   number,
   shape,
   objectOf,
+  func,
   arrayOf,
   string,
 } from 'prop-types';
 import Bookmark from '../Bookmark';
-import NoImagePNG from '../assets/images/no-image.png';
+import NoImagePNG from '../../assets/images/no-image.png';
 import { isObjectEmpty } from '../../_helpers/utils';
 
 const propTypes = {
   id: number.isRequired,
+  bookmarkButtonHandler: func.isRequired,
   genres: objectOf(string).isRequired,
   genreIDs: arrayOf(number),
   movie: shape({
@@ -123,16 +125,17 @@ class MovieBlock extends Component {
   }
 
   getGenresFromIDs = () => {
-    const { genres: _genres, genreIDs: ids } = this.props;
+    const { genres, genreIDs: ids } = this.props;
 
-    return isObjectEmpty(_genres)
+    return isObjectEmpty(genres)
       ? 'Genres error'
-      : ids.map(id => _genres[id]).join(', ');
+      : ids.map(id => genres[id]).join(', ');
   };
 
   render() {
     const {
       id,
+      bookmarkButtonHandler,
       movie: {
         title,
         poster_path: posterPath,
@@ -145,8 +148,8 @@ class MovieBlock extends Component {
 
     return (
       <li className="film__item film">
-        <Link to={`/movie/${id}`} className="film__link" onClick={this.onBookmarkClickHandler}>
-          <Bookmark />
+        <Link to={`/movie/${id}`} className="film__link">
+          <Bookmark bookmarkButtonHandler={bookmarkButtonHandler} />
           <h2 className="film__title">{title}</h2>
           <img src={image} className="film__image" alt={`${title}`} />
           <div className="film__description">{this.getGenresFromIDs()}</div>

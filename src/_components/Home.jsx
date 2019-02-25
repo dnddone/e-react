@@ -2,34 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   func,
-  arrayOf,
-  shape,
-  number,
   bool,
   objectOf,
-  string,
 } from 'prop-types';
 import { movieActions } from '../_actions';
 import Loader from './Loader';
 // import SearchForm from './SearchForm';
-import Movies from './Movies';
+import Movies from './Movies/Movies';
 // import Pagination from './Pagination';
 
 const propTypes = {
   getMoviePopular: func.isRequired,
-  genres: objectOf(string),
   loading: objectOf(bool),
-  movies: arrayOf(shape({
-    id: number.isRequired,
-    title: string.isRequired,
-    genre_ids: arrayOf(number),
-    overview: string,
-  })),
 };
 
 const defaultProps = {
-  movies: [],
-  genres: {},
   loading: {},
 };
 
@@ -96,15 +83,15 @@ class Home extends Component {
   // }
 
   render() {
-    const { movies, genres, loading } = this.props;
+    const { loading: { MOVIES: moviesLoading } } = this.props;
 
     return (
       <div className="container content home">
         <Loader
           className="test lol"
-          isLoading={loading.MOVIES}
+          isLoading={moviesLoading}
         />
-        <Movies movies={movies} genres={genres} />
+        {!moviesLoading && <Movies />}
         {/* {
           (!searchValue && !isInfoPage
             && <Pagination
@@ -116,11 +103,9 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { movies, genres, api: { loading } } = state;
+  const { api: { loading } } = state;
 
   return {
-    movies,
-    genres,
     loading,
   };
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import {
-  arrayOf,
   string,
   bool,
 } from 'prop-types';
@@ -9,16 +8,17 @@ import {
 import loader from '../assets/images/loader.svg';
 
 const propTypes = {
-  className: arrayOf(string),
+  className: string,
   isLoading: bool,
 };
 
 const defaultProps = {
-  className: [],
+  className: '',
   isLoading: false,
 };
 
 const Loader = ({ className, isLoading }) => {
+  console.log(`isLoading: ${isLoading}`);
   if (!isLoading) { return null; }
 
   return (

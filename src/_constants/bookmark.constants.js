@@ -1,0 +1,9 @@
+export const BOOKMARK_GET = 'BOOKMARK_GET';
+export const BOOKMARK_UPDATE = 'BOOKMARK_UPDATE';
+export const BOOKMARK_RESET = 'BOOKMARK_RESET';
+
+export default {
+  BOOKMARK_GET,
+  BOOKMARK_UPDATE,
+  BOOKMARK_RESET,
+};

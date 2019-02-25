@@ -6,7 +6,9 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faStar);
 
-const Bookmark = ({ isBookmark }) => (
+// TODO: Bookmark handler
+
+const Bookmark = ({ isBookmark, }) => (
   <div className={`bookmark ${isBookmark}`}>
     <FontAwesomeIcon icon={faStar} />
   </div>
