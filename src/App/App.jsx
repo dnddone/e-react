@@ -27,7 +27,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="rsa">
+        <>
           <Header navigationList={pathsConstants.NAVIGATION_LIST} />
           <Switch>
             <Route exact path={pathsConstants.HOME_PAGE} component={Home} />
@@ -35,7 +35,7 @@ class App extends Component {
             <Route path={pathsConstants.BOOKMARKS_PAGE} component={Bookmarks} /> */}
             <Route component={NotFound} />
           </Switch>
-        </div>
+        </>
       </BrowserRouter>
     );
   }

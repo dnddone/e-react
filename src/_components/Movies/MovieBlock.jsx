@@ -7,8 +7,9 @@ import {
   arrayOf,
   string,
 } from 'prop-types';
-import Bookmark from './Bookmark';
+import Bookmark from '../Bookmark';
 import NoImagePNG from '../assets/images/no-image.png';
+import { isObjectEmpty } from '../../_helpers/utils';
 
 const propTypes = {
   id: number.isRequired,
@@ -123,7 +124,10 @@ class MovieBlock extends Component {
 
   getGenresFromIDs = () => {
     const { genres: _genres, genreIDs: ids } = this.props;
-    return ids.map(id => _genres[id]).join(', ');
+
+    return isObjectEmpty(_genres)
+      ? 'Genres error'
+      : ids.map(id => _genres[id]).join(', ');
   };
 
   render() {

@@ -4,8 +4,9 @@
   font-family: "Montserrat", sans-serif !important;
 }
 
-body {
+html, body {
   background-color: #000;
+  height: 100%;
 }
 
 .color {
@@ -22,8 +23,9 @@ body {
   }
 }
 
-.rsa {
+#root {
   position: relative;
+  height: 100%;
 }
 
 .App {
@@ -38,11 +40,19 @@ body {
   margin: 0 auto;
 }
 
-.main-content {
-  .container {
-    border: 1px solid #fff;
-    border-top: none;
-    padding: 40px 0;
+.content {
+  position: relative;
+  padding: 100px 0 40px;
+  border: 1px solid #fff;
+  border-top: none;
+  transition: all 0.2s linear;
+}
+
+.loader {
+  text-align: center;
+  
+  img {
+    max-width: 200px;
   }
 }
 

@@ -39,10 +39,6 @@
       "jsx-a11y/no-autofocus": 0,
       "implicit-arrow-linebreak": 0,
       "react/destructuring-assignment": 0,
-      "linebreak-style": [
-        "error", 
-        "windows"
-      ],
       "operator-linebreak": [
         "error",
         "before",

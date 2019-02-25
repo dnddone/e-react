@@ -5,17 +5,20 @@ import {
   arrayOf,
   shape,
   number,
+  bool,
   objectOf,
   string,
 } from 'prop-types';
 import { movieActions } from '../_actions';
+import Loader from './Loader';
 // import SearchForm from './SearchForm';
-import MovieBlock from './MovieBlock';
+import Movies from './Movies';
 // import Pagination from './Pagination';
 
 const propTypes = {
   getMoviePopular: func.isRequired,
   genres: objectOf(string),
+  loading: objectOf(bool),
   movies: arrayOf(shape({
     id: number.isRequired,
     title: string.isRequired,
@@ -27,6 +30,7 @@ const propTypes = {
 const defaultProps = {
   movies: [],
   genres: {},
+  loading: {},
 };
 
 // It show movie's preview at home page
@@ -92,48 +96,32 @@ class Home extends Component {
   // }
 
   render() {
-    const { movies, genres } = this.props;
-
-    const isMoviesNotEmpty = movies.length;
+    const { movies, genres, loading } = this.props;
 
     return (
-      <section className="main-content">
-        <div className="container">
-          <div>
-            <ul className="film__list">
-              {isMoviesNotEmpty
-                && movies.map(movie => (
-                  <MovieBlock
-                    movie={movie}
-                    genreIDs={movie.genre_ids}
-                    genres={genres}
-                    key={movie.id}
-                    id={movie.id}
-                  />
-                ))
-              }
-              {!isMoviesNotEmpty
-                && <div className="film__user">The movie list is empty!</div>
-              }
-            </ul>
-          </div>
-          {/* {
-            (!searchValue && !isInfoPage
-              && <Pagination
-                handlePage={this.updatePage} currentPage={page} totalPages={totalPages} />)
-          } */}
-        </div>
-      </section>
+      <div className="container content home">
+        <Loader
+          className="test lol"
+          isLoading={loading.MOVIES}
+        />
+        <Movies movies={movies} genres={genres} />
+        {/* {
+          (!searchValue && !isInfoPage
+            && <Pagination
+              handlePage={this.updatePage} currentPage={page} totalPages={totalPages} />)
+        } */}
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  const { movies, genres } = state;
+  const { movies, genres, api: { loading } } = state;
 
   return {
     movies,
     genres,
+    loading,
   };
 };
 
