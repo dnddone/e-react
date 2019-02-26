@@ -18,7 +18,6 @@ const defaultProps = {
 };
 
 const Loader = ({ className, isLoading }) => {
-  console.log(`isLoading: ${isLoading}`);
   if (!isLoading) { return null; }
 
   return (

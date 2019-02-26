@@ -10,8 +10,8 @@ const getBookmarks = () => {
   return [];
 };
 
-const updateBookmarks = (array) => {
-  localStorage.setItem('bookmarks', array.join(' '));
+const updateBookmarks = (bookmarks) => {
+  localStorage.setItem('bookmarks', bookmarks.join(' '));
 };
 
 export default {

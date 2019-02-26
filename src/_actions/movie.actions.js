@@ -17,7 +17,6 @@ const getMoviePopular = page => (dispatch) => {
       return Promise.resolve(movie);
     })
     .catch((error) => {
-      console.log(error);
       dispatch(reduce(movieConstants.MOVIE_FAILURE, error.message));
       return Promise.reject(error);
     })

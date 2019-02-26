@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
   string,
@@ -15,6 +15,7 @@ import bookmarkActions from '../../_actions/bookmark.actions';
 const propTypes = {
   bookmarkButtonHandler: func,
   genres: objectOf(string),
+  bookmarks: arrayOf(number),
   movies: arrayOf(shape({
     id: number.isRequired,
     title: string.isRequired,
@@ -25,46 +26,73 @@ const propTypes = {
 
 const defaultProps = {
   movies: [],
+  bookmarks: [],
   genres: {},
   bookmarkButtonHandler: () => {},
 };
 
-const Movies = (props) => {
-  const { movies, genres, bookmarkButtonHandler } = props;
-  const isAnyMovie = movies.length;
+class Movies extends PureComponent {
+  getBookmarkAdded = () => {
+    const { movies, bookmarks } = this.props;
 
-  if (isAnyMovie) {
-    return (
-      <ul className="film__list">
-        {movies.map(movie => (
-          <MovieBlock
-            movie={movie}
-            genreIDs={movie.genre_ids}
-            genres={genres}
-            key={movie.id}
-            id={movie.id}
-            bookmarkButtonHandler={bookmarkButtonHandler}
-          />
-        ))}
-      </ul>
-    );
+    return movies.map((movie) => {
+      const look = bookmarks.some((id) => {
+        if (movie.id === id) {
+          // console.log(`Movie [${movie.id}] and id [${id}]`);
+        }
+        return movie.id === id;
+      });
+
+      // console.log(`Look = [${look}]`);
+      return look;
+    });
+  };
+
+  render() {
+    const {
+      movies,
+      genres,
+      bookmarkButtonHandler,
+    } = this.props;
+
+    const isAnyMovie = movies.length;
+    const isBookmarkAdded = this.getBookmarkAdded();
+
+    if (isAnyMovie) {
+      return (
+        <ul className="film__list">
+          {movies.map((movie, index) => (
+            <MovieBlock
+              movie={movie}
+              genreIDs={movie.genre_ids}
+              isBookmarkAdded={isBookmarkAdded[index]}
+              genres={genres}
+              key={movie.id}
+              id={movie.id}
+              bookmarkButtonHandler={bookmarkButtonHandler}
+            />
+          ))}
+        </ul>
+      );
+    }
+
+    return (<div className="film__user">The movie list is empty!</div>);
   }
-
-  return (<div className="film__user">The movie list is empty!</div>);
-};
+}
 
 Movies.propTypes = propTypes;
 Movies.defaultProps = defaultProps;
 
 const mapDispatchToProps = dispatch => ({
-  bookmarkButtonHandler: () => dispatch(bookmarkActions.updateBookmarks()),
+  bookmarkButtonHandler: id => dispatch(bookmarkActions.updateBookmarks(id)),
 });
 
 const mapStateToProps = (state) => {
-  const { genres, movies } = state;
+  const { genres, movies, bookmarks } = state;
   return {
     genres,
     movies,
+    bookmarks,
   };
 };
 

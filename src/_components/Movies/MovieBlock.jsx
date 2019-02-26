@@ -8,7 +8,7 @@ import {
   arrayOf,
   string,
 } from 'prop-types';
-import Bookmark from '../Bookmark';
+import BookmarkStar from '../BookmarkStar';
 import NoImagePNG from '../../assets/images/no-image.png';
 import { isObjectEmpty } from '../../_helpers/utils';
 
@@ -136,6 +136,7 @@ class MovieBlock extends Component {
     const {
       id,
       bookmarkButtonHandler,
+      isBookmarkAdded,
       movie: {
         title,
         poster_path: posterPath,
@@ -149,7 +150,11 @@ class MovieBlock extends Component {
     return (
       <li className="film__item film">
         <Link to={`/movie/${id}`} className="film__link">
-          <Bookmark bookmarkButtonHandler={bookmarkButtonHandler} />
+          <BookmarkStar
+            id={id}
+            bookmarkButtonHandler={bookmarkButtonHandler}
+            isBookmarkAdded={isBookmarkAdded}
+          />
           <h2 className="film__title">{title}</h2>
           <img src={image} className="film__image" alt={`${title}`} />
           <div className="film__description">{this.getGenresFromIDs()}</div>

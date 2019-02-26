@@ -48,6 +48,13 @@ html, body {
   transition: all 0.2s linear;
 }
 
+.bookmark {
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
 .loader {
   text-align: center;
   

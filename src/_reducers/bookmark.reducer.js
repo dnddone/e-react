@@ -6,7 +6,7 @@ export default (state = [], action) => {
   switch (type) {
     case bookmarkConstants.BOOKMARK_GET:
     case bookmarkConstants.BOOKMARK_UPDATE:
-      return action.payload;
+      return action.payload.slice();
     case bookmarkConstants.BOOKMARK_RESET:
       return [];
     default:
