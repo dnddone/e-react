@@ -10,6 +10,7 @@ import Home from '../_components/Home';
 // import Info from '../_components/Info';
 // import Bookmarks from '../_components/Bookmarks';
 import NotFound from '../_components/NotFound';
+import Notification from '../_components/Notification';
 
 const propTypes = {
   getGenres: func,
@@ -31,6 +32,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <>
+          <Notification />
           <Header navigationList={pathsConstants.NAVIGATION_LIST} />
           <Switch>
             <Route exact path={pathsConstants.HOME_PAGE} component={Home} />

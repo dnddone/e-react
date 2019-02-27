@@ -6,6 +6,8 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import {
   number,
   func,
+  shape,
+  string,
   bool,
 } from 'prop-types';
 
@@ -14,7 +16,10 @@ library.add(faStar);
 // TODO: Bookmark handler
 
 const propTypes = {
-  id: number.isRequired,
+  data: shape({
+    id: number.isRequired,
+    title: string,
+  }).isRequired,
   isBookmarkAdded: bool,
   bookmarkButtonHandler: func.isRequired,
 };
@@ -23,10 +28,10 @@ const defaultProps = {
   isBookmarkAdded: false,
 };
 
-const BookmarkStar = ({ id, bookmarkButtonHandler, isBookmarkAdded }) => {
+const BookmarkStar = ({ data, bookmarkButtonHandler, isBookmarkAdded }) => {
   const onClickBookmark = (event) => {
     event.preventDefault();
-    bookmarkButtonHandler(id);
+    bookmarkButtonHandler(data.id, data.title);
   };
 
   return (

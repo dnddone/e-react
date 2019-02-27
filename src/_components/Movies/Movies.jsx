@@ -84,7 +84,7 @@ Movies.propTypes = propTypes;
 Movies.defaultProps = defaultProps;
 
 const mapDispatchToProps = dispatch => ({
-  bookmarkButtonHandler: id => dispatch(bookmarkActions.updateBookmarks(id)),
+  bookmarkButtonHandler: (id, title) => dispatch(bookmarkActions.updateBookmarks(id, title)),
 });
 
 const mapStateToProps = (state) => {
