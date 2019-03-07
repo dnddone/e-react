@@ -1,20 +1,17 @@
 import React from 'react';
-import { string, number, func } from 'prop-types';
+import { string, bool, func } from 'prop-types';
 
 const propTypes = {
-  id: number,
   title: string,
-  status: string.isRequired,
+  status: bool.isRequired,
   removeNotificationMessage: func.isRequired,
 };
 
 const defaultProps = {
-  id: 0,
   title: 'Unknown',
 };
 
 const NotificationMessage = ({
-  id,
   title,
   status,
   removeNotificationMessage,
@@ -25,12 +22,12 @@ const NotificationMessage = ({
     <div className="notification__container">
       <h3 className="notification__title">{title}</h3>
       <p className="notification__message">
-        <span className="color-blue">{id}</span>
-        : the movie was
+        <span className="color-blue">{title}</span>
+        {' was '}
         <span className="color-yellow">
           {status ? 'added to' : 'removed from'}
         </span>
-        your favorite list
+        {' favorite list'}
       </p>
     </div>
   );

@@ -23,6 +23,13 @@ const getMoviePopular = page => (dispatch) => {
   );
 };
 
+const getMovieById = id => (dispatch) => {
+  dispatch(reduce(movieConstants.MOVIEINFO_REQUEST));
+  return (
+    {}
+  );
+}
+
 export default {
   getMoviePopular,
 };

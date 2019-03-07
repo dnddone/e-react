@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
   string,
+  bool,
   number,
   func,
   arrayOf,
   shape,
 } from 'prop-types';
-// import { CSSTransitionGroup } from 'react-transition-group';
 
 import NotificationMessage from './NotificationMessage';
 import { notificationActions } from '../../_actions';
@@ -16,7 +16,7 @@ const propTypes = {
   notification: arrayOf(shape({
     id: number,
     title: string,
-    status: string,
+    status: bool,
   })),
   notificationExpiredAction: func,
 };
@@ -34,18 +34,18 @@ class NotificationContainer extends PureComponent {
     } = this.props;
 
     return (
-      // <CSSTransitionGroup transitionName="notification">
-      <div className="notification">
-        {notification.map(({ id, title, status }) => (
-          <NotificationMessage
-            id={id}
-            title={title}
-            status={status}
-            removeNotificationMessage={notificationExpiredAction}
-          />
-        ))}
-      </div>
-      // </CSSTransitionGroup>
+      <>
+        <div className="notification">
+          {notification.map(({ id, title, status }) => (
+            <NotificationMessage
+              key={`${id}-${status}`}
+              title={title}
+              status={status}
+              removeNotificationMessage={notificationExpiredAction}
+            />
+          ))}
+        </div>
+      </>
     );
   }
 }

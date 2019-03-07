@@ -15,7 +15,13 @@ const NavMenu = ({ navigationList }) => (
     {
       navigationList.map(path => (
         <li className="nav__item" key={path}>
-          <Link to={path.toLowerCase()} className="nav__link">{path}</Link>
+          <Link
+            to={`/${path.toLowerCase()}`}
+            replace
+            className="nav__link"
+          >
+            {path}
+          </Link>
         </li>
       ))
     }

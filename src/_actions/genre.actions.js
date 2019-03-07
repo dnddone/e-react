@@ -23,9 +23,9 @@ const getGenres = () => (dispatch) => {
 
       return Promise.resolve(genres);
     })
-    .catch(() => {
-      // dispatch(reduce(genreConstants.GENRES_FAILURE, error.message));
-      // return Promise.reject(error);
+    .catch((error) => {
+      dispatch(reduce(genreConstants.GENRES_FAILURE, error.message));
+      return Promise.reject(error);
     });
 };
 

@@ -69,7 +69,7 @@ class MovieBlock extends Component {
             isBookmarkAdded={isBookmarkAdded}
           />
           <h2 className="film__title">{title}</h2>
-          <img src={image} className="film__image" alt={`${title}`} />
+          <img src={image} className="film__image" alt={title} />
           <div className="film__description">{this.getGenresFromIDs()}</div>
         </Link>
       </li>

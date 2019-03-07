@@ -24,63 +24,7 @@ const defaultProps = {
 class Home extends Component {
   componentDidMount() {
     this.props.getMoviePopular();
-    // this.getMovieAsync();
-    // TODO: Genre request is required here;
   }
-
-  // onChangeHandler = (event) => {
-  //   const searchValue = event.target.value;
-
-  //   if (!searchValue) {
-  //     this.setState({ page: 1, searchValue: '' }, () => this.getMovieAsync());
-  //     return;
-  //   }
-
-  //   // TODO: Pagination for search queries
-
-  //   this.setState({
-  //     searchValue,
-  //   });
-
-  //   fetch(`${movieConstants.SEARCH_URL}&query=${searchValue}`);
-  // };
-
-  // updatePage = (page) => {
-  // this.setState({ page });
-  // this.getMovieAsync();
-  // }
-
-  // getMovieAsync = async () => {
-  // const { page } = this.state
-  // const  defineURL = this.props.isRecommendations
-  //  ? `https://api.themoviedb.org/3/movie/${this.props.specialID}/recommendations?api_key=677522a533aae20a5fa0d80d392c1496`
-  //  : `https://api.themoviedb.org/3/movie/popular?api_key=677522a533aae20a5fa0d80d392c1496&page=${page}`;
-
-
-  // await fetch(defineURL)
-  //   .then(response => response.json())
-  //   .then(
-  //     (response) => {
-  //       this.setState({
-  //         movie: {
-  //           ...this.state.movie,
-  //           isLoaded: true,
-  //           movies: response.results
-  // },
-  // totalPages: response.total_pages
-  //       });
-  //     },
-  //     (error) => {
-  //       this.setState({
-  //         movie: {
-  //           ...this.state.movie,
-  //           isLoaded: true,
-  //           error: error
-  //         }
-  //       });
-  //     }
-  //   );
-  // }
 
   render() {
     const { loading: { MOVIES: moviesLoading } } = this.props;
