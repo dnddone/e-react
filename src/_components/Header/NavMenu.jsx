@@ -10,16 +10,17 @@ const defaultProps = {
   navigationList: ['Home', 'Bookmark'],
 };
 
+const pathFormated = (path) => {
+  const pathTo = path === 'Home' ? '' : path.toLowerCase();
+  return pathTo;
+};
+
 const NavMenu = ({ navigationList }) => (
   <ul className="header__menu nav__list">
     {
       navigationList.map(path => (
         <li className="nav__item" key={path}>
-          <Link
-            to={`/${path.toLowerCase()}`}
-            replace
-            className="nav__link"
-          >
+          <Link to={pathFormated(path)} className="nav__link">
             {path}
           </Link>
         </li>

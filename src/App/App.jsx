@@ -7,7 +7,7 @@ import { genreActions, bookmarkActions } from '../_actions';
 
 import Header from '../_components/Header/Header';
 import Home from '../_components/Home';
-// import Info from '../_components/Info';
+import Info from '../_components/Info';
 // import Bookmarks from '../_components/Bookmarks';
 import NotFound from '../_components/NotFound';
 import Notification from '../_components/Notification';
@@ -36,8 +36,8 @@ class App extends Component {
           <Header navigationList={pathsConstants.NAVIGATION_LIST} />
           <Switch>
             <Route exact path={pathsConstants.HOME_PAGE} component={Home} />
-            {/* <Route path={pathsConstants.MOVIE_PAGE} component={Info} />
-            <Route path={pathsConstants.BOOKMARKS_PAGE} component={Bookmarks} /> */}
+            <Route path={pathsConstants.MOVIE_PAGE} component={Info} />
+            {/* <Route path={pathsConstants.BOOKMARKS_PAGE} component={Bookmarks} /> */}
             <Route component={NotFound} />
           </Switch>
         </>

@@ -36,14 +36,7 @@ class Movies extends PureComponent {
     const { movies, bookmarks } = this.props;
 
     return movies.map((movie) => {
-      const look = bookmarks.some((id) => {
-        if (movie.id === id) {
-          // console.log(`Movie [${movie.id}] and id [${id}]`);
-        }
-        return movie.id === id;
-      });
-
-      // console.log(`Look = [${look}]`);
+      const look = bookmarks.some(id => movie.id === id);
       return look;
     });
   };

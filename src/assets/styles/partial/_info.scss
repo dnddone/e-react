@@ -53,11 +53,23 @@
   &__overview {
     line-height: 1.5;
     font-size: 16px;
+    margin: 15px 0 0;
+  }
+
+  &__sub-title {
+    font-size: 24px;
     margin: 25px 0 0;
   }
   
   &__button {
+    display: inline-block;
     outline: none;
+    background-color: transparent;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #fff;
+    box-shadow: 0px 0px 20px 5px rgba(255, 255, 255, 0.5);
+    transition: all 0.2s linear;
       
     .bookmark {
         display: inline-block;
@@ -73,13 +85,6 @@
       display: inline-block;
       vertical-align: bottom;
     }
-    
-    background-color: transparent;
-    padding: 10px 20px;
-    cursor: pointer;
-    border: 1px solid #fff;
-    box-shadow: 0px 0px 20px 5px rgba(255, 255, 255, 0.5);
-    transition: all 0.2s linear;
       
     svg {
       font-size: 18px;

@@ -10,9 +10,9 @@ const getMoviePopular = page => (dispatch) => {
       const { page, total_pages, results } = movie; // results is movie data array
       /* eslint-disable */
 
-      dispatch(reduce(movieConstants.MOVIES_SUCCESS));
       dispatch(reduce(movieConstants.ADD_MOVIES_POPULAR, results));
       dispatch(reduce(movieConstants.PAGINATION_UPDATE, { page, total_pages }));
+      dispatch(reduce(movieConstants.MOVIES_SUCCESS));
 
       return Promise.resolve(movie);
     })
@@ -25,11 +25,23 @@ const getMoviePopular = page => (dispatch) => {
 
 const getMovieById = id => (dispatch) => {
   dispatch(reduce(movieConstants.MOVIEINFO_REQUEST));
-  return (
-    {}
+  return (movieService.getMovieById(id)
+    .then((movie) => {
+      dispatch(reduce(movieConstants.MOVIEINFO_ADD, movie));
+      dispatch(reduce(movieConstants.MOVIEINFO_SUCCESS));
+      return Promise.resolve(movie);
+    })
+    .catch((error) => {
+      dispatch(reduce(movieConstants.MOVIEINFO_FAILURE, error.message));
+      return Promise.reject(error);
+    })
   );
 }
 
+const movieInfoReset = () => ({ type: movieConstants.MOVIEINFO_RESET })
+
 export default {
   getMoviePopular,
+  getMovieById,
+  movieInfoReset,
 };

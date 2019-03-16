@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import movies from './movie.reducer';
+import info from './info.reducer';
 import notification from './notification.reducer';
 import genres from './genre.reducer';
 import pagination from './pagination.reducer';
@@ -12,6 +13,7 @@ import lastFetch from './api/lastFetch.reducer';
 
 const rootReducer = combineReducers({
   movies,
+  info,
   genres,
   bookmarks,
   pagination,

@@ -10,8 +10,7 @@ import {
   string,
 } from 'prop-types';
 import BookmarkStar from '../BookmarkStar';
-import NoImagePNG from '../../assets/images/no-image.png';
-import { isObjectEmpty } from '../../_helpers/utils';
+import { isObjectEmpty, imagePosterPath } from '../../_helpers/utils';
 
 const propTypes = {
   id: number.isRequired,
@@ -42,9 +41,6 @@ class MovieBlock extends Component {
       : ids.map(id => genres[id]).join(', ');
   };
 
-  imagePosterPath = path =>
-    (path ? `https://image.tmdb.org/t/p/w300${path}` : NoImagePNG);
-
   render() {
     const {
       id,
@@ -56,7 +52,7 @@ class MovieBlock extends Component {
       },
     } = this.props;
 
-    const image = this.imagePosterPath(posterPath);
+    const image = imagePosterPath(posterPath);
     const bookmarkNotificationInfo = { id, title };
 
     return (

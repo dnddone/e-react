@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {
   func,
   bool,
-  objectOf,
 } from 'prop-types';
 import { movieActions } from '../_actions';
 import Loader from './Loader';
@@ -13,11 +12,11 @@ import Movies from './Movies/Movies';
 
 const propTypes = {
   getMoviePopular: func.isRequired,
-  loading: objectOf(bool),
+  moviesLoading: bool,
 };
 
 const defaultProps = {
-  loading: {},
+  moviesLoading: true,
 };
 
 // It show movie's preview at home page
@@ -27,12 +26,12 @@ class Home extends Component {
   }
 
   render() {
-    const { loading: { MOVIES: moviesLoading } } = this.props;
+    const { moviesLoading } = this.props;
 
     return (
       <div className="container content home">
         <Loader
-          className="test lol"
+          className="test"
           isLoading={moviesLoading}
         />
         {!moviesLoading && <Movies />}
@@ -46,13 +45,9 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { api: { loading } } = state;
-
-  return {
-    loading,
-  };
-};
+const mapStateToProps = state => ({
+  moviesLoading: state.api.loading.MOVIES,
+});
 
 const mapDispatchToProps = dispatch => ({
   getMoviePopular: (page = 1) => dispatch(movieActions.getMoviePopular(page)),
