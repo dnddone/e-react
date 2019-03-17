@@ -11,6 +11,7 @@ import {
 
 import MovieBlock from './MovieBlock';
 import bookmarkActions from '../../_actions/bookmark.actions';
+import { bookmarkChecker } from '../../_helpers/utils';
 
 const propTypes = {
   bookmarkButtonHandler: func,
@@ -35,11 +36,8 @@ class Movies extends PureComponent {
   getBookmarkAdded = () => {
     const { movies, bookmarks } = this.props;
 
-    return movies.map((movie) => {
-      const look = bookmarks.some(id => movie.id === id);
-      return look;
-    });
-  };
+    return movies.map(({ id }) => bookmarkChecker(id, bookmarks));
+  }
 
   render() {
     const {
@@ -49,7 +47,7 @@ class Movies extends PureComponent {
     } = this.props;
 
     const isAnyMovie = movies.length;
-    const isBookmarkAdded = this.getBookmarkAdded();
+    const isBookmarkAddedArray = this.getBookmarkAdded();
 
     if (isAnyMovie) {
       return (
@@ -58,7 +56,7 @@ class Movies extends PureComponent {
             <MovieBlock
               movie={movie}
               genreIDs={movie.genre_ids}
-              isBookmarkAdded={isBookmarkAdded[index]}
+              isBookmarkAdded={isBookmarkAddedArray[index]}
               genres={genres}
               key={movie.id}
               id={movie.id}

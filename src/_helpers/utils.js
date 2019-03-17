@@ -30,7 +30,12 @@ export const separateBitNumber = number => (
   number.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
 );
 
-export const imagePosterPath = path => (path ? `https://image.tmdb.org/t/p/w300${path}` : NoImagePNG);
+export const imagePosterPath = path =>
+  (path ? `https://image.tmdb.org/t/p/w300${path}` : NoImagePNG);
+
+export const bookmarkChecker = (movieId, bookmarks) => (
+  bookmarks.some(bookmarkId => movieId === bookmarkId)
+);
 
 export default {
   reduce,
@@ -38,4 +43,5 @@ export default {
   getMovieIdFromUrl,
   getGenresForMovieInfo,
   imagePosterPath,
+  bookmarkChecker,
 };
