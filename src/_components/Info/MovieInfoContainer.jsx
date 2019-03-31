@@ -48,14 +48,13 @@ class MovieInfoContainer extends Component {
       bookmarkButtonHandler,
       bookmarks,
     } = this.props;
-    // console.log(infoLoading);
     const { info } = this.props;
     const isBookmarkAdded = bookmarkChecker(id, bookmarks);
 
     return (
       <div className="container content movie">
         <Loader className="" isLoading={infoLoading} />
-        {!infoLoading && (
+        {info.title && (
           <MovieInfo
             id={id}
             info={info}

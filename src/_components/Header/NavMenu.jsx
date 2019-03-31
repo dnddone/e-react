@@ -1,18 +1,16 @@
 import React from 'react';
-import { arrayOf, string } from 'prop-types';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
+import { formatedPath, activeNavLink } from '../../_helpers/utils';
+
 const propTypes = {
-  navigationList: arrayOf(string),
+  navigationList: PropTypes.arrayOf(PropTypes.string),
 };
 
 const defaultProps = {
   navigationList: ['Home', 'Bookmark'],
-};
-
-const pathFormated = (path) => {
-  const pathTo = path === 'Home' ? '' : path.toLowerCase();
-  return pathTo;
 };
 
 const NavMenu = ({ navigationList }) => (
@@ -20,7 +18,10 @@ const NavMenu = ({ navigationList }) => (
     {
       navigationList.map(path => (
         <li className="nav__item" key={path}>
-          <Link to={pathFormated(path)} className="nav__link">
+          <Link
+            to={formatedPath(path)}
+            className={classNames('nav__link', { nav__active: activeNavLink(path) })}
+          >
             {path}
           </Link>
         </li>

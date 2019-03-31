@@ -27,8 +27,8 @@ const getMovieById = id => (dispatch) => {
   dispatch(reduce(movieConstants.MOVIEINFO_REQUEST));
   return (movieService.getMovieById(id)
     .then((movie) => {
-      dispatch(reduce(movieConstants.MOVIEINFO_ADD, movie));
       dispatch(reduce(movieConstants.MOVIEINFO_SUCCESS));
+      dispatch(reduce(movieConstants.MOVIEINFO_ADD, movie));
       return Promise.resolve(movie);
     })
     .catch((error) => {

@@ -22,7 +22,7 @@ export default (state = [], action) => {
       ];
     case notificationConstants.NOTIFICATION_EXPIRED:
       return [
-        ...state.slice(1, 3),
+        ...action.payload,
       ];
     default:
       return state;

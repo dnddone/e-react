@@ -1,37 +1,29 @@
 import React, { PureComponent } from 'react';
-import classNames from 'classnames';
-import {
-  shape,
-  string,
-  number,
-  func,
-  bool,
-  arrayOf,
-} from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { getGenresForMovieInfo, separateBitNumber, imagePosterPath } from '../../_helpers/utils';
 import BookmarkStar from '../BookmarkStar';
 
 const propTypes = {
-  id: number.isRequired,
-  bookmarkButtonHandler: func.isRequired,
-  isBookmarkAdded: bool.isRequired,
-  info: shape({
-    title: string,
-    poster_path: string,
-    original_title: string,
-    tagline: string,
-    budget: number,
-    genres: arrayOf(shape({
-      id: number,
-      name: string,
+  id: PropTypes.number.isRequired,
+  bookmarkButtonHandler: PropTypes.func.isRequired,
+  isBookmarkAdded: PropTypes.bool.isRequired,
+  info: PropTypes.shape({
+    title: PropTypes.string,
+    poster_path: PropTypes.string,
+    original_title: PropTypes.string,
+    tagline: PropTypes.string,
+    budget: PropTypes.number,
+    genres: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
     })),
-    homepage: string,
-    runtime: number,
-    release_date: string,
-    vote_average: number,
-    vote_count: number,
-    overview: string,
+    homepage: PropTypes.string,
+    runtime: PropTypes.number,
+    release_date: PropTypes.string,
+    vote_average: PropTypes.number,
+    vote_count: PropTypes.number,
+    overview: PropTypes.string,
   }),
 };
 
@@ -48,6 +40,7 @@ class MovieInfo extends PureComponent {
       isBookmarkAdded,
       bookmarkButtonHandler,
     } = this.props;
+
     const {
       title,
       poster_path: posterPath,
@@ -63,7 +56,9 @@ class MovieInfo extends PureComponent {
       overview,
     } = info;
 
-    const notificationData = { id, title };
+    const bookmarkButtonText = isBookmarkAdded
+      ? 'Remove favorite'
+      : 'Make favorite';
 
     return (
       <div className="info">
@@ -92,15 +87,14 @@ class MovieInfo extends PureComponent {
               <span className="color-blue">{voteCount}</span>
             </div>
             <div className="info__button-container">
-              <span className={classNames('info__button', { added: isBookmarkAdded })}>
-              {/* TODO: Button with text */}
-                <BookmarkStar
-                  bookmarkButtonHandler={bookmarkButtonHandler}
-                  notificationData={notificationData}
-                  isBookmarkAdded={isBookmarkAdded}
-                />
-                <span className="info__button-text">favorite</span>
-              </span>
+              <BookmarkStar
+                bookmarkButtonHandler={bookmarkButtonHandler}
+                id={id}
+                title={title}
+                text={bookmarkButtonText}
+                className="info__button"
+                isBookmarkAdded={isBookmarkAdded}
+              />
             </div>
           </div>
           <h2 className="info__sub-title">Overview</h2>

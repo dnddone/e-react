@@ -38,9 +38,10 @@ class NotificationContainer extends PureComponent {
         <div className="notification">
           {notification.map(({ id, title, status }) => (
             <NotificationMessage
-              key={`${id}-${status}`}
+              id={id}
               title={title}
               status={status}
+              key={`${id}-${status}`}
               removeNotificationMessage={notificationExpiredAction}
             />
           ))}
@@ -54,7 +55,8 @@ NotificationContainer.propTypes = propTypes;
 NotificationContainer.defaultProps = defaultProps;
 
 const mapDispatchToProps = dispatch => ({
-  notificationExpiredAction: () => dispatch(notificationActions.notificationExpired()),
+  notificationExpiredAction: (id, status) =>
+    dispatch(notificationActions.notificationExpired(id, status)),
 });
 
 const mapStateToProps = state => ({

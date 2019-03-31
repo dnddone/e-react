@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  func,
-  bool,
-} from 'prop-types';
+import PropTypes from 'prop-types';
 import { movieActions } from '../_actions';
-import Loader from './Loader';
+import ContextMovies from './ContextMovies';
 // import SearchForm from './SearchForm';
-import Movies from './Movies/Movies';
+import Movies from './Movies';
 // import Pagination from './Pagination';
 
 const propTypes = {
-  getMoviePopular: func.isRequired,
-  moviesLoading: bool,
+  getMoviePopular: PropTypes.func.isRequired,
 };
 
-const defaultProps = {
-  moviesLoading: true,
-};
+const defaultProps = {};
 
 // It show movie's preview at home page
 class Home extends Component {
@@ -26,28 +20,16 @@ class Home extends Component {
   }
 
   render() {
-    const { moviesLoading } = this.props;
-
     return (
-      <div className="container content home">
-        <Loader
-          className="test"
-          isLoading={moviesLoading}
-        />
-        {!moviesLoading && <Movies />}
-        {/* {
-          (!searchValue && !isInfoPage
-            && <Pagination
-              handlePage={this.updatePage} currentPage={page} totalPages={totalPages} />)
-        } */}
-      </div>
+      <ContextMovies
+        className="home"
+        getContextMovie={this.props.getMoviePopular}
+      >
+        <Movies />
+      </ContextMovies>
     );
   }
 }
-
-const mapStateToProps = state => ({
-  moviesLoading: state.api.loading.MOVIES,
-});
 
 const mapDispatchToProps = dispatch => ({
   getMoviePopular: (page = 1) => dispatch(movieActions.getMoviePopular(page)),
@@ -56,7 +38,7 @@ const mapDispatchToProps = dispatch => ({
 Home.propTypes = propTypes;
 Home.defaultProps = defaultProps;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(null, mapDispatchToProps)(Home);
 
 /* {(isInfoPage && <h1 className="recommendations__title">Movie recommendations</h1>)}
 {(!isInfoPage && <SearchForm onChangeHandler={this.onChangeHandler} />)} */

@@ -3,41 +3,47 @@ import classNames from 'classnames';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import {
-  number,
-  func,
-  shape,
-  string,
-  bool,
-} from 'prop-types';
+import PropTypes from 'prop-types';
 
 library.add(faStar);
 
 // TODO: Bookmark handler
 
 const propTypes = {
-  notificationData: shape({
-    id: number.isRequired,
-    title: string,
-  }).isRequired,
-  isBookmarkAdded: bool,
-  bookmarkButtonHandler: func.isRequired,
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  isBookmarkAdded: PropTypes.bool,
+  bookmarkButtonHandler: PropTypes.func.isRequired,
+  text: PropTypes.string,
+  className: PropTypes.string,
 };
 
 const defaultProps = {
   isBookmarkAdded: false,
+  text: '',
+  className: '',
 };
 
-const BookmarkStar = ({ notificationData, bookmarkButtonHandler, isBookmarkAdded }) => {
+const BookmarkStar = ({
+  id,
+  title,
+  bookmarkButtonHandler,
+  isBookmarkAdded,
+  text,
+  className,
+}) => {
   const onClickBookmark = (event) => {
     event.preventDefault();
-    bookmarkButtonHandler(notificationData.id, notificationData.title);
+    bookmarkButtonHandler(id, title);
   };
 
   return (
-    <button className={classNames('bookmark', { added: isBookmarkAdded })} type="button" onClick={onClickBookmark}>
-      <FontAwesomeIcon icon={faStar} />
-    </button>
+    <span className={classNames(className, { added: isBookmarkAdded })}>
+      <button className={classNames('bookmark', { added: isBookmarkAdded })} type="button" onClick={onClickBookmark}>
+        <FontAwesomeIcon icon={faStar} />
+        {text && <span>{text}</span> }
+      </button>
+    </span>
   );
 };
 

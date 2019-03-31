@@ -53,13 +53,13 @@ class MovieBlock extends Component {
     } = this.props;
 
     const image = imagePosterPath(posterPath);
-    const bookmarkNotificationData = { id, title };
 
     return (
       <li className="film__item film">
         <Link to={`/movie/${id}`} className="film__link">
           <BookmarkStar
-            notificationData={bookmarkNotificationData}
+            id={id}
+            title={title}
             bookmarkButtonHandler={bookmarkButtonHandler}
             isBookmarkAdded={isBookmarkAdded}
           />

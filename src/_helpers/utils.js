@@ -22,9 +22,8 @@ export const getMovieIdFromUrl = () => {
   return '';
 };
 
-export const getGenresForMovieInfo = (genres) => {
-  return genres.map(genre => genre.name).join(', ');
-};
+export const getGenresForMovieInfo = genres =>
+  genres.map(genre => genre.name).join(', ');
 
 export const separateBitNumber = number => (
   number.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
@@ -37,11 +36,17 @@ export const bookmarkChecker = (movieId, bookmarks) => (
   bookmarks.some(bookmarkId => movieId === bookmarkId)
 );
 
-export default {
-  reduce,
-  isObjectEmpty,
-  getMovieIdFromUrl,
-  getGenresForMovieInfo,
-  imagePosterPath,
-  bookmarkChecker,
+export const formatedPath = (path) => {
+  const pathTo = path === 'Home' ? '' : path.toLowerCase();
+  return pathTo;
+};
+
+export const activeNavLink = (path) => {
+  const { pathname } = window.location;
+
+  if (path === 'Home' && pathname === '/') {
+    return true;
+  }
+
+  return pathname.toLowerCase().includes(path.toLowerCase());
 };
