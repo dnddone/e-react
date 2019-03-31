@@ -1,24 +1,17 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {
-  string,
-  bool,
-  number,
-  func,
-  arrayOf,
-  shape,
-} from 'prop-types';
+import PropTypes from 'prop-types';
 
 import NotificationMessage from './NotificationMessage';
 import { notificationActions } from '../../_actions';
 
 const propTypes = {
-  notification: arrayOf(shape({
-    id: number,
-    title: string,
-    status: bool,
+  notification: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    status: PropTypes.bool,
   })),
-  notificationExpiredAction: func,
+  notificationExpiredAction: PropTypes.func,
 };
 
 const defaultProps = {

@@ -1,27 +1,20 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import {
-  string,
-  arrayOf,
-  func,
-  objectOf,
-  shape,
-  number,
-} from 'prop-types';
+import PropTypes from 'prop-types';
 
 import MovieBlock from './MovieBlock';
 import bookmarkActions from '../../_actions/bookmark.actions';
 import { bookmarkChecker } from '../../_helpers/utils';
 
 const propTypes = {
-  bookmarkButtonHandler: func,
-  genres: objectOf(string),
-  bookmarks: arrayOf(number),
-  movies: arrayOf(shape({
-    id: number.isRequired,
-    title: string.isRequired,
-    genre_ids: arrayOf(number),
-    overview: string,
+  bookmarkButtonHandler: PropTypes.func,
+  genres: PropTypes.shape({}),
+  bookmarks: PropTypes.arrayOf(PropTypes.number),
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    genre_ids: PropTypes.arrayOf(PropTypes.number),
+    overview: PropTypes.string,
   })),
 };
 
