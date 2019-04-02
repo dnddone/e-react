@@ -5,21 +5,7 @@ export default (state = [], action) => {
 
   switch (type) {
     case notificationConstants.NOTIFICATION_ADD:
-      return [
-        ...state,
-        {
-          status: true,
-          ...action.payload,
-        },
-      ];
     case notificationConstants.NOTIFICATION_REMOVE:
-      return [
-        ...state,
-        {
-          status: false,
-          ...action.payload,
-        },
-      ];
     case notificationConstants.NOTIFICATION_EXPIRED:
       return [
         ...action.payload,

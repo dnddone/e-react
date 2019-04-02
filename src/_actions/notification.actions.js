@@ -1,23 +1,41 @@
 import { notificationConstants } from '../_constants';
-import { reduce } from '../_helpers/utils';
+import { reduce, uniqueFilter } from '../_helpers/utils';
 
-export const notificationExpired = (id, status) => (dispatch, getState) => {
+const add = ({ id, title }) => (dispatch, getState) => {
   const { notification } = getState();
-  let notificationUpdated;
+  const notificationFiltered = notification.filter(uniqueFilter(id, true));
+  notificationFiltered.push({
+    status: true,
+    id,
+    title,
+  });
 
-  if (id) {
-    notificationUpdated = notification.filter(data => (
-      // Remove notification by `id` and `status`
-      !(data.id === id && data.status === status)
-    ));
-  } else {
-    // Or remove first item
-    notificationUpdated = notification.slice(1, 3);
-  }
+  return dispatch(reduce(notificationConstants.NOTIFICATION_ADD, notificationFiltered));
+};
 
-  return dispatch(reduce(notificationConstants.NOTIFICATION_EXPIRED, notificationUpdated));
+const remove = ({ id, title }) => (dispatch, getState) => {
+  const { notification } = getState();
+  const notificationFiltered = notification.filter(uniqueFilter(id, false));
+  notificationFiltered.push({
+    status: false,
+    id,
+    title,
+  });
+
+  return dispatch(reduce(notificationConstants.NOTIFICATION_REMOVE, notificationFiltered));
+};
+
+export const expired = (id, status) => (dispatch, getState) => {
+  const { notification } = getState();
+  const notificationFiltered = notification.filter(uniqueFilter(id, status));
+
+  return dispatch(
+    reduce(notificationConstants.NOTIFICATION_EXPIRED, notificationFiltered),
+  );
 };
 
 export default {
-  notificationExpired,
+  add,
+  remove,
+  expired,
 };

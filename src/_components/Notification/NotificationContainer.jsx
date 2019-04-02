@@ -49,7 +49,7 @@ NotificationContainer.defaultProps = defaultProps;
 
 const mapDispatchToProps = dispatch => ({
   notificationExpiredAction: (id, status) =>
-    dispatch(notificationActions.notificationExpired(id, status)),
+    dispatch(notificationActions.expired(id, status)),
 });
 
 const mapStateToProps = state => ({

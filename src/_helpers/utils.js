@@ -50,3 +50,7 @@ export const activeNavLink = (path) => {
 
   return pathname.toLowerCase().includes(path.toLowerCase());
 };
+
+export const uniqueFilter = (id, status) => item => (
+  !(item.id === id && item.status === status)
+);

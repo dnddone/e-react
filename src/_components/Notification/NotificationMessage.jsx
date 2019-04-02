@@ -15,7 +15,7 @@ const defaultProps = {
 class NotificationMessage extends Component {
   constructor(props) {
     super(props);
-    this.stId = setTimeout(this.props.removeNotificationMessage, 5000);
+    this.stId = setTimeout(this.removeThisNotification, 5000);
   }
 
   removeThisNotification = () => {

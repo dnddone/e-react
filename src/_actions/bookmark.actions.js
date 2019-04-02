@@ -1,6 +1,8 @@
 import { bookmarkService } from '../_services';
-import { bookmarkConstants, notificationConstants } from '../_constants';
+import { bookmarkConstants } from '../_constants';
 import { reduce } from '../_helpers/utils';
+
+import notificationActions from './notification.actions';
 
 const getBookmarks = () => (dispatch) => {
   const bookmarks = bookmarkService.getBookmarks();
@@ -12,13 +14,14 @@ const updateBookmarks = (id, title) => (dispatch, getState) => {
   // id = new id
   const { bookmarks } = getState();
   const index = bookmarks.indexOf(id);
+  const notificationData = { id, title };
 
   if (index > -1) {
     bookmarks.splice(index, 1);
-    dispatch(reduce(notificationConstants.NOTIFICATION_REMOVE, { id, title }));
+    dispatch(notificationActions.remove(notificationData));
   } else {
     bookmarks.push(id);
-    dispatch(reduce(notificationConstants.NOTIFICATION_ADD, { id, title }));
+    dispatch(notificationActions.add(notificationData));
   }
 
   bookmarkService.updateBookmarks(bookmarks);
