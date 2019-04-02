@@ -4,21 +4,23 @@ import classNames from 'classnames';
 
 import PropTypes from 'prop-types';
 import Loader from './Loader';
-// import SearchForm from './SearchForm';
+import SearchInput from './SearchInput';
 // import Pagination from './Pagination';
 
 const propTypes = {
   getContextMovie: PropTypes.func.isRequired,
   moviesLoading: PropTypes.bool,
   className: PropTypes.string,
+  handleSearch: PropTypes.func,
   children: PropTypes.shape({
 
   }).isRequired,
 };
 
 const defaultProps = {
-  moviesLoading: true,
   className: '',
+  handleSearch: () => {},
+  moviesLoading: true,
 };
 
 // It show movie's preview at home page
@@ -28,20 +30,21 @@ class ContextMovie extends Component {
   }
 
   render() {
-    const { moviesLoading, children, className } = this.props;
+    const {
+      children,
+      className,
+      handleSearch,
+      moviesLoading,
+    } = this.props;
 
     return (
       <div className={classNames('container content', className)}>
+        <SearchInput handleSearch={handleSearch} />
         <Loader
           className="test"
           isLoading={moviesLoading}
         />
         {!moviesLoading && children}
-        {/* {
-          (!searchValue && !isInfoPage
-            && <Pagination
-              handlePage={this.updatePage} currentPage={page} totalPages={totalPages} />)
-        } */}
       </div>
     );
   }

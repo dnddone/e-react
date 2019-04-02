@@ -9,6 +9,13 @@ import Movies from './Movies';
 
 const propTypes = {
   getMoviePopular: PropTypes.func.isRequired,
+  searchMovies: PropTypes.func.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    genre_ids: PropTypes.arrayOf(PropTypes.number),
+    overview: PropTypes.string,
+  })).isRequired,
 };
 
 const defaultProps = {};
@@ -19,13 +26,20 @@ class Home extends Component {
     this.props.getMoviePopular();
   }
 
+  handleSearch = (search) => {
+    this.props.searchMovies(search);
+  }
+
   render() {
+    const { movies } = this.props;
+
     return (
       <ContextMovies
         className="home"
+        handleSearch={this.handleSearch}
         getContextMovie={this.props.getMoviePopular}
       >
-        <Movies />
+        <Movies movies={movies} />
       </ContextMovies>
     );
   }
@@ -33,14 +47,18 @@ class Home extends Component {
 
 const mapDispatchToProps = dispatch => ({
   getMoviePopular: (page = 1) => dispatch(movieActions.getMoviePopular(page)),
+  searchMovies: query => dispatch(movieActions.searchMovies(query)),
+});
+
+const mapStateToProps = state => ({
+  movies: state.movies,
 });
 
 Home.propTypes = propTypes;
 Home.defaultProps = defaultProps;
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 /* {(isInfoPage && <h1 className="recommendations__title">Movie recommendations</h1>)}
 {(!isInfoPage && <SearchForm onChangeHandler={this.onChangeHandler} />)} */
 // (error && <div className="film__user color-error">Error: {error.message}</div>)
-// (!isLoaded && <div className="film__user">Loading...</div>)

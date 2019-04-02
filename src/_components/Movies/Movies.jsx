@@ -15,11 +15,10 @@ const propTypes = {
     title: PropTypes.string.isRequired,
     genre_ids: PropTypes.arrayOf(PropTypes.number),
     overview: PropTypes.string,
-  })),
+  })).isRequired,
 };
 
 const defaultProps = {
-  movies: [],
   bookmarks: [],
   genres: {},
   bookmarkButtonHandler: () => {},
@@ -72,10 +71,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = (state) => {
-  const { genres, movies, bookmarks } = state;
+  const { genres, bookmarks } = state;
   return {
     genres,
-    movies,
     bookmarks,
   };
 };
