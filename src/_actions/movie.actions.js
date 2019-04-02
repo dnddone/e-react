@@ -5,16 +5,15 @@ import { movieConstants } from '../_constants';
 const getMoviePopular = page => (dispatch) => {
   dispatch(reduce(movieConstants.MOVIES_REQUEST));
   return (movieService.getMoviePopular(page)
-    .then((movie) => {
-      /* eslint-disable */
-      const { page, total_pages, results } = movie; // results is movie data array
-      /* eslint-disable */
+    .then((movies) => {
+      /* eslint-disable-next-line */
+      const { page, total_pages, results } = movies; // results is movie data array
 
+      dispatch(reduce(movieConstants.MOVIES_SUCCESS));
       dispatch(reduce(movieConstants.ADD_MOVIES_POPULAR, results));
       dispatch(reduce(movieConstants.PAGINATION_UPDATE, { page, total_pages }));
-      dispatch(reduce(movieConstants.MOVIES_SUCCESS));
 
-      return Promise.resolve(movie);
+      return Promise.resolve(movies);
     })
     .catch((error) => {
       dispatch(reduce(movieConstants.MOVIE_FAILURE, error.message));
@@ -26,17 +25,36 @@ const getMoviePopular = page => (dispatch) => {
 const getMovieById = id => (dispatch) => {
   dispatch(reduce(movieConstants.MOVIEINFO_REQUEST));
   return (movieService.getMovieById(id)
-    .then((movie) => {
+    .then((movies) => {
       dispatch(reduce(movieConstants.MOVIEINFO_SUCCESS));
-      dispatch(reduce(movieConstants.MOVIEINFO_ADD, movie));
-      return Promise.resolve(movie);
+      dispatch(reduce(movieConstants.MOVIEINFO_ADD, movies));
+      return Promise.resolve(movies);
     })
     .catch((error) => {
       dispatch(reduce(movieConstants.MOVIEINFO_FAILURE, error.message));
       return Promise.reject(error);
     })
   );
-}
+};
+
+const searchMovie = query => (dispatch) => {
+  dispatch(reduce(movieConstants.SEARCH_REQUEST));
+  return (movieService.searchMovie(query)
+    .then((movies) => {
+      /* eslint-disable-next-line */
+      const { page, total_pages, results } = movies;
+
+      dispatch(reduce(movieConstants.SEARCH_SUCCESS));
+      dispatch(reduce(movieConstants.SEARCH_QUERY, results));
+      dispatch(reduce(movieConstants.PAGINATION_UPDATE, { page, total_pages }));
+      return Promise.resolve(movies);
+    })
+    .catch((error) => {
+      dispatch(reduce(movieConstants.SEARCH_FAILURE, error.message));
+      return Promise.reject(error);
+    })
+  );
+};
 
 const movieInfoReset = () => ({ type: movieConstants.MOVIEINFO_RESET })
 
@@ -44,4 +62,5 @@ export default {
   getMoviePopular,
   getMovieById,
   movieInfoReset,
+  searchMovie,
 };

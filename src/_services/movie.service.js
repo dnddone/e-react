@@ -6,7 +6,10 @@ const getMoviePopular = page => axios.get(`${movieConstants.MOVIE_POPULAR}&page=
 
 const getMovieById = id => axios.get(`/movie/${id}?${API_KEY}`);
 
+const searchMovie = query => axios.get(`${movieConstants.SEARCH_URL}&query=${query}`);
+
 export default {
   getMoviePopular,
   getMovieById,
+  searchMovie,
 };

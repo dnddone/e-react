@@ -9,7 +9,7 @@ import Movies from './Movies';
 
 const propTypes = {
   getMoviePopular: PropTypes.func.isRequired,
-  searchMovies: PropTypes.func.isRequired,
+  searchMovie: PropTypes.func.isRequired,
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -27,7 +27,12 @@ class Home extends Component {
   }
 
   handleSearch = (search) => {
-    this.props.searchMovies(search);
+    const { searchMovie, getMoviePopular } = this.props;
+    if (search) {
+      searchMovie(search);
+    } else {
+      getMoviePopular();
+    }
   }
 
   render() {
@@ -47,7 +52,7 @@ class Home extends Component {
 
 const mapDispatchToProps = dispatch => ({
   getMoviePopular: (page = 1) => dispatch(movieActions.getMoviePopular(page)),
-  searchMovies: query => dispatch(movieActions.searchMovies(query)),
+  searchMovie: query => dispatch(movieActions.searchMovie(query)),
 });
 
 const mapStateToProps = state => ({

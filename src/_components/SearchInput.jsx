@@ -24,6 +24,9 @@ class SearchInput extends Component {
     );
   }
 
+  searchSearch = () => {
+  }
+
   render() {
     const { searchValue } = this.state;
     const { type, placeholder } = this.props;
