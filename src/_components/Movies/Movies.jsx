@@ -59,7 +59,7 @@ class Movies extends PureComponent {
       );
     }
 
-    return (<div className="film__user">The movie list is empty!</div>);
+    return (<div className="film__user">The movie list is empty</div>);
   }
 }
 

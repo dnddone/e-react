@@ -118,7 +118,7 @@ export default class Bookmarks extends Component {
                       <Film movie={movieItem} genres={genre} key={movieItem.id} id={movieItem.id} />
                     ))
                   ) || (
-                    <div className="film__user">The movie list is empty!</div>
+                    <div className="film__user">The movie list is empty</div>
                   )
                 }
               </ul>

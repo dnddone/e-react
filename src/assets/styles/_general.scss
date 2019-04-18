@@ -34,18 +34,16 @@ html, body {
 }
 
 .container {
+  position: relative;
+  margin: 0 auto;
   max-width: 980px;
   width: 100%;
-  display: block;
-  margin: 0 auto;
+  border: 1px solid #fff;
+  border-top: none;
 }
 
 .content {
-  position: relative;
-  padding: 100px 0 40px;
-  border: 1px solid #fff;
-  border-top: none;
-  transition: all 0.2s linear;
+  padding: 40px 0;
 }
 
 .bookmark {

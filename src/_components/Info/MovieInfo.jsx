@@ -74,7 +74,7 @@ class MovieInfo extends PureComponent {
             <div className="info__description">{`Genres: ${getGenresForMovieInfo(genres)}`}</div>
             <div className="info__description">
               {'Homepage: '}
-              <a href={homepage} className="info__link">{homepage}</a>
+              <a href={homepage} target="_blank" rel="noopener noreferrer" className="info__link">{homepage}</a>
             </div>
             <div className="info__description">{`Runtime: ${runtime} minutes`}</div>
             <div className="info__description">{`Release date: ${releaseDate}`}</div>

@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { movieActions } from '../_actions';
 import ContextMovies from './ContextMovies';
-// import SearchForm from './SearchForm';
 import Movies from './Movies';
-// import Pagination from './Pagination';
+import Pagination from './Pagination';
 
 const propTypes = {
-  getMoviePopular: PropTypes.func.isRequired,
-  searchMovie: PropTypes.func.isRequired,
+  getMoviePopularAction: PropTypes.func.isRequired,
+  searchMovieAction: PropTypes.func.isRequired,
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -23,36 +22,37 @@ const defaultProps = {};
 // It show movie's preview at home page
 class Home extends Component {
   componentDidMount() {
-    this.props.getMoviePopular();
+    this.props.getMoviePopularAction();
   }
 
   handleSearch = (search) => {
-    const { searchMovie, getMoviePopular } = this.props;
+    const { searchMovieAction, getMoviePopularAction } = this.props;
     if (search) {
-      searchMovie(search);
+      searchMovieAction(search);
     } else {
-      getMoviePopular();
+      getMoviePopularAction();
     }
   }
 
   render() {
-    const { movies } = this.props;
+    const { movies, getMoviePopularAction } = this.props;
 
     return (
       <ContextMovies
         className="home"
         handleSearch={this.handleSearch}
-        getContextMovie={this.props.getMoviePopular}
+        getContextMovie={getMoviePopularAction}
       >
         <Movies movies={movies} />
+        <Pagination handlePage={getMoviePopularAction} />
       </ContextMovies>
     );
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  getMoviePopular: (page = 1) => dispatch(movieActions.getMoviePopular(page)),
-  searchMovie: query => dispatch(movieActions.searchMovie(query)),
+  getMoviePopularAction: page => dispatch(movieActions.getMoviePopular(page)),
+  searchMovieAction: query => dispatch(movieActions.searchMovie(query)),
 });
 
 const mapStateToProps = state => ({
@@ -64,6 +64,5 @@ Home.defaultProps = defaultProps;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
-/* {(isInfoPage && <h1 className="recommendations__title">Movie recommendations</h1>)}
-{(!isInfoPage && <SearchForm onChangeHandler={this.onChangeHandler} />)} */
+// {(isInfoPage && <h1 className="recommendations__title">Movie recommendations</h1>)}
 // (error && <div className="film__user color-error">Error: {error.message}</div>)

@@ -8,22 +8,26 @@
   }
   
   &__item {
-    font-size: 18px;
-    padding: 0 5px;
-    margin: 0 5px 10px;
     display: inline-block;
+    margin: 0 5px 10px;
     vertical-align: top;
-    cursor: pointer;
-    color: #fff;
-    transition: all 0.2s linear;
     
-    &:hover {
-        color: $blue;
-    }
+    span {
+      display: inline-block;
+      padding: 0 5px;
+      font-size: 18px;
+      color: #fff;
+      transition: all 0.2s linear;
+      cursor: pointer;
+      
+      &:hover {
+          color: $blue;
+      }
     
-    &.current {
-        color: $yellow !important;
-        cursor: default;
+      &.current {
+          color: $yellow !important;
+          cursor: default;
+      }
     }
   }
 }

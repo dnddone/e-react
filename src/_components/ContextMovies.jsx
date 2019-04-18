@@ -12,9 +12,7 @@ const propTypes = {
   moviesLoading: PropTypes.bool,
   className: PropTypes.string,
   handleSearch: PropTypes.func,
-  children: PropTypes.shape({
-
-  }).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 const defaultProps = {

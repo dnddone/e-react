@@ -2,7 +2,7 @@ import { reduce } from '../_helpers/utils';
 import { movieService } from '../_services';
 import { movieConstants } from '../_constants';
 
-const getMoviePopular = page => (dispatch) => {
+const getMoviePopular = (page = 1) => (dispatch) => {
   dispatch(reduce(movieConstants.MOVIES_REQUEST));
   return (movieService.getMoviePopular(page)
     .then((movies) => {
