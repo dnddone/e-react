@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 const propTypes = {
   isCurrent: PropTypes.bool.isRequired,
-  handlePage: PropTypes.func.isRequired,
+  paginationHandler: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
 };
 
@@ -12,10 +12,10 @@ const defaultProps = {};
 
 const PaginationItem = ({
   isCurrent,
-  handlePage,
+  paginationHandler,
   page,
 }) => {
-  const onPageClick = () => { handlePage(page); };
+  const onPageClick = () => { paginationHandler(page); };
 
   return (
     <li className="pagination__item">

@@ -35,6 +35,8 @@ class ContextMovie extends Component {
       moviesLoading,
     } = this.props;
 
+    console.log(moviesLoading);
+
     return (
       <div className={classNames('container content', className)}>
         <SearchInput handleSearch={handleSearch} />

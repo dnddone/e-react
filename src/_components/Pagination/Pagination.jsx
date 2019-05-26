@@ -7,13 +7,13 @@ import PaginationItem from './PaginationItem';
 const propTypes = {
   page: PropTypes.number,
   totalPages: PropTypes.number,
-  handlePage: PropTypes.func,
+  paginationHandler: PropTypes.func,
 };
 
 const defaultProps = {
   page: 1,
   totalPages: 1,
-  handlePage: () => {},
+  paginationHandler: () => {},
 };
 
 class Pagination extends Component {
@@ -31,14 +31,14 @@ class Pagination extends Component {
   };
 
   paginationItem = (value) => {
-    const { page, handlePage } = this.props;
+    const { page, paginationHandler } = this.props;
     const isCurrent = page === value;
 
     return (
       <PaginationItem
         key={value}
         page={value}
-        handlePage={handlePage}
+        paginationHandler={paginationHandler}
         isCurrent={isCurrent}
       />
     );

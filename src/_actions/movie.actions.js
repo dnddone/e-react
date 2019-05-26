@@ -10,7 +10,7 @@ const getMoviePopular = (page = 1) => (dispatch) => {
       const { page, total_pages, results } = movies; // results is movie data array
 
       dispatch(reduce(movieConstants.MOVIES_SUCCESS));
-      dispatch(reduce(movieConstants.ADD_MOVIES_POPULAR, results));
+      dispatch(reduce(movieConstants.SAVE, results));
       dispatch(reduce(movieConstants.PAGINATION_UPDATE, { page, total_pages }));
 
       return Promise.resolve(movies);
@@ -56,7 +56,7 @@ const searchMovie = query => (dispatch) => {
   );
 };
 
-const movieInfoReset = () => ({ type: movieConstants.MOVIEINFO_RESET })
+const movieInfoReset = () => ({ type: movieConstants.MOVIEINFO_RESET });
 
 export default {
   getMoviePopular,

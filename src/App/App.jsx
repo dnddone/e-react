@@ -6,26 +6,26 @@ import { pathsConstants } from '../_constants';
 import { genreActions, bookmarkActions } from '../_actions';
 
 import Header from '../_components/Header/Header';
-import Home from '../_components/Home';
+import Home from '../_components/Pages/Home';
+import Bookmarks from '../_components/Pages/Bookmarks';
 import Info from '../_components/Info';
-// import Bookmarks from '../_components/Bookmarks';
 import NotFound from '../_components/NotFound';
 import Notification from '../_components/Notification';
 
 const propTypes = {
-  getGenres: func,
-  getBookmarks: func,
+  getGenresAction: func,
+  getBookmarksAction: func,
 };
 
 const defaultProps = {
-  getGenres: () => {},
-  getBookmarks: () => {},
+  getGenresAction: () => {},
+  getBookmarksAction: () => {},
 };
 
 class App extends Component {
   componentDidMount() {
-    this.props.getGenres();
-    this.props.getBookmarks();
+    this.props.getBookmarksAction();
+    this.props.getGenresAction();
   }
 
   render() {
@@ -37,7 +37,7 @@ class App extends Component {
           <Switch>
             <Route exact path={pathsConstants.HOME_PAGE} component={Home} />
             <Route path={pathsConstants.MOVIE_PAGE} component={Info} />
-            {/* <Route path={pathsConstants.BOOKMARKS_PAGE} component={Bookmarks} /> */}
+            <Route path={pathsConstants.BOOKMARKS_PAGE} component={Bookmarks} />
             <Route component={NotFound} />
           </Switch>
         </>
@@ -50,8 +50,8 @@ App.propTypes = propTypes;
 App.defaultProps = defaultProps;
 
 const mapDispatchToProps = dispatch => ({
-  getGenres: () => dispatch(genreActions.getGenres()),
-  getBookmarks: () => dispatch(bookmarkActions.getBookmarks()),
+  getGenresAction: () => dispatch(genreActions.getGenres()),
+  getBookmarksAction: () => dispatch(bookmarkActions.getBookmarks()),
 });
 
 export default connect(null, mapDispatchToProps)(App);

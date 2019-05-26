@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { movieActions } from '../_actions';
-import ContextMovies from './ContextMovies';
-import Movies from './Movies';
-import Pagination from './Pagination';
+
+import { movieActions } from '../../_actions';
+
+import ContextMovies from '../ContextMovies';
+import Movies from '../Movies';
+import Pagination from '../Pagination';
 
 const propTypes = {
   getMoviePopularAction: PropTypes.func.isRequired,
@@ -19,13 +21,8 @@ const propTypes = {
 
 const defaultProps = {};
 
-// It show movie's preview at home page
 class Home extends Component {
-  componentDidMount() {
-    this.props.getMoviePopularAction();
-  }
-
-  handleSearch = (search) => {
+  searchHandler = (search) => {
     const { searchMovieAction, getMoviePopularAction } = this.props;
     if (search) {
       searchMovieAction(search);
@@ -40,11 +37,11 @@ class Home extends Component {
     return (
       <ContextMovies
         className="home"
-        handleSearch={this.handleSearch}
+        searchHandler={this.searchHandler}
         getContextMovie={getMoviePopularAction}
       >
         <Movies movies={movies} />
-        <Pagination handlePage={getMoviePopularAction} />
+        <Pagination paginationHandler={getMoviePopularAction} />
       </ContextMovies>
     );
   }

@@ -70,12 +70,9 @@ const mapDispatchToProps = dispatch => ({
   bookmarkButtonHandler: (id, title) => dispatch(bookmarkActions.updateBookmarks(id, title)),
 });
 
-const mapStateToProps = (state) => {
-  const { genres, bookmarks } = state;
-  return {
-    genres,
-    bookmarks,
-  };
-};
+const mapStateToProps = state => ({
+  genres: state.genres,
+  bookmarks: state.bookmarks,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Movies);
