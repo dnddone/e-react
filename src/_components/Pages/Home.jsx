@@ -38,7 +38,7 @@ class Home extends Component {
       <ContextMovies
         className="home"
         searchHandler={this.homeSearchHandler}
-        getContextMovie={getMoviesPopularAction}
+        getContextMovieAction={getMoviesPopularAction}
       >
         <Movies movies={movies} />
         <Pagination paginationHandler={getMoviesPopularAction} />

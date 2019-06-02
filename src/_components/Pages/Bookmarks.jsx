@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -23,18 +23,16 @@ const defaultProps = {
 };
 
 // It shows the moevies from bookmark list at hostname/bookmarks
-class Bookmarks extends Component {
-  bookmarksSearchHandler = () => {
-  }
-
+class Bookmarks extends PureComponent {
   render() {
     const { movies, getBookmarkMoviesAction } = this.props;
 
     return (
       <ContextMovies
+        showSearchInput={false}
         className="bookmarks"
         searchHandler={() => {}}
-        getContextMovie={getBookmarkMoviesAction}
+        getContextMovieAction={getBookmarkMoviesAction}
       >
         <Movies movies={movies} />
         <Pagination paginationHandler={getBookmarkMoviesAction} />

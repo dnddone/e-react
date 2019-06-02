@@ -6,14 +6,16 @@ import Loader from './Loader';
 import SearchInput from './SearchInput';
 
 const propTypes = {
-  getContextMovie: PropTypes.func.isRequired,
+  showSearchInput: PropTypes.bool,
   moviesLoading: PropTypes.bool,
   className: PropTypes.string,
   searchHandler: PropTypes.func,
   children: PropTypes.node.isRequired,
+  getContextMovieAction: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
+  showSearchInput: true,
   className: '',
   searchHandler: () => {},
   moviesLoading: true,
@@ -22,11 +24,12 @@ const defaultProps = {
 // It show movie's preview at home/bookmarks pages
 class ContextMovie extends Component {
   componentDidMount() {
-    this.props.getContextMovie();
+    this.props.getContextMovieAction();
   }
 
   render() {
     const {
+      showSearchInput,
       children,
       className,
       searchHandler,
@@ -36,7 +39,7 @@ class ContextMovie extends Component {
     if (!moviesLoading) {
       return (
         <div className={`container content ${className}`}>
-          <SearchInput searchHandler={searchHandler} />
+          {showSearchInput && <SearchInput searchHandler={searchHandler} />}
           {children}
         </div>
       );

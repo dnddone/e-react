@@ -31,16 +31,17 @@ const defaultProps = {
 // It is the movie's container at /home page.
 class MovieBlock extends Component {
   getGenresFromIDs = () => {
-    const {
-      genres,
-      movie: {
-        genres: ids,
-      },
-    } = this.props;
+    const { genres, movie } = this.props;
 
-    return isObjectEmpty(genres)
-      ? 'Genres error'
-      : ids.map(({ id }) => genres[id]).join(', ');
+    if (isObjectEmpty(genres)) {
+      return 'Genres error';
+    }
+
+    if (movie.genres) {
+      return movie.genres.map(({ id }) => genres[id]).join(', ');
+    }
+
+    return movie.genre_ids.map(id => genres[id]).join(', ');
   };
 
   render() {
