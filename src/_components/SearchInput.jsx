@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   type: PropTypes.string,
-  handleSearch: PropTypes.func.isRequired,
+  searchHandler: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
 };
 
@@ -17,10 +17,10 @@ class SearchInput extends Component {
     searchValue: '',
   }
 
-  handleSearch = (event) => {
+  searchHandler = (event) => {
     this.setState(
       { searchValue: event.target.value },
-      () => this.props.handleSearch(this.state.searchValue),
+      () => this.props.searchHandler(this.state.searchValue),
     );
   }
 
@@ -37,7 +37,7 @@ class SearchInput extends Component {
           className="search__input"
           type={type}
           value={searchValue}
-          onChange={this.handleSearch}
+          onChange={this.searchHandler}
           placeholder={placeholder}
         />
       </div>

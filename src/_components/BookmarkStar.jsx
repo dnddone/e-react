@@ -10,8 +10,10 @@ library.add(faStar);
 // TODO: Bookmark handler
 
 const propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
+  data: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired,
   isBookmarkAdded: PropTypes.bool,
   bookmarkButtonHandler: PropTypes.func.isRequired,
   text: PropTypes.string,
@@ -25,8 +27,7 @@ const defaultProps = {
 };
 
 const BookmarkStar = ({
-  id,
-  title,
+  data,
   bookmarkButtonHandler,
   isBookmarkAdded,
   text,
@@ -34,7 +35,7 @@ const BookmarkStar = ({
 }) => {
   const onClickBookmark = (event) => {
     event.preventDefault();
-    bookmarkButtonHandler(id, title);
+    bookmarkButtonHandler(data);
   };
 
   return (

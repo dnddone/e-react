@@ -7,21 +7,24 @@ import bookmarkActions from '../../_actions/bookmark.actions';
 import { bookmarkChecker } from '../../_helpers/utils';
 
 const propTypes = {
-  bookmarkButtonHandler: PropTypes.func,
   genres: PropTypes.shape({}),
-  bookmarks: PropTypes.arrayOf(PropTypes.number),
+  bookmarks: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+  })),
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     genre_ids: PropTypes.arrayOf(PropTypes.number),
     overview: PropTypes.string,
   })).isRequired,
+  updateBookmarksAction: PropTypes.func,
 };
 
 const defaultProps = {
   bookmarks: [],
   genres: {},
-  bookmarkButtonHandler: () => {},
+  updateBookmarksAction: () => {},
 };
 
 class Movies extends PureComponent {
@@ -35,7 +38,7 @@ class Movies extends PureComponent {
     const {
       movies,
       genres,
-      bookmarkButtonHandler,
+      updateBookmarksAction,
     } = this.props;
 
     const isAnyMovie = movies.length;
@@ -46,13 +49,11 @@ class Movies extends PureComponent {
         <ul className="film__list">
           {movies.map((movie, index) => (
             <MovieBlock
+              key={movie.id}
               movie={movie}
-              genreIDs={movie.genre_ids}
               isBookmarkAdded={isBookmarkAddedArray[index]}
               genres={genres}
-              key={movie.id}
-              id={movie.id}
-              bookmarkButtonHandler={bookmarkButtonHandler}
+              bookmarkButtonHandler={updateBookmarksAction}
             />
           ))}
         </ul>
@@ -67,7 +68,7 @@ Movies.propTypes = propTypes;
 Movies.defaultProps = defaultProps;
 
 const mapDispatchToProps = dispatch => ({
-  bookmarkButtonHandler: (id, title) => dispatch(bookmarkActions.updateBookmarks(id, title)),
+  updateBookmarksAction: data => dispatch(bookmarkActions.updateBookmarks(data)),
 });
 
 const mapStateToProps = state => ({

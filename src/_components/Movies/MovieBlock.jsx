@@ -13,10 +13,8 @@ import BookmarkStar from '../BookmarkStar';
 import { isObjectEmpty, imagePosterPath } from '../../_helpers/utils';
 
 const propTypes = {
-  id: number.isRequired,
   bookmarkButtonHandler: func.isRequired,
   genres: objectOf(string).isRequired,
-  genreIDs: arrayOf(number),
   isBookmarkAdded: bool,
   movie: shape({
     id: number.isRequired,
@@ -27,39 +25,43 @@ const propTypes = {
 };
 
 const defaultProps = {
-  genreIDs: [],
   isBookmarkAdded: [],
 };
 
 // It is the movie's container at /home page.
 class MovieBlock extends Component {
   getGenresFromIDs = () => {
-    const { genres, genreIDs: ids } = this.props;
+    const {
+      genres,
+      movie: {
+        genres: ids,
+      },
+    } = this.props;
 
     return isObjectEmpty(genres)
       ? 'Genres error'
-      : ids.map(id => genres[id]).join(', ');
+      : ids.map(({ id }) => genres[id]).join(', ');
   };
 
   render() {
     const {
-      id,
       bookmarkButtonHandler,
       isBookmarkAdded,
       movie: {
+        id,
         title,
         poster_path: posterPath,
       },
     } = this.props;
 
     const image = imagePosterPath(posterPath);
+    const movieData = { id, title };
 
     return (
       <li className="film__item film">
         <Link to={`/movie/${id}`} className="film__link">
           <BookmarkStar
-            id={id}
-            title={title}
+            data={movieData}
             bookmarkButtonHandler={bookmarkButtonHandler}
             isBookmarkAdded={isBookmarkAdded}
           />

@@ -1,36 +1,45 @@
-import { bookmarkService, movieService } from '../_services';
+import { movieService } from '../_services';
 import { movieConstants, bookmarkConstants } from '../_constants';
+import * as bookmarksUtils from '../_helpers/bookmarksUtils';
 import { reduce } from '../_helpers/utils';
 
 import notificationActions from './notification.actions';
 
 const getBookmarks = () => (dispatch) => {
-  const bookmarks = bookmarkService.getBookmarks();
+  const bookmarks = bookmarksUtils.getBookmarks();
   return dispatch(reduce(bookmarkConstants.SAVE, bookmarks));
 };
 
-const updateBookmarks = (id, title) => (dispatch, getState) => {
+const updateBookmarks = data => (dispatch, getState) => {
   // id = new id
+  // console.log('data');
+  // console.log(data);
   const { bookmarks } = getState();
-  const index = bookmarks.indexOf(id);
-  const notificationData = { id, title };
+  const { id } = data;
+  let index = -1;
 
-  if (index > -1) {
+  const newBookmark = bookmarks.some((bookmark) => {
+    const is = bookmark.id === id;
+    if (is) { index = id; }
+    return is;
+  });
+
+  if (newBookmark) {
     bookmarks.splice(index, 1);
-    dispatch(notificationActions.remove(notificationData));
+    dispatch(notificationActions.remove(data));
   } else {
-    bookmarks.push(id);
-    dispatch(notificationActions.add(notificationData));
+    bookmarks.push(data);
+    dispatch(notificationActions.add(data));
   }
 
-  bookmarkService.updateBookmarks(bookmarks);
+  bookmarksUtils.updateBookmarks(bookmarks);
   return dispatch(reduce(bookmarkConstants.SAVE, bookmarks));
 };
 
 const moviesPerPage = 9;
 const getBookmarkMovies = (page = 1) => (dispatch, getState) => {
   const { bookmarks: getStateBookmarks } = getState();
-  const bookmarks = getStateBookmarks.length ? getStateBookmarks : bookmarkService.getBookmarks();
+  const bookmarks = getStateBookmarks.length ? getStateBookmarks : bookmarksUtils.getBookmarks();
 
   const moviesIDPromises = [];
 
@@ -38,7 +47,7 @@ const getBookmarkMovies = (page = 1) => (dispatch, getState) => {
 
   for (let i = baseMoviesIterator; i < baseMoviesIterator + moviesPerPage; i += 1) {
     if (i < bookmarks.length) {
-      moviesIDPromises.push(movieService.getMovieById(bookmarks[i]));
+      moviesIDPromises.push(movieService.getMovieById(bookmarks[i].id));
     }
   }
 
@@ -49,6 +58,7 @@ const getBookmarkMovies = (page = 1) => (dispatch, getState) => {
       dispatch(reduce(movieConstants.SAVE, get));
       dispatch(reduce(movieConstants.PAGINATION_SAVE, {
         page,
+        // Round up page amount to make a number not float
         total: Math.ceil(bookmarks.length / moviesPerPage),
       }));
     })

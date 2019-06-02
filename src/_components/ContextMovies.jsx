@@ -9,13 +9,13 @@ const propTypes = {
   getContextMovie: PropTypes.func.isRequired,
   moviesLoading: PropTypes.bool,
   className: PropTypes.string,
-  handleSearch: PropTypes.func,
+  searchHandler: PropTypes.func,
   children: PropTypes.node.isRequired,
 };
 
 const defaultProps = {
   className: '',
-  handleSearch: () => {},
+  searchHandler: () => {},
   moviesLoading: true,
 };
 
@@ -29,17 +29,17 @@ class ContextMovie extends Component {
     const {
       children,
       className,
-      handleSearch,
+      searchHandler,
       moviesLoading,
     } = this.props;
 
     if (!moviesLoading) {
       return (
         <div className={`container content ${className}`}>
-          <SearchInput handleSearch={handleSearch} />
+          <SearchInput searchHandler={searchHandler} />
           {children}
         </div>
-      )
+      );
     }
 
     return (

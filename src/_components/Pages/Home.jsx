@@ -22,7 +22,7 @@ const propTypes = {
 const defaultProps = {};
 
 class Home extends Component {
-  searchHandler = (search) => {
+  homeSearchHandler = (search) => {
     const { searchMoviesAction, getMoviesPopularAction } = this.props;
     if (search) {
       searchMoviesAction(search);
@@ -37,7 +37,7 @@ class Home extends Component {
     return (
       <ContextMovies
         className="home"
-        searchHandler={this.searchHandler}
+        searchHandler={this.homeSearchHandler}
         getContextMovie={getMoviesPopularAction}
       >
         <Movies movies={movies} />

@@ -24,8 +24,7 @@ const defaultProps = {
 
 // It shows the moevies from bookmark list at hostname/bookmarks
 class Bookmarks extends Component {
-  componentDidMount() {
-
+  bookmarksSearchHandler = () => {
   }
 
   render() {

@@ -43,7 +43,7 @@ export const imagePosterPath = path =>
   (path ? `https://image.tmdb.org/t/p/w300${path}` : NoImagePNG);
 
 export const bookmarkChecker = (movieId, bookmarks) => (
-  bookmarks.some(bookmarkId => movieId === bookmarkId)
+  bookmarks.some(({ id }) => movieId === id)
 );
 
 export const formatedPath = (path) => {

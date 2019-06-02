@@ -35,13 +35,13 @@ const defaultProps = {
 class MovieInfo extends PureComponent {
   render() {
     const {
-      id,
       info,
       isBookmarkAdded,
       bookmarkButtonHandler,
     } = this.props;
 
     const {
+      id,
       title,
       poster_path: posterPath,
       original_title: originalTitle,
@@ -55,6 +55,8 @@ class MovieInfo extends PureComponent {
       vote_count: voteCount,
       overview,
     } = info;
+
+    const movieData = { id, title };
 
     const bookmarkButtonText = isBookmarkAdded
       ? 'Remove favorite'
@@ -88,12 +90,11 @@ class MovieInfo extends PureComponent {
             </div>
             <div className="info__button-container">
               <BookmarkStar
-                bookmarkButtonHandler={bookmarkButtonHandler}
-                id={id}
-                title={title}
+                data={movieData}
                 text={bookmarkButtonText}
                 className="info__button"
                 isBookmarkAdded={isBookmarkAdded}
+                bookmarkButtonHandler={bookmarkButtonHandler}
               />
             </div>
           </div>

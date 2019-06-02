@@ -50,7 +50,6 @@ class MovieInfoContainer extends Component {
         <Loader className="" isLoading={infoLoading} />
         {info.title && (
           <MovieInfo
-            id={id}
             info={info}
             isBookmarkAdded={isBookmarkAdded}
             bookmarkButtonHandler={updateBookmarksAction}

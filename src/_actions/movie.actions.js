@@ -55,7 +55,7 @@ const searchMovies = query => (dispatch) => {
 
       dispatch(reduce(movieConstants.SEARCH_SUCCESS));
       dispatch(reduce(movieConstants.SEARCH_QUERY, results));
-      dispatch(reduce(movieConstants.PAGINATION_UPDATE, {
+      dispatch(reduce(movieConstants.PAGINATION_SAVE, {
         page: paginationPage,
         total: paginationTotal,
       }));
