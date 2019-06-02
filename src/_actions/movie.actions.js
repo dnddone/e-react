@@ -6,12 +6,18 @@ const getMoviePopular = (page = 1) => (dispatch) => {
   dispatch(reduce(movieConstants.MOVIES_REQUEST));
   return (movieService.getMoviePopular(page)
     .then((movies) => {
-      /* eslint-disable-next-line */
-      const { page, total_pages, results } = movies; // results is movie data array
+      const {
+        page: paginationPage,
+        total_pages: paginationTotal,
+        results,
+      } = movies; // results is movie data array
 
       dispatch(reduce(movieConstants.MOVIES_SUCCESS));
       dispatch(reduce(movieConstants.SAVE, results));
-      dispatch(reduce(movieConstants.PAGINATION_UPDATE, { page, total_pages }));
+      dispatch(reduce(movieConstants.PAGINATION_UPDATE, {
+        page: paginationPage,
+        totalPages: paginationTotal,
+      }));
 
       return Promise.resolve(movies);
     })

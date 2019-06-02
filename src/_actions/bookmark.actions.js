@@ -27,17 +27,30 @@ const updateBookmarks = (id, title) => (dispatch, getState) => {
   return dispatch(reduce(bookmarkConstants.BOOKMARK_UPDATE, bookmarks));
 };
 
-const getBookmarkMovies = () => (dispatch, getState) => {
+const pagePerPage = 9;
+const getBookmarkMovies = (page = 1) => (dispatch, getState) => {
   const { bookmarks: getStateBookmarks } = getState();
   const bookmarks = getStateBookmarks.length ? getStateBookmarks : bookmarkService.getBookmarks();
 
-  const fork = bookmarks.map(id => movieService.getMovieById(id));
+  const fork = [];
+
+  const forPageFor = pagePerPage * (page - 1);
+
+  for (let i = forPageFor; i < forPageFor + pagePerPage; i += 1) {
+    if (i < bookmarks.length) {
+      fork.push(movieService.getMovieById(bookmarks[i]));
+    }
+  }
 
   dispatch(reduce(movieConstants.MOVIES_REQUEST));
   Promise.all(fork)
     .then((get) => {
       dispatch(reduce(movieConstants.MOVIES_SUCCESS));
       dispatch(reduce(movieConstants.SAVE, get));
+      dispatch(reduce(movieConstants.PAGINATION_UPDATE, {
+        page,
+        totalPages: Math.ceil(bookmarks.length / pagePerPage),
+      }));
     })
     .catch((error) => {
       dispatch(reduce(movieConstants.MOVIE_FAILURE, error.message));

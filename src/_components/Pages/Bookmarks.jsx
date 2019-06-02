@@ -30,7 +30,6 @@ class Bookmarks extends Component {
 
   render() {
     const { movies, getBookmarkMoviesAction } = this.props;
-    console.log(movies);
 
     return (
       <ContextMovies
@@ -39,7 +38,7 @@ class Bookmarks extends Component {
         getContextMovie={getBookmarkMoviesAction}
       >
         <Movies movies={movies} />
-        <Pagination paginationHandler={() => {}} />
+        <Pagination paginationHandler={getBookmarkMoviesAction} />
       </ContextMovies>
     );
   }
@@ -54,7 +53,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getBookmarkMoviesAction: () => dispatch(bookmarkActions.getBookmarkMovies()),
+  getBookmarkMoviesAction: page => dispatch(bookmarkActions.getBookmarkMovies(page)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Bookmarks);

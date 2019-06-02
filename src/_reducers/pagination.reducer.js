@@ -7,7 +7,7 @@ export default (state = {}, action) => {
     case movieConstants.PAGINATION_UPDATE:
       return {
         page: action.payload.page,
-        totalPages: action.payload.total_pages,
+        totalPages: action.payload.totalPages,
       };
 
     case movieConstants.PAGINATION_RESET:

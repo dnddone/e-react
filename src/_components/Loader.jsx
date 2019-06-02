@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 import {
   string,
   bool,
@@ -21,7 +20,7 @@ const Loader = ({ className, isLoading }) => {
   if (!isLoading) { return null; }
 
   return (
-    <div className={classNames('loader', className)}>
+    <div className={`loader ${className}`}>
       <img src={loader} alt="Response loader" />
     </div>
   );

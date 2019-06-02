@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import classNames from 'classnames';
 
 import PropTypes from 'prop-types';
 import Loader from './Loader';
 import SearchInput from './SearchInput';
-// import Pagination from './Pagination';
 
 const propTypes = {
   getContextMovie: PropTypes.func.isRequired,
@@ -21,7 +19,7 @@ const defaultProps = {
   moviesLoading: true,
 };
 
-// It show movie's preview at home page
+// It show movie's preview at home/bookmarks pages
 class ContextMovie extends Component {
   componentDidMount() {
     this.props.getContextMovie();
@@ -35,16 +33,20 @@ class ContextMovie extends Component {
       moviesLoading,
     } = this.props;
 
-    console.log(moviesLoading);
+    if (!moviesLoading) {
+      return (
+        <div className={`container content ${className}`}>
+          <SearchInput handleSearch={handleSearch} />
+          {children}
+        </div>
+      )
+    }
 
     return (
-      <div className={classNames('container content', className)}>
-        <SearchInput handleSearch={handleSearch} />
+      <div className="container content">
         <Loader
-          className="test"
           isLoading={moviesLoading}
         />
-        {!moviesLoading && children}
       </div>
     );
   }
