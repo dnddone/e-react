@@ -4,7 +4,7 @@ export default (state = {}, action) => {
   const { type } = action;
 
   switch (type) {
-    case movieConstants.MOVIEINFO_ADD:
+    case movieConstants.MOVIEINFO_SAVE:
       return action.payload;
     case movieConstants.MOVIEINFO_RESET:
       return {};

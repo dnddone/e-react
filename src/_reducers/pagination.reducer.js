@@ -4,16 +4,16 @@ export default (state = {}, action) => {
   const { type } = action;
 
   switch (type) {
-    case movieConstants.PAGINATION_UPDATE:
+    case movieConstants.PAGINATION_SAVE:
       return {
         page: action.payload.page,
-        totalPages: action.payload.totalPages,
+        total: action.payload.total,
       };
 
     case movieConstants.PAGINATION_RESET:
       return {
-        page: 1,
-        totalPages: 1,
+        page: null,
+        total: null,
       };
 
     default:

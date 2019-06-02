@@ -9,8 +9,8 @@ import Movies from '../Movies';
 import Pagination from '../Pagination';
 
 const propTypes = {
-  getMoviePopularAction: PropTypes.func.isRequired,
-  searchMovieAction: PropTypes.func.isRequired,
+  getMoviesPopularAction: PropTypes.func.isRequired,
+  searchMoviesAction: PropTypes.func.isRequired,
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -23,33 +23,33 @@ const defaultProps = {};
 
 class Home extends Component {
   searchHandler = (search) => {
-    const { searchMovieAction, getMoviePopularAction } = this.props;
+    const { searchMoviesAction, getMoviesPopularAction } = this.props;
     if (search) {
-      searchMovieAction(search);
+      searchMoviesAction(search);
     } else {
-      getMoviePopularAction();
+      getMoviesPopularAction();
     }
   }
 
   render() {
-    const { movies, getMoviePopularAction } = this.props;
+    const { movies, getMoviesPopularAction } = this.props;
 
     return (
       <ContextMovies
         className="home"
         searchHandler={this.searchHandler}
-        getContextMovie={getMoviePopularAction}
+        getContextMovie={getMoviesPopularAction}
       >
         <Movies movies={movies} />
-        <Pagination paginationHandler={getMoviePopularAction} />
+        <Pagination paginationHandler={getMoviesPopularAction} />
       </ContextMovies>
     );
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  getMoviePopularAction: page => dispatch(movieActions.getMoviePopular(page)),
-  searchMovieAction: query => dispatch(movieActions.searchMovie(query)),
+  getMoviesPopularAction: page => dispatch(movieActions.getMoviesPopular(page)),
+  searchMoviesAction: query => dispatch(movieActions.searchMovies(query)),
 });
 
 const mapStateToProps = state => ({

@@ -6,28 +6,32 @@ import PaginationItem from './PaginationItem';
 
 const propTypes = {
   page: PropTypes.number,
-  totalPages: PropTypes.number,
+  total: PropTypes.number,
   paginationHandler: PropTypes.func,
 };
 
 const defaultProps = {
   page: 1,
-  totalPages: 1,
+  total: 1,
   paginationHandler: () => {},
 };
 
 class Pagination extends Component {
-  paginationArray = (diff = 6) => {
-    const { page, totalPages } = this.props;
-    const arrayPages = [];
+  paginationRange = (diff = 6) => {
+    const { page, total } = this.props;
+    const range = [];
+
+    if (total <= 1) {
+      return range;
+    }
 
     for (let i = page - diff; i <= page + diff; i += 1) {
-      if (i > 0 && i <= totalPages) {
-        arrayPages.push(i);
+      if (i > 0 && i <= total) {
+        range.push(i);
       }
     }
 
-    return arrayPages;
+    return range;
   };
 
   paginationItem = (value) => {
@@ -45,12 +49,12 @@ class Pagination extends Component {
   }
 
   render() {
-    const arrayPages = this.paginationArray();
+    const paginationArray = this.paginationRange();
 
     return (
       <div className="pagination pagination__container">
         <ul className="pagination__list">
-          {arrayPages.map(this.paginationItem)}
+          {paginationArray.map(this.paginationItem)}
         </ul>
       </div>
     );
@@ -62,7 +66,7 @@ Pagination.defaultProps = defaultProps;
 
 const mapStateToProps = state => ({
   page: state.pagination.page,
-  totalPages: state.pagination.totalPages,
+  total: state.pagination.total,
 });
 
 export default connect(mapStateToProps)(Pagination);

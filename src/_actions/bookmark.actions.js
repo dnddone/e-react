@@ -6,7 +6,7 @@ import notificationActions from './notification.actions';
 
 const getBookmarks = () => (dispatch) => {
   const bookmarks = bookmarkService.getBookmarks();
-  return dispatch(reduce(bookmarkConstants.BOOKMARK_GET, bookmarks));
+  return dispatch(reduce(bookmarkConstants.SAVE, bookmarks));
 };
 
 const updateBookmarks = (id, title) => (dispatch, getState) => {
@@ -24,36 +24,36 @@ const updateBookmarks = (id, title) => (dispatch, getState) => {
   }
 
   bookmarkService.updateBookmarks(bookmarks);
-  return dispatch(reduce(bookmarkConstants.BOOKMARK_UPDATE, bookmarks));
+  return dispatch(reduce(bookmarkConstants.SAVE, bookmarks));
 };
 
-const pagePerPage = 9;
+const moviesPerPage = 9;
 const getBookmarkMovies = (page = 1) => (dispatch, getState) => {
   const { bookmarks: getStateBookmarks } = getState();
   const bookmarks = getStateBookmarks.length ? getStateBookmarks : bookmarkService.getBookmarks();
 
-  const fork = [];
+  const moviesIDPromises = [];
 
-  const forPageFor = pagePerPage * (page - 1);
+  const baseMoviesIterator = moviesPerPage * (page - 1);
 
-  for (let i = forPageFor; i < forPageFor + pagePerPage; i += 1) {
+  for (let i = baseMoviesIterator; i < baseMoviesIterator + moviesPerPage; i += 1) {
     if (i < bookmarks.length) {
-      fork.push(movieService.getMovieById(bookmarks[i]));
+      moviesIDPromises.push(movieService.getMovieById(bookmarks[i]));
     }
   }
 
   dispatch(reduce(movieConstants.MOVIES_REQUEST));
-  Promise.all(fork)
+  Promise.all(moviesIDPromises)
     .then((get) => {
       dispatch(reduce(movieConstants.MOVIES_SUCCESS));
       dispatch(reduce(movieConstants.SAVE, get));
-      dispatch(reduce(movieConstants.PAGINATION_UPDATE, {
+      dispatch(reduce(movieConstants.PAGINATION_SAVE, {
         page,
-        totalPages: Math.ceil(bookmarks.length / pagePerPage),
+        total: Math.ceil(bookmarks.length / moviesPerPage),
       }));
     })
     .catch((error) => {
-      dispatch(reduce(movieConstants.MOVIE_FAILURE, error.message));
+      dispatch(reduce(movieConstants.MOVIES_FAILURE, error.message));
       return Promise.reject(error);
     });
 };

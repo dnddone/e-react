@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  func,
-  bool,
-  shape,
-  arrayOf,
-  number,
-} from 'prop-types';
+import PropTypes from 'prop-types';
 import { movieActions, bookmarkActions } from '../../_actions';
 import { getMovieIdFromUrl, bookmarkChecker } from '../../_helpers/utils';
 
@@ -14,39 +8,39 @@ import Loader from '../Loader';
 import MovieInfo from './MovieInfo';
 
 const propTypes = {
-  getMovieById: func,
-  removeMovieInfo: func,
-  bookmarkButtonHandler: func,
-  infoLoading: bool,
-  bookmarks: arrayOf(number),
-  info: shape({}),
+  infoLoading: PropTypes.bool,
+  bookmarks: PropTypes.arrayOf(PropTypes.number),
+  info: PropTypes.shape({}),
+  getMovieByIdAction: PropTypes.func,
+  resetMovieInfoAction: PropTypes.func,
+  updateBookmarksAction: PropTypes.func,
 };
 
 const defaultProps = {
-  getMovieById: () => {},
-  removeMovieInfo: () => {},
-  bookmarkButtonHandler: () => {},
   infoLoading: true,
   info: {},
   bookmarks: [],
+  getMovieByIdAction: () => {},
+  resetMovieInfoAction: () => {},
+  updateBookmarksAction: () => {},
 };
 
 class MovieInfoContainer extends Component {
   componentDidMount() {
     const id = getMovieIdFromUrl();
-    this.props.getMovieById(id);
+    this.props.getMovieByIdAction(id);
   }
 
   componentWillUnmount() {
-    this.props.removeMovieInfo();
+    this.props.resetMovieInfoAction();
   }
 
   render() {
     const id = getMovieIdFromUrl();
     const {
       infoLoading,
-      bookmarkButtonHandler,
       bookmarks,
+      updateBookmarksAction,
     } = this.props;
     const { info } = this.props;
     const isBookmarkAdded = bookmarkChecker(id, bookmarks);
@@ -59,7 +53,7 @@ class MovieInfoContainer extends Component {
             id={id}
             info={info}
             isBookmarkAdded={isBookmarkAdded}
-            bookmarkButtonHandler={bookmarkButtonHandler}
+            bookmarkButtonHandler={updateBookmarksAction}
           />
         )}
       </div>
@@ -77,9 +71,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getMovieById: id => (dispatch(movieActions.getMovieById(id))),
-  removeMovieInfo: () => (dispatch(movieActions.movieInfoReset())),
-  bookmarkButtonHandler: (id, title) => dispatch(bookmarkActions.updateBookmarks(id, title)),
+  getMovieByIdAction: id => (dispatch(movieActions.getMovieById(id))),
+  resetMovieInfoAction: () => (dispatch(movieActions.resetMovieInfo())),
+  updateBookmarksAction: (id, title) => dispatch(bookmarkActions.updateBookmarks(id, title)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieInfoContainer);

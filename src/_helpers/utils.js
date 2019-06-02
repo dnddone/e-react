@@ -5,6 +5,16 @@ export const reduce = (type, payload) => ({ type, payload });
 export const isObjectEmpty = obj =>
   Object.entries(obj).length === 0 && obj.constructor === Object;
 
+export const genresArrayToObject = ({ genres }) => {
+  const genreUsableObject = {};
+
+  genres.forEach(({ id, name }) => {
+    genreUsableObject[id] = name;
+  });
+
+  return genreUsableObject;
+};
+
 export const getMovieIdFromUrl = () => {
   const movie = 'movie';
   const movieLength = movie.length;

@@ -1,7 +1,7 @@
 import axios from '../_helpers/axios';
-import { genreConstants } from '../_constants';
+import { movieConstants } from '../_constants';
 
-const getGenres = () => axios.get(genreConstants.GENRES_URL);
+const getGenres = () => axios.get(movieConstants.GENRES_URL);
 
 export default {
   getGenres,

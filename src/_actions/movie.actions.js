@@ -2,9 +2,9 @@ import { reduce } from '../_helpers/utils';
 import { movieService } from '../_services';
 import { movieConstants } from '../_constants';
 
-const getMoviePopular = (page = 1) => (dispatch) => {
+const getMoviesPopular = (page = 1) => (dispatch) => {
   dispatch(reduce(movieConstants.MOVIES_REQUEST));
-  return (movieService.getMoviePopular(page)
+  return (movieService.getMoviesPopular(page)
     .then((movies) => {
       const {
         page: paginationPage,
@@ -14,15 +14,15 @@ const getMoviePopular = (page = 1) => (dispatch) => {
 
       dispatch(reduce(movieConstants.MOVIES_SUCCESS));
       dispatch(reduce(movieConstants.SAVE, results));
-      dispatch(reduce(movieConstants.PAGINATION_UPDATE, {
+      dispatch(reduce(movieConstants.PAGINATION_SAVE, {
         page: paginationPage,
-        totalPages: paginationTotal,
+        total: paginationTotal,
       }));
 
       return Promise.resolve(movies);
     })
     .catch((error) => {
-      dispatch(reduce(movieConstants.MOVIE_FAILURE, error.message));
+      dispatch(reduce(movieConstants.MOVIES_FAILURE, error.message));
       return Promise.reject(error);
     })
   );
@@ -31,10 +31,10 @@ const getMoviePopular = (page = 1) => (dispatch) => {
 const getMovieById = id => (dispatch) => {
   dispatch(reduce(movieConstants.MOVIEINFO_REQUEST));
   return (movieService.getMovieById(id)
-    .then((movies) => {
+    .then((movie) => {
       dispatch(reduce(movieConstants.MOVIEINFO_SUCCESS));
-      dispatch(reduce(movieConstants.MOVIEINFO_ADD, movies));
-      return Promise.resolve(movies);
+      dispatch(reduce(movieConstants.MOVIEINFO_SAVE, movie));
+      return Promise.resolve(movie);
     })
     .catch((error) => {
       dispatch(reduce(movieConstants.MOVIEINFO_FAILURE, error.message));
@@ -43,16 +43,23 @@ const getMovieById = id => (dispatch) => {
   );
 };
 
-const searchMovie = query => (dispatch) => {
+const searchMovies = query => (dispatch) => {
   dispatch(reduce(movieConstants.SEARCH_REQUEST));
-  return (movieService.searchMovie(query)
+  return (movieService.searchMovies(query)
     .then((movies) => {
-      /* eslint-disable-next-line */
-      const { page, total_pages, results } = movies;
+      const {
+        page: paginationPage,
+        total_pages: paginationTotal,
+        results,
+      } = movies; // results is movie data array
 
       dispatch(reduce(movieConstants.SEARCH_SUCCESS));
       dispatch(reduce(movieConstants.SEARCH_QUERY, results));
-      dispatch(reduce(movieConstants.PAGINATION_UPDATE, { page, total_pages }));
+      dispatch(reduce(movieConstants.PAGINATION_UPDATE, {
+        page: paginationPage,
+        total: paginationTotal,
+      }));
+
       return Promise.resolve(movies);
     })
     .catch((error) => {
@@ -62,11 +69,11 @@ const searchMovie = query => (dispatch) => {
   );
 };
 
-const movieInfoReset = () => ({ type: movieConstants.MOVIEINFO_RESET });
+const resetMovieInfo = () => ({ type: movieConstants.MOVIEINFO_RESET });
 
 export default {
-  getMoviePopular,
+  getMoviesPopular,
   getMovieById,
-  movieInfoReset,
-  searchMovie,
+  resetMovieInfo,
+  searchMovies,
 };

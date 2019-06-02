@@ -1,30 +1,20 @@
-import { reduce } from '../_helpers/utils';
+import { reduce, genresArrayToObject } from '../_helpers/utils';
 import { genreService } from '../_services';
-import { genreConstants } from '../_constants';
-
-const makeGenresUsable = ({ genres }) => {
-  const genreUsableObject = {};
-
-  genres.forEach(({ id, name }) => {
-    genreUsableObject[id] = name;
-  });
-
-  return genreUsableObject;
-};
+import { movieConstants } from '../_constants';
 
 const getGenres = () => (dispatch) => {
-  dispatch(reduce(genreConstants.GENRES_REQUEST));
+  dispatch(reduce(movieConstants.GENRES_REQUEST));
   return genreService.getGenres()
     .then((response) => {
-      const genres = makeGenresUsable(response);
+      const genres = genresArrayToObject(response);
 
-      dispatch(reduce(genreConstants.GENRES_SUCCESS));
-      dispatch(reduce(genreConstants.ADD_GENRES, { genres }));
+      dispatch(reduce(movieConstants.GENRES_SUCCESS));
+      dispatch(reduce(movieConstants.GENRES_SAVE, { genres }));
 
       return Promise.resolve(genres);
     })
     .catch((error) => {
-      dispatch(reduce(genreConstants.GENRES_FAILURE, error.message));
+      dispatch(reduce(movieConstants.GENRES_FAILURE, error.message));
       return Promise.reject(error);
     });
 };

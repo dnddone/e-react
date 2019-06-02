@@ -4,10 +4,9 @@ export default (state = [], action) => {
   const { type } = action;
 
   switch (type) {
-    case bookmarkConstants.BOOKMARK_GET:
-    case bookmarkConstants.BOOKMARK_UPDATE:
+    case bookmarkConstants.SAVE:
       return action.payload.slice();
-    case bookmarkConstants.BOOKMARK_RESET:
+    case bookmarkConstants.RESET:
       return [];
     default:
       return state;
