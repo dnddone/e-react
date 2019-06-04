@@ -11,6 +11,7 @@
     "@material/grid-list": "^1.1.0",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
@@ -22,7 +23,8 @@
     "react-transition-group": "^2.6.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "sass-loader": "^7.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -64,9 +66,6 @@
     "eslint-plugin-flowtype": "^3.4.1",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
-    "gh-pages": "^2.0.1",
-    "node-sass": "^4.11.0",
-    "sass-loader": "^7.1.0"
+    "eslint-plugin-react": "^7.12.4"
   }
 }
