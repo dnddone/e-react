@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { movieActions, bookmarkActions } from '../../_actions';
-import { getMovieIdFromUrl, bookmarkChecker } from '../../_helpers/utils';
 
 import Loader from '../Loader';
 import MovieInfo from './MovieInfo';
 
+import { movieActions, bookmarkActions } from '../../_actions';
+import { getMovieIdFromUrl, bookmarkChecker } from '../../_helpers/utils';
+import { createLoadingSelector } from '../../_helpers/selector';
+
 const propTypes = {
-  infoLoading: PropTypes.bool,
+  loadingInfo: PropTypes.bool,
   bookmarks: PropTypes.arrayOf(PropTypes.number),
   info: PropTypes.shape({}),
   getMovieByIdAction: PropTypes.func,
@@ -17,7 +19,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  infoLoading: true,
+  loadingInfo: true,
   info: {},
   bookmarks: [],
   getMovieByIdAction: () => {},
@@ -38,7 +40,7 @@ class MovieInfoContainer extends Component {
   render() {
     const id = getMovieIdFromUrl();
     const {
-      infoLoading,
+      loadingInfo,
       bookmarks,
       updateBookmarksAction,
     } = this.props;
@@ -47,7 +49,7 @@ class MovieInfoContainer extends Component {
 
     return (
       <div className="container content movie">
-        <Loader className="" isLoading={infoLoading} />
+        <Loader className="" isLoading={loadingInfo} />
         {info.title && (
           <MovieInfo
             info={info}
@@ -63,8 +65,10 @@ class MovieInfoContainer extends Component {
 MovieInfoContainer.propTypes = propTypes;
 MovieInfoContainer.defaultProps = defaultProps;
 
+const loadingInfoSelector = createLoadingSelector('MOVIEINFO');
+
 const mapStateToProps = state => ({
-  infoLoading: state.api.loading.MOVIEINFO,
+  loadingInfo: loadingInfoSelector(state),
   info: state.info,
   bookmarks: state.bookmarks,
 });

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import PropTypes from 'prop-types';
+import { createLoadingSelector } from '../_helpers/selector';
 import Loader from './Loader';
 import SearchInput from './SearchInput';
 
 const propTypes = {
   showSearchInput: PropTypes.bool,
-  moviesLoading: PropTypes.bool,
+  loadingMovies: PropTypes.bool,
   className: PropTypes.string,
   searchHandler: PropTypes.func,
   children: PropTypes.node.isRequired,
@@ -18,7 +19,7 @@ const defaultProps = {
   showSearchInput: true,
   className: '',
   searchHandler: () => {},
-  moviesLoading: true,
+  loadingMovies: true,
 };
 
 // It show movie's preview at home/bookmarks pages
@@ -33,10 +34,10 @@ class ContextMovie extends Component {
       children,
       className,
       searchHandler,
-      moviesLoading,
+      loadingMovies,
     } = this.props;
 
-    if (!moviesLoading) {
+    if (!loadingMovies) {
       return (
         <div className={`container content ${className}`}>
           {showSearchInput && <SearchInput searchHandler={searchHandler} />}
@@ -48,15 +49,17 @@ class ContextMovie extends Component {
     return (
       <div className="container content">
         <Loader
-          isLoading={moviesLoading}
+          isLoading={loadingMovies}
         />
       </div>
     );
   }
 }
 
+const loadingMoviesSelector = createLoadingSelector('MOVIES');
+
 const mapStateToProps = state => ({
-  moviesLoading: state.api.loading.MOVIES,
+  loadingMovies: loadingMoviesSelector(state),
 });
 
 ContextMovie.propTypes = propTypes;

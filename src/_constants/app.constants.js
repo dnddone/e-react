@@ -9,6 +9,8 @@ export const FETCH_TIMEOUT = env.REACT_APP_FETCH_TIMEOUT || 30000;
 export const API_TOKEN = '677522a533aae20a5fa0d80d392c1496';
 export const API_KEY = `api_key=${API_TOKEN}`;
 
+
+
 export default {
   SERVER_URL,
   PUBLIC_URL,
