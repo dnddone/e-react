@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import {
   number,
   shape,
@@ -8,9 +8,10 @@ import {
   arrayOf,
   bool,
   string,
-} from 'prop-types';
-import BookmarkStar from '../BookmarkStar';
-import { isObjectEmpty, imagePosterPath } from '../../_helpers/utils';
+} from "prop-types";
+import BookmarkStar from "../BookmarkStar";
+import { isObjectEmpty, imagePosterPath } from "../../_helpers/utils";
+import { pathsConstants } from "../../_constants";
 
 const propTypes = {
   bookmarkButtonHandler: func.isRequired,
@@ -34,25 +35,21 @@ class MovieBlock extends Component {
     const { genres, movie } = this.props;
 
     if (isObjectEmpty(genres)) {
-      return 'Genres error';
+      return "Genres error";
     }
 
     if (movie.genres) {
-      return movie.genres.map(({ id }) => genres[id]).join(', ');
+      return movie.genres.map(({ id }) => genres[id]).join(", ");
     }
 
-    return movie.genre_ids.map(id => genres[id]).join(', ');
+    return movie.genre_ids.map((id) => genres[id]).join(", ");
   };
 
   render() {
     const {
       bookmarkButtonHandler,
       isBookmarkAdded,
-      movie: {
-        id,
-        title,
-        poster_path: posterPath,
-      },
+      movie: { id, title, poster_path: posterPath },
     } = this.props;
 
     const image = imagePosterPath(posterPath);
@@ -60,7 +57,7 @@ class MovieBlock extends Component {
 
     return (
       <li className="film__item film">
-        <Link to={`/movie/${id}`} className="film__link">
+        <Link to={`${pathsConstants.MOVIE_PAGE}/${id}`} className="film__link">
           <BookmarkStar
             data={movieData}
             bookmarkButtonHandler={bookmarkButtonHandler}

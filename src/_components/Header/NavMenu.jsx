@@ -1,32 +1,41 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import { Link } from "react-router-dom";
 
-import { formatedPath, activeNavLink } from '../../_helpers/utils';
+import { activeNavLink } from "../../_helpers/utils";
+import { PUBLIC_URL } from "../../_constants/app.constants";
+import { pathsConstants } from "../../_constants";
 
 const propTypes = {
   navigationList: PropTypes.arrayOf(PropTypes.string),
 };
 
 const defaultProps = {
-  navigationList: ['Home', 'Bookmark'],
+  navigationList: [],
 };
 
 const NavMenu = ({ navigationList }) => (
   <ul className="header__menu nav__list">
-    {
-      navigationList.map(path => (
+    {navigationList.map((path) => {
+      const text =
+        path === pathsConstants.HOME_PAGE
+          ? "Home"
+          : path.replace(`${PUBLIC_URL}/`, "");
+
+      return (
         <li className="nav__item" key={path}>
           <Link
-            to={formatedPath(path)}
-            className={classNames('nav__link', { nav__active: activeNavLink(path) })}
+            to={path}
+            className={classNames("nav__link", {
+              nav__active: activeNavLink(path),
+            })}
           >
-            {path}
+            {text}
           </Link>
         </li>
-      ))
-    }
+      );
+    })}
   </ul>
 );
 

@@ -1,8 +1,9 @@
-import NoImagePNG from '../assets/images/no-image.png';
+import { PUBLIC_URL } from "../_constants/app.constants";
+import NoImagePNG from "../assets/images/no-image.png";
 
 export const reduce = (type, payload) => ({ type, payload });
 
-export const isObjectEmpty = obj =>
+export const isObjectEmpty = (obj) =>
   Object.entries(obj).length === 0 && obj.constructor === Object;
 
 export const genresArrayToObject = ({ genres }) => {
@@ -16,7 +17,7 @@ export const genresArrayToObject = ({ genres }) => {
 };
 
 export const getMovieIdFromUrl = () => {
-  const movie = 'movie';
+  const movie = "movie";
   const movieLength = movie.length;
   const path = window.location.pathname;
   const moviePosition = path.indexOf(movie);
@@ -24,43 +25,35 @@ export const getMovieIdFromUrl = () => {
   const id = path.substring(moviePosition + movieLength + 1);
 
   try {
-    return id ? parseInt(id, 10) : '';
+    return id ? parseInt(id, 10) : "";
   } catch (error) {
-    console.log('Error id parsing');
+    console.log("Error id parsing");
   }
 
-  return '';
+  return "";
 };
 
-export const getGenresForMovieInfo = genres =>
-  genres.map(genre => genre.name).join(', ');
+export const getGenresForMovieInfo = (genres) =>
+  genres.map((genre) => genre.name).join(", ");
 
-export const separateBitNumber = number => (
-  number.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
-);
+export const separateBitNumber = (number) =>
+  number.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
 
-export const imagePosterPath = path =>
-  (path ? `https://image.tmdb.org/t/p/w300${path}` : NoImagePNG);
+export const imagePosterPath = (path) =>
+  path ? `https://image.tmdb.org/t/p/w300${path}` : NoImagePNG;
 
-export const bookmarkChecker = (movieId, bookmarks) => (
-  bookmarks.some(({ id }) => movieId === id)
-);
-
-export const formatedPath = (path) => {
-  const pathTo = path === 'Home' ? '' : path.toLowerCase();
-  return pathTo;
-};
+export const bookmarkChecker = (movieId, bookmarks) =>
+  bookmarks.some(({ id }) => movieId === id);
 
 export const activeNavLink = (path) => {
   const { pathname } = window.location;
 
-  if (path === 'Home' && pathname === '/') {
+  if (path === "Home" && pathname === "/") {
     return true;
   }
 
   return pathname.toLowerCase().includes(path.toLowerCase());
 };
 
-export const uniqueFilter = (id, status) => item => (
-  !(item.id === id && item.status === status)
-);
+export const uniqueFilter = (id, status) => (item) =>
+  !(item.id === id && item.status === status);
