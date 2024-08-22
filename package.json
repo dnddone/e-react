@@ -1,7 +1,7 @@
 {
   "name": "maketheworldbetter",
   "version": "0.1.0",
-  "homepage": "http://dnddtw.github.io/e-react",
+  "homepage": "http://dnddone.github.io/e-react",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.8",
