@@ -1,4 +1,3 @@
-import { PUBLIC_URL } from "../_constants/app.constants";
 import NoImagePNG from "../assets/images/no-image.png";
 
 export const reduce = (type, payload) => ({ type, payload });

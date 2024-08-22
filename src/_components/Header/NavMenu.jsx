@@ -4,7 +4,6 @@ import classNames from "classnames";
 import { Link } from "react-router-dom";
 
 import { activeNavLink } from "../../_helpers/utils";
-import { PUBLIC_URL } from "../../_constants/app.constants";
 import { pathsConstants } from "../../_constants";
 
 const propTypes = {
@@ -19,9 +18,7 @@ const NavMenu = ({ navigationList }) => (
   <ul className="header__menu nav__list">
     {navigationList.map((path) => {
       const text =
-        path === pathsConstants.HOME_PAGE
-          ? "Home"
-          : path.replace(`${PUBLIC_URL}/`, "");
+        path === pathsConstants.HOME_PAGE ? "Home" : path.replace("/", "");
 
       return (
         <li className="nav__item" key={path}>
